@@ -5,7 +5,7 @@
       xmlns:ctlg="using:CommunityToolkit.LiquidGlass">
 
   <ScrollViewer Padding="28,0">
-    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+    <StackPanel Spacing="16" HorizontalAlignment="Stretch" Padding="0,24,0,32">
 
       <TextBlock Text="Settings controls" FontSize="30" FontWeight="Bold" Foreground="White" />
       <TextBlock Text="The Windows Community Toolkit's SettingsCard and SettingsExpander running on Uno, re-skinned as Liquid Glass through lightweight resource overrides."

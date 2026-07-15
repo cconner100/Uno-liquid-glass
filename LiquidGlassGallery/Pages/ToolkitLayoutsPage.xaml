@@ -19,7 +19,7 @@
   </Page.Resources>
 
   <ScrollViewer Padding="28,0">
-    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+    <StackPanel Spacing="16" HorizontalAlignment="Stretch" Padding="0,24,0,32">
 
       <TextBlock Text="Layouts &amp; panels" FontSize="30" FontWeight="Bold" Foreground="White" />
       <TextBlock Text="Windows Community Toolkit layout primitives running on Uno Platform. Panels have no visuals of their own — the liquid glass lives in their children — while the sizers pick up glass grip and track resources from the theme."

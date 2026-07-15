@@ -69,12 +69,17 @@ public sealed partial class MainPage : Page
     {
         HideSidebarButton.Visibility = Visibility.Collapsed;
         ShowSidebarButton.Visibility = Visibility.Visible;
+
+        // Keep only enough room for the floating reopen button. The page itself
+        // still receives the rest of the width released by the sidebar.
+        ContentFrame.Margin = new Thickness(44, 0, 0, 0);
     }
 
     private void OnPaneOpened(NavigationView sender, object args)
     {
         HideSidebarButton.Visibility = Visibility.Visible;
         ShowSidebarButton.Visibility = Visibility.Collapsed;
+        ContentFrame.Margin = new Thickness(0);
     }
 
     private async void OnLoaded(object sender, RoutedEventArgs e)

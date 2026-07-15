@@ -4,7 +4,7 @@
       xmlns:dgrid="using:CommunityToolkit.WinUI.UI.Controls">
 
   <ScrollViewer Padding="28,0">
-    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+    <StackPanel Spacing="16" HorizontalAlignment="Stretch" Padding="0,24,0,32">
 
       <TextBlock Text="Data grid" FontSize="30" FontWeight="Bold" Foreground="White" />
       <TextBlock Text="The Windows Community Toolkit DataGrid (from the Uno.WindowsCommunityToolkit 7.x fork — 8.x never shipped one) on a glass card: chromeless sortable headers, hairline grid lines, tint selection, and glass cell editors."

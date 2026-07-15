@@ -4,7 +4,7 @@
       xmlns:dev="using:DevWinUI.LiquidGlass">
 
   <ScrollViewer Padding="28,0">
-    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+    <StackPanel Spacing="16" HorizontalAlignment="Stretch" Padding="0,24,0,32">
 
       <TextBlock Text="Dialogs &amp; windows" FontSize="30" FontWeight="Bold" Foreground="White" />
 

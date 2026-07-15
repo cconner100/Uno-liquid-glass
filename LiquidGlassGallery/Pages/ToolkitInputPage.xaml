@@ -4,7 +4,7 @@
       xmlns:controls="using:CommunityToolkit.WinUI.Controls">
 
   <ScrollViewer Padding="28,0">
-    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+    <StackPanel Spacing="16" HorizontalAlignment="Stretch" Padding="0,24,0,32">
 
       <TextBlock Text="Input &amp; selection" FontSize="30" FontWeight="Bold" Foreground="White" />
       <TextBlock Text="Windows Community Toolkit (CommunityToolkit.WinUI 8.x) controls running on Uno Platform, restyled with liquid glass: frosted tracks and chips, Apple tint for selection, white round thumbs."
