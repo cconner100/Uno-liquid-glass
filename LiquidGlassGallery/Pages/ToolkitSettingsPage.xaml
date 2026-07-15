@@ -1,0 +1,121 @@
+<Page x:Class="LiquidGlassGallery.Pages.ToolkitSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+      xmlns:ctlg="using:CommunityToolkit.LiquidGlass">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Settings controls" FontSize="30" FontWeight="Bold" Foreground="White" />
+      <TextBlock Text="The Windows Community Toolkit's SettingsCard and SettingsExpander running on Uno, re-skinned as Liquid Glass through lightweight resource overrides."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <TextBlock Text="SettingsCard" FontSize="17" FontWeight="SemiBold" Margin="0,8,0,0"
+                 Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+      <TextBlock Text="Glass settings rows with header icons and inline content. The last card is click-enabled and updates its own description."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <controls:SettingsCard Header="Wi-Fi"
+                             Description="Connect to wireless networks"
+                             Background="{ThemeResource LiquidGlassFillBrush}"
+                             BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                             BorderThickness="1"
+                             CornerRadius="16">
+        <controls:SettingsCard.HeaderIcon>
+          <FontIcon Glyph="&#xE701;" />
+        </controls:SettingsCard.HeaderIcon>
+        <ToggleSwitch IsOn="True" MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+      </controls:SettingsCard>
+
+      <controls:SettingsCard Header="Appearance"
+                             Description="Choose how the app looks"
+                             Background="{ThemeResource LiquidGlassFillBrush}"
+                             BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                             BorderThickness="1"
+                             CornerRadius="16">
+        <controls:SettingsCard.HeaderIcon>
+          <FontIcon Glyph="&#xE790;" />
+        </controls:SettingsCard.HeaderIcon>
+        <ComboBox MinWidth="130" SelectedIndex="0">
+          <ComboBoxItem Content="Auto" />
+          <ComboBoxItem Content="Light" />
+          <ComboBoxItem Content="Dark" />
+        </ComboBox>
+      </controls:SettingsCard>
+
+      <controls:SettingsCard x:Name="UpdatesCard"
+                             Header="Check for updates"
+                             Description="Never checked"
+                             IsClickEnabled="True"
+                             Click="OnCheckForUpdates"
+                             Background="{ThemeResource LiquidGlassFillBrush}"
+                             BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                             BorderThickness="1"
+                             CornerRadius="16">
+        <controls:SettingsCard.HeaderIcon>
+          <FontIcon Glyph="&#xE895;" />
+        </controls:SettingsCard.HeaderIcon>
+      </controls:SettingsCard>
+
+      <TextBlock Text="SettingsExpander" FontSize="17" FontWeight="SemiBold" Margin="0,8,0,0"
+                 Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+      <TextBlock Text="A collapsible glass card hosting nested SettingsCard rows on a clear-glass items area."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <controls:SettingsExpander Header="Ethernet"
+                                 ctlg:SettingsGlass.FixExpanderHeader="True"
+                                 Description="Connected — 1 Gbps"
+                                 IsExpanded="True"
+                                 Background="{ThemeResource LiquidGlassFillBrush}"
+                                 BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                                 CornerRadius="16">
+        <controls:SettingsExpander.HeaderIcon>
+          <FontIcon Glyph="&#xE968;" />
+        </controls:SettingsExpander.HeaderIcon>
+
+        <controls:SettingsExpander.Items>
+          <controls:SettingsCard Header="Metered connection"
+                                 Description="Limit background data usage"
+                                 Background="Transparent">
+            <ToggleSwitch MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+          </controls:SettingsCard>
+
+          <controls:SettingsCard Header="IP address"
+                                 Background="Transparent">
+            <TextBlock Text="192.168.1.24"
+                       FontSize="13"
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </controls:SettingsCard>
+
+          <controls:SettingsCard Header="Random hardware addresses"
+                                 Description="Make it harder to track this device"
+                                 Background="Transparent">
+            <ToggleSwitch MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+          </controls:SettingsCard>
+        </controls:SettingsExpander.Items>
+      </controls:SettingsExpander>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="MetadataControl" FontSize="17" FontWeight="SemiBold"
+                     Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="A dot-separated run of metadata labels. Items are set in code-behind; the middle item carries a command and renders as a link."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <controls:MetadataControl x:Name="Metadata"
+                                    Margin="0,10,0,0"
+                                    FontSize="13"
+                                    Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <TextBlock x:Name="MetadataOutput"
+                     Text="Click the version item above to invoke its command."
+                     FontSize="12"
+                     Margin="0,6,0,0"
+                     TextWrapping="Wrap"
+                     Foreground="{ThemeResource LiquidGlassTertiaryLabelBrush}" />
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

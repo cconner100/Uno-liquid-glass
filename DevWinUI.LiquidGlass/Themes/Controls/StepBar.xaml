@@ -1,0 +1,24 @@
+<!-- StepBar: horizontal step indicator; circles and connectors are generated in code into PART_Root. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:DevWinUI.LiquidGlass">
+
+  <Style TargetType="local:StepBar" BasedOn="{StaticResource LiquidGlassStepBarStyle}" />
+
+  <Style x:Key="LiquidGlassStepBarStyle" TargetType="local:StepBar">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="AccentBrush" Value="{ThemeResource LiquidGlassTintBrush}" />
+    <Setter Property="OnAccentBrush" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+    <Setter Property="PendingFillBrush" Value="{ThemeResource LiquidGlassControlFillBrush}" />
+    <Setter Property="SecondaryBrush" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="LabelBrush" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="ConnectorBrush" Value="{ThemeResource LiquidGlassSeparatorBrush}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="local:StepBar">
+          <Grid x:Name="PART_Root" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

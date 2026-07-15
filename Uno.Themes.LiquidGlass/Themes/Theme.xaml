@@ -1,0 +1,96 @@
+<!--
+  Uno.Themes.LiquidGlass — Theme.xaml
+  Aggregates the Liquid Glass theme, mirroring Uno.Themes' MaterialTheme:
+
+    <Application.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+          <LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass" />
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </Application.Resources>
+-->
+<ResourceDictionary x:Class="Uno.Themes.LiquidGlass.LiquidGlassTheme"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Colors.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Common.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Button.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/TextBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/ToggleSwitch.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Selection.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Pickers.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/PickerFlyouts.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Menus.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/TabView.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/NavigationViewItem.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/AutoSuggestBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Controls.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Commanding.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/InputsStatus.xaml" />
+    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Containers.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- Framework style-key overrides: WinUI looks these up by name -->
+  <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource LiquidGlassProminentButtonStyle}" />
+
+  <!-- Implicit styles: every control in the app picks up Liquid Glass by default -->
+  <Style TargetType="Button" BasedOn="{StaticResource LiquidGlassButtonStyle}" />
+  <Style TargetType="ToggleButton" BasedOn="{StaticResource LiquidGlassToggleButtonStyle}" />
+  <Style TargetType="RepeatButton" BasedOn="{StaticResource LiquidGlassRepeatButtonStyle}" />
+  <Style TargetType="HyperlinkButton" BasedOn="{StaticResource LiquidGlassHyperlinkButtonStyle}" />
+  <Style TargetType="TextBox" BasedOn="{StaticResource LiquidGlassTextBoxStyle}" />
+  <Style TargetType="PasswordBox" BasedOn="{StaticResource LiquidGlassPasswordBoxStyle}" />
+  <Style TargetType="AutoSuggestBox" BasedOn="{StaticResource LiquidGlassAutoSuggestBoxStyle}" />
+  <Style TargetType="CheckBox" BasedOn="{StaticResource LiquidGlassCheckBoxStyle}" />
+  <Style TargetType="RadioButton" BasedOn="{StaticResource LiquidGlassRadioButtonStyle}" />
+  <Style TargetType="ToggleSwitch" BasedOn="{StaticResource LiquidGlassToggleSwitchStyle}" />
+  <Style TargetType="Slider" BasedOn="{StaticResource LiquidGlassSliderStyle}" />
+  <Style TargetType="ComboBox" BasedOn="{StaticResource LiquidGlassComboBoxStyle}" />
+  <Style TargetType="ComboBoxItem" BasedOn="{StaticResource LiquidGlassComboBoxItemStyle}" />
+  <Style TargetType="ProgressBar" BasedOn="{StaticResource LiquidGlassProgressBarStyle}" />
+  <Style TargetType="DatePicker" BasedOn="{StaticResource LiquidGlassDatePickerStyle}" />
+  <Style TargetType="TimePicker" BasedOn="{StaticResource LiquidGlassTimePickerStyle}" />
+  <Style TargetType="DatePickerFlyoutPresenter" BasedOn="{StaticResource LiquidGlassDatePickerFlyoutPresenterStyle}" />
+  <Style TargetType="TimePickerFlyoutPresenter" BasedOn="{StaticResource LiquidGlassTimePickerFlyoutPresenterStyle}" />
+  <Style TargetType="FlyoutPresenter" BasedOn="{StaticResource LiquidGlassFlyoutPresenterStyle}" />
+  <Style TargetType="MenuFlyoutPresenter" BasedOn="{StaticResource LiquidGlassMenuFlyoutPresenterStyle}" />
+  <Style TargetType="MenuFlyoutItem" BasedOn="{StaticResource LiquidGlassMenuFlyoutItemStyle}" />
+  <Style TargetType="MenuFlyoutSeparator" BasedOn="{StaticResource LiquidGlassMenuFlyoutSeparatorStyle}" />
+  <Style TargetType="ContentDialog" BasedOn="{StaticResource LiquidGlassContentDialogStyle}" />
+  <Style TargetType="TabViewItem" BasedOn="{StaticResource LiquidGlassTabViewItemStyle}" />
+  <Style TargetType="NavigationViewItem" BasedOn="{StaticResource LiquidGlassNavigationViewItemStyle}" />
+  <Style TargetType="CalendarDatePicker" BasedOn="{StaticResource LiquidGlassCalendarDatePickerStyle}" />
+  <Style TargetType="ListViewItem" BasedOn="{StaticResource LiquidGlassListViewItemStyle}" />
+  <Style TargetType="ListBoxItem" BasedOn="{StaticResource LiquidGlassListBoxItemStyle}" />
+
+  <!-- Commanding, inputs/status and container controls (Commanding.xaml /
+       InputsStatus.xaml / Containers.xaml). Implicit registrations must live
+       HERE: Uno does not resolve implicit styles for framework controls from
+       dictionaries merged below the theme's top level. -->
+  <Style TargetType="DropDownButton" BasedOn="{StaticResource LiquidGlassDropDownButtonStyle}" />
+  <Style TargetType="SplitButton" BasedOn="{StaticResource LiquidGlassSplitButtonStyle}" />
+  <Style TargetType="ToggleSplitButton" BasedOn="{StaticResource LiquidGlassToggleSplitButtonStyle}" />
+  <Style TargetType="MenuBar" BasedOn="{StaticResource LiquidGlassMenuBarStyle}" />
+  <Style TargetType="MenuBarItem" BasedOn="{StaticResource LiquidGlassMenuBarItemStyle}" />
+  <Style TargetType="MenuFlyoutSubItem" BasedOn="{StaticResource LiquidGlassMenuFlyoutSubItemStyle}" />
+  <Style TargetType="CommandBar" BasedOn="{StaticResource LiquidGlassCommandBarStyle}" />
+  <Style TargetType="AppBarButton" BasedOn="{StaticResource LiquidGlassAppBarButtonStyle}" />
+  <Style TargetType="AppBarToggleButton" BasedOn="{StaticResource LiquidGlassAppBarToggleButtonStyle}" />
+  <Style TargetType="AppBarSeparator" BasedOn="{StaticResource LiquidGlassAppBarSeparatorStyle}" />
+  <Style TargetType="NumberBox" BasedOn="{StaticResource LiquidGlassNumberBoxStyle}" />
+  <Style TargetType="RatingControl" BasedOn="{StaticResource LiquidGlassRatingControlStyle}" />
+  <Style TargetType="InfoBar" BasedOn="{StaticResource LiquidGlassInfoBarStyle}" />
+  <Style TargetType="ToolTip" BasedOn="{StaticResource LiquidGlassToolTipStyle}" />
+  <Style TargetType="InfoBadge" BasedOn="{StaticResource LiquidGlassInfoBadgeStyle}" />
+  <Style TargetType="PersonPicture" BasedOn="{StaticResource LiquidGlassPersonPictureStyle}" />
+  <Style TargetType="Expander" BasedOn="{StaticResource LiquidGlassExpanderStyle}" />
+  <Style TargetType="TreeViewItem" BasedOn="{StaticResource LiquidGlassTreeViewItemStyle}" />
+  <Style TargetType="BreadcrumbBarItem" BasedOn="{StaticResource LiquidGlassBreadcrumbBarItemStyle}" />
+  <Style TargetType="PipsPager" BasedOn="{StaticResource LiquidGlassPipsPagerStyle}" />
+  <Style TargetType="FlipView" BasedOn="{StaticResource LiquidGlassFlipViewStyle}" />
+  <Style TargetType="SplitView" BasedOn="{StaticResource LiquidGlassSplitViewStyle}" />
+</ResourceDictionary>

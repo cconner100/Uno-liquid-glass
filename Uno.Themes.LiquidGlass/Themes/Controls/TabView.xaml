@@ -1,0 +1,166 @@
+<!--
+  Uno.Themes.LiquidGlass — TabView.xaml
+  Tabs as an Apple-style segmented control: the selected tab is a glass pill.
+  The template keeps the state names (Normal/PointerOver/Pressed/Selected/
+  PointerOverSelected/PressedSelected, DisabledStates) and the CloseButton part;
+  the code-driven tab-shape paths of the stock template are intentionally dropped.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style x:Key="LiquidGlassTabCloseButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Width" Value="18" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="FontSize" Value="9" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" CornerRadius="9">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Background" Value="{ThemeResource LiquidGlassHighlightBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Background" Value="{ThemeResource LiquidGlassPressedOverlayBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              AutomationProperties.AccessibilityView="Raw" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassTabViewItemStyle" TargetType="TabViewItem">
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="MinHeight" Value="40" />
+    <Setter Property="Padding" Value="2" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TabViewItem">
+          <Grid x:Name="LayoutRoot" Padding="{TemplateBinding Padding}" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="TabContainer.Background" Value="{ThemeResource LiquidGlassHoverOverlayBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="TabContainer.Background" Value="{ThemeResource LiquidGlassHighlightBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                  <VisualState.Setters>
+                    <Setter Target="TabContainer.Background" Value="{ThemeResource LiquidGlassFillBrush}" />
+                    <Setter Target="TabContainer.BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+                    <Setter Target="Specular.Opacity" Value="1" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+                    <Setter Target="ContentPresenter.FontWeight" Value="SemiBold" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerOverSelected">
+                  <VisualState.Setters>
+                    <Setter Target="TabContainer.Background" Value="{ThemeResource LiquidGlassFillPointerOverBrush}" />
+                    <Setter Target="TabContainer.BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+                    <Setter Target="Specular.Opacity" Value="1" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+                    <Setter Target="ContentPresenter.FontWeight" Value="SemiBold" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PressedSelected">
+                  <VisualState.Setters>
+                    <Setter Target="TabContainer.Background" Value="{ThemeResource LiquidGlassFillPressedBrush}" />
+                    <Setter Target="TabContainer.BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+                    <Setter Target="Specular.Opacity" Value="1" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+                    <Setter Target="ContentPresenter.FontWeight" Value="SemiBold" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="DisabledStates">
+                <VisualState x:Name="Enabled" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="LayoutRoot.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CloseIconStates">
+                <VisualState x:Name="CloseButtonVisible">
+                  <VisualState.Setters>
+                    <Setter Target="CloseButton.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CloseButtonCollapsed" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="TabContainer"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="1"
+                    CornerRadius="16"
+                    Padding="14,6">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="ContentPresenter"
+                                  Content="{TemplateBinding Header}"
+                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                  Foreground="{TemplateBinding Foreground}"
+                                  FontSize="14"
+                                  VerticalAlignment="Center"
+                                  AutomationProperties.AccessibilityView="Raw" />
+                <Button x:Name="CloseButton"
+                        Grid.Column="1"
+                        Content="&#xE711;"
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                        Style="{StaticResource LiquidGlassTabCloseButtonStyle}"
+                        Margin="8,0,0,0"
+                        Visibility="Collapsed"
+                        IsTabStop="False"
+                        AutomationProperties.AccessibilityView="Raw" />
+              </Grid>
+            </Border>
+
+            <!-- Specular kiss on the selected pill -->
+            <Border x:Name="Specular"
+                    Background="{ThemeResource LiquidGlassSpecularBrush}"
+                    CornerRadius="16"
+                    Margin="2"
+                    Opacity="0"
+                    IsHitTestVisible="False" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

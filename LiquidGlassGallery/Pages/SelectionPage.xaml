@@ -1,0 +1,60 @@
+<Page x:Class="LiquidGlassGallery.Pages.SelectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Selection" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="CheckBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="6" Margin="0,8,0,0">
+            <CheckBox Content="Unchecked" />
+            <CheckBox Content="Checked" IsChecked="True" />
+            <CheckBox Content="Indeterminate" IsThreeState="True" IsChecked="{x:Null}" />
+            <CheckBox Content="Disabled" IsEnabled="False" IsChecked="True" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="RadioButton" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="6" Margin="0,8,0,0">
+            <RadioButton Content="Small" GroupName="Size" />
+            <RadioButton Content="Medium" GroupName="Size" IsChecked="True" />
+            <RadioButton Content="Large" GroupName="Size" />
+            <RadioButton Content="Disabled" GroupName="Size" IsEnabled="False" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="ToggleSwitch" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Switches use the Apple system green when on."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+          <StackPanel Spacing="6">
+            <ToggleSwitch Header="Wi-Fi" IsOn="True" />
+            <ToggleSwitch Header="Bluetooth" />
+            <ToggleSwitch Header="Airplane mode (disabled)" IsEnabled="False" IsOn="True" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Slider" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="6" Margin="0,8,0,0">
+            <Slider Header="Volume" Value="30" Maximum="100" />
+            <Slider Header="Brightness" Value="75" Maximum="100" />
+            <Slider Header="Disabled" Value="50" Maximum="100" IsEnabled="False" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

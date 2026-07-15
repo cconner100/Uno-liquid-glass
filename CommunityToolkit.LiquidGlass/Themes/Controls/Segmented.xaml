@@ -1,0 +1,154 @@
+<!--
+  CommunityToolkit.LiquidGlass — Segmented.xaml
+  Lightweight styling overrides for CommunityToolkit.WinUI.Controls.Segmented / SegmentedItem.
+
+  iOS-style segmented control: frosted translucent track, selected segment renders as a
+  bright glass pill (white in light theme, elevated gray in dark), no accent underline.
+  Key names come from the toolkit sources (Segmented.xaml / SegmentedItem.xaml):
+  Segmented* (track), SegmentedItem* (default style), SegmentedPill* (accent underline),
+  PivotItem* (PivotSegmentedStyle) and ButtonItem* (ButtonSegmentedStyle).
+  Brush values are literal (mirroring Uno.Themes.LiquidGlass/Colors.xaml) so this
+  dictionary is self-contained regardless of merge order.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ResourceDictionary.ThemeDictionaries>
+
+    <!-- ================================ LIGHT ================================ -->
+    <ResourceDictionary x:Key="Light">
+
+      <!-- Track (Segmented control chrome): iOS systemGray fill, no visible border -->
+      <SolidColorBrush x:Key="SegmentedBackground" Color="#1F767680" />
+      <SolidColorBrush x:Key="SegmentedBorderBrush" Color="Transparent" />
+      <Thickness x:Key="SegmentedBorderThickness">1</Thickness>
+
+      <!-- SegmentedItem background: transparent at rest, bright glass pill when selected -->
+      <SolidColorBrush x:Key="SegmentedItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundPointerOver" Color="#14000000" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundSelected" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundPressed" Color="#1F000000" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundDisabled" Color="Transparent" />
+
+      <!-- SegmentedItem border: only the selected pill gets a hairline edge -->
+      <SolidColorBrush x:Key="SegmentedItemBorderBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushSelected" Color="#14000000" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushDisabled" Color="Transparent" />
+
+      <!-- SegmentedItem foreground: Apple label / secondaryLabel / tertiaryLabel -->
+      <SolidColorBrush x:Key="SegmentedItemForeground" Color="#000000" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundPointerOver" Color="#000000" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundSelected" Color="#000000" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundPressed" Color="#993C3C43" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundDisabled" Color="#4D3C3C43" />
+
+      <!-- Accent underline pill: hidden — iOS segmented controls have none -->
+      <SolidColorBrush x:Key="SegmentedPillBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundDisabled" Color="Transparent" />
+
+      <Thickness x:Key="SegmentedItemBorderThickness">1</Thickness>
+      <x:Double x:Key="SegmentedItemDisabledOpacity">0.45</x:Double>
+
+      <!-- PivotSegmentedStyle: text-only tabs, tint underline pill -->
+      <SolidColorBrush x:Key="PivotItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundSelected" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundDisabled" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemForeground" Color="#993C3C43" />
+      <SolidColorBrush x:Key="PivotItemForegroundPointerOver" Color="#000000" />
+      <SolidColorBrush x:Key="PivotItemForegroundPressed" Color="#993C3C43" />
+      <SolidColorBrush x:Key="PivotItemForegroundSelected" Color="#007AFF" />
+      <SolidColorBrush x:Key="PivotItemForegroundDisabled" Color="#4D3C3C43" />
+      <SolidColorBrush x:Key="PivotItemPillBackground" Color="#007AFF" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundPointerOver" Color="#3395FF" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundPressed" Color="#0066D6" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundDisabled" Color="#66007AFF" />
+
+      <!-- ButtonSegmentedStyle: detached buttons, tint when selected -->
+      <SolidColorBrush x:Key="ButtonItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundPointerOver" Color="#14000000" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundPressed" Color="#1F000000" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelected" Color="#007AFF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelectedPointerOver" Color="#3395FF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelectedPressed" Color="#0066D6" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundDisabled" Color="Transparent" />
+      <SolidColorBrush x:Key="ButtonItemForeground" Color="#000000" />
+      <SolidColorBrush x:Key="ButtonItemForegroundPointerOver" Color="#000000" />
+      <SolidColorBrush x:Key="ButtonItemForegroundPressed" Color="#993C3C43" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelected" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelectedPointerOver" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelectedPressed" Color="#CCFFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundDisabled" Color="#4D3C3C43" />
+    </ResourceDictionary>
+
+    <!-- ================================ DARK ================================ -->
+    <ResourceDictionary x:Key="Default">
+
+      <SolidColorBrush x:Key="SegmentedBackground" Color="#3D767680" />
+      <SolidColorBrush x:Key="SegmentedBorderBrush" Color="Transparent" />
+      <Thickness x:Key="SegmentedBorderThickness">1</Thickness>
+
+      <SolidColorBrush x:Key="SegmentedItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundPointerOver" Color="#14FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundSelected" Color="#636366" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundPressed" Color="#1FFFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemBackgroundDisabled" Color="Transparent" />
+
+      <SolidColorBrush x:Key="SegmentedItemBorderBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushSelected" Color="#26FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedItemBorderBrushDisabled" Color="Transparent" />
+
+      <SolidColorBrush x:Key="SegmentedItemForeground" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundPointerOver" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundSelected" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundPressed" Color="#99EBEBF5" />
+      <SolidColorBrush x:Key="SegmentedItemForegroundDisabled" Color="#4DEBEBF5" />
+
+      <SolidColorBrush x:Key="SegmentedPillBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="SegmentedPillBackgroundDisabled" Color="Transparent" />
+
+      <Thickness x:Key="SegmentedItemBorderThickness">1</Thickness>
+      <x:Double x:Key="SegmentedItemDisabledOpacity">0.45</x:Double>
+
+      <SolidColorBrush x:Key="PivotItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundPointerOver" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundSelected" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundPressed" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemBackgroundDisabled" Color="Transparent" />
+      <SolidColorBrush x:Key="PivotItemForeground" Color="#99EBEBF5" />
+      <SolidColorBrush x:Key="PivotItemForegroundPointerOver" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="PivotItemForegroundPressed" Color="#99EBEBF5" />
+      <SolidColorBrush x:Key="PivotItemForegroundSelected" Color="#0A84FF" />
+      <SolidColorBrush x:Key="PivotItemForegroundDisabled" Color="#4DEBEBF5" />
+      <SolidColorBrush x:Key="PivotItemPillBackground" Color="#0A84FF" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundPointerOver" Color="#409CFF" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundPressed" Color="#086CD9" />
+      <SolidColorBrush x:Key="PivotItemPillBackgroundDisabled" Color="#660A84FF" />
+
+      <SolidColorBrush x:Key="ButtonItemBackground" Color="Transparent" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundPointerOver" Color="#14FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundPressed" Color="#1FFFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelected" Color="#0A84FF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelectedPointerOver" Color="#409CFF" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundSelectedPressed" Color="#086CD9" />
+      <SolidColorBrush x:Key="ButtonItemBackgroundDisabled" Color="Transparent" />
+      <SolidColorBrush x:Key="ButtonItemForeground" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundPointerOver" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundPressed" Color="#99EBEBF5" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelected" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelectedPointerOver" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundSelectedPressed" Color="#CCFFFFFF" />
+      <SolidColorBrush x:Key="ButtonItemForegroundDisabled" Color="#4DEBEBF5" />
+    </ResourceDictionary>
+
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

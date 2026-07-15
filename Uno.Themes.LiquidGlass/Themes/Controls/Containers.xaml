@@ -1,0 +1,1297 @@
+<!--
+  Uno.Themes.LiquidGlass — Containers.xaml
+  Container / navigation controls: Expander, TreeViewItem, BreadcrumbBarItem,
+  PipsPager, FlipView, SplitView.
+
+  Rules honored throughout (see Controls.xaml for the canonical pattern):
+  - Full retemplates keep the stock template PART names and VisualStateGroup /
+    state names so control code keeps working.
+  - Visual states use opacity-toggled overlays or literal setters only — never
+    ThemeResource brush-swap keyframes (they mis-resolve on runtime theme switch).
+  - The stock Expander lightweight keys (ExpanderHeaderBackground, ...) are
+    overridden app-wide by CommunityToolkit.LiquidGlass/Settings.xaml for the WCT
+    SettingsExpander; this template deliberately uses LiquidGlass* brushes
+    directly so the two never fight.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- ============================================================ -->
+  <!-- Expander                                                     -->
+  <!-- ============================================================ -->
+
+  <!-- Header row: frosted glass ToggleButton with a chevron that flips when
+       checked (two overlaid FontIcons toggled by opacity — no AnimatedIcon). -->
+  <Style x:Key="LiquidGlassExpanderHeaderStyle" TargetType="ToggleButton">
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToggleButton">
+          <Grid x:Name="RootGrid">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="HoverOverlay.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Checked">
+                  <VisualState.Setters>
+                    <Setter Target="ChevronDown.Opacity" Value="0" />
+                    <Setter Target="ChevronUp.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="ChevronDown.Opacity" Value="0" />
+                    <Setter Target="ChevronUp.Opacity" Value="1" />
+                    <Setter Target="HoverOverlay.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPressed">
+                  <VisualState.Setters>
+                    <Setter Target="ChevronDown.Opacity" Value="0" />
+                    <Setter Target="ChevronUp.Opacity" Value="1" />
+                    <Setter Target="PressedOverlay.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="ChevronDown.Opacity" Value="0" />
+                    <Setter Target="ChevronUp.Opacity" Value="1" />
+                    <Setter Target="RootGrid.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="BackgroundFill"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}" />
+            <Border x:Name="HoverOverlay"
+                    Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Opacity="0" />
+            <Border x:Name="PressedOverlay"
+                    Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Opacity="0" />
+
+            <Grid Margin="{TemplateBinding Padding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ContentPresenter x:Name="ContentPresenter"
+                                Grid.Column="0"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Foreground="{TemplateBinding Foreground}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+              <Grid Grid.Column="1" Width="24" VerticalAlignment="Center">
+                <FontIcon x:Name="ChevronDown"
+                          Glyph="&#xE70D;"
+                          FontSize="12"
+                          Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          IsHitTestVisible="False" />
+                <FontIcon x:Name="ChevronUp"
+                          Glyph="&#xE70E;"
+                          FontSize="12"
+                          Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Opacity="0"
+                          IsHitTestVisible="False" />
+              </Grid>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Expander: glass card. Header on LiquidGlassFillBrush (16px corners, squared
+       toward the content while expanded via literal corner setters in the stock
+       ExpandStates), content on LiquidGlassClearFillBrush with 16px bottom corners.
+       Part names (ExpanderHeader / ExpanderContentClip / ExpanderContent) and the
+       ExpandStates / ExpandDirectionStates storyboards are kept from the stock
+       template so expand/collapse animation and TemplateSettings keep working. -->
+  <Style x:Key="LiquidGlassExpanderStyle" TargetType="Expander">
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassClearFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="MinWidth" Value="96" />
+    <Setter Property="MinHeight" Value="44" />
+    <Setter Property="Padding" Value="16,12" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="CornerRadius" Value="16" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Expander">
+          <Grid MinWidth="{TemplateBinding MinWidth}" MaxWidth="{TemplateBinding MaxWidth}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="ExpandStates">
+                <VisualState x:Name="ExpandUp">
+                  <VisualState.Setters>
+                    <Setter Target="ExpanderHeader.CornerRadius" Value="0,0,16,16" />
+                  </VisualState.Setters>
+                  <VisualState.Storyboard>
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ContentHeight}" />
+                        <SplineDoubleKeyFrame KeyTime="0:0:0.333" Value="0" KeySpline="0.0, 0.0, 0.0, 1.0" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState.Storyboard>
+                </VisualState>
+                <VisualState x:Name="CollapseDown">
+                  <VisualState.Storyboard>
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <SplineDoubleKeyFrame KeyTime="0:0:0.167" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ContentHeight}" KeySpline="1.0, 1.0, 0.0, 1.0" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState.Storyboard>
+                </VisualState>
+                <VisualState x:Name="ExpandDown">
+                  <VisualState.Setters>
+                    <Setter Target="ExpanderHeader.CornerRadius" Value="16,16,0,0" />
+                  </VisualState.Setters>
+                  <VisualState.Storyboard>
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeContentHeight}" />
+                        <SplineDoubleKeyFrame KeyTime="0:0:0.333" Value="0" KeySpline="0.0, 0.0, 0.0, 1.0" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState.Storyboard>
+                </VisualState>
+                <VisualState x:Name="CollapseUp">
+                  <VisualState.Storyboard>
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.167" Value="Collapsed" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <SplineDoubleKeyFrame KeyTime="0:0:0.167" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeContentHeight}" KeySpline="1.0, 1.0, 0.0, 1.0" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState.Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ExpandDirectionStates">
+                <VisualState x:Name="Down" />
+                <VisualState x:Name="Up">
+                  <VisualState.Setters>
+                    <Setter Target="ExpanderContent.BorderThickness" Value="1,1,1,0" />
+                    <Setter Target="ExpanderContent.CornerRadius" Value="16,16,0,0" />
+                    <Setter Target="ExpanderHeader.(Grid.Row)" Value="1" />
+                    <Setter Target="ExpanderContentClip.(Grid.Row)" Value="0" />
+                    <Setter Target="Row0.Height" Value="*" />
+                    <Setter Target="Row1.Height" Value="Auto" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Grid.RowDefinitions>
+              <RowDefinition x:Name="Row0" Height="Auto" />
+              <RowDefinition x:Name="Row1" Height="*" />
+            </Grid.RowDefinitions>
+
+            <ToggleButton x:Name="ExpanderHeader"
+                          AutomationProperties.AutomationId="ExpanderToggleButton"
+                          Style="{StaticResource LiquidGlassExpanderHeaderStyle}"
+                          MinHeight="{TemplateBinding MinHeight}"
+                          CornerRadius="{TemplateBinding CornerRadius}"
+                          IsEnabled="{TemplateBinding IsEnabled}"
+                          Padding="16,0,10,0"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          Content="{TemplateBinding Header}"
+                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                          IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+            <!-- The clip is a composition clip applied in code -->
+            <Border x:Name="ExpanderContentClip" Grid.Row="1">
+              <Border x:Name="ExpanderContent"
+                      Visibility="Collapsed"
+                      Background="{TemplateBinding Background}"
+                      CornerRadius="0,0,16,16"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="1,0,1,1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Padding="{TemplateBinding Padding}">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                <Border.RenderTransform>
+                  <CompositeTransform />
+                </Border.RenderTransform>
+              </Border>
+            </Border>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- TreeViewItem                                                 -->
+  <!-- ============================================================ -->
+
+  <!-- Rounded-10 rows with opacity-overlay hover and a persistent
+       LiquidGlassHighlightBrush selection fill. The stock indentation mechanism
+       (TreeViewItemTemplateSettings.Indentation padding on MultiSelectGrid) and
+       part names (ExpandCollapseChevron, CollapsedGlyph, ExpandedGlyph,
+       ContentPresenter, MultiSelectCheckBox, ...) are preserved; glyphs come from
+       the control's CollapsedGlyph/ExpandedGlyph properties (E76C / E70D). -->
+  <Style x:Key="LiquidGlassTreeViewItemStyle" TargetType="TreeViewItem">
+    <Setter Property="Padding" Value="4,0,12,0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="GlyphBrush" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="GlyphSize" Value="12" />
+    <Setter Property="MinHeight" Value="36" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="FocusVisualMargin" Value="0,-1,0,-1" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TreeViewItem">
+          <Grid x:Name="ContentPresenterGrid"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Margin="2,1"
+                CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="HoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="HoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                  <VisualState.Setters>
+                    <Setter Target="SelectionFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenterGrid.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerOverSelected">
+                  <VisualState.Setters>
+                    <Setter Target="SelectionFill.Opacity" Value="1" />
+                    <Setter Target="HoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PressedSelected">
+                  <VisualState.Setters>
+                    <Setter Target="SelectionFill.Opacity" Value="1" />
+                    <Setter Target="HoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="SelectedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="SelectionFill.Opacity" Value="1" />
+                    <Setter Target="ContentPresenterGrid.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ReorderedPlaceholder">
+                  <Storyboard>
+                    <FadeOutThemeAnimation TargetName="MultiSelectGrid" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="TreeViewMultiSelectStates">
+                <VisualState x:Name="TreeViewMultiSelectDisabled" />
+                <VisualState x:Name="TreeViewMultiSelectEnabledUnselected">
+                  <VisualState.Setters>
+                    <Setter Target="MultiSelectCheckBox.Visibility" Value="Visible" />
+                    <Setter Target="ExpandCollapseChevron.Padding" Value="0,0,12,0" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TreeViewMultiSelectEnabledSelected">
+                  <VisualState.Setters>
+                    <Setter Target="MultiSelectCheckBox.Visibility" Value="Visible" />
+                    <Setter Target="SelectionFill.Opacity" Value="1" />
+                    <Setter Target="ExpandCollapseChevron.Padding" Value="0,0,12,0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="DragStates">
+                <VisualState x:Name="NotDragging" />
+                <VisualState x:Name="MultipleDraggingPrimary">
+                  <VisualState.Setters>
+                    <Setter Target="MultiSelectCheckBox.Opacity" Value="0" />
+                    <Setter Target="MultiArrangeOverlayTextBorder.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <!-- Persistent selection fill + hover overlay (opacity-toggled) -->
+            <Border x:Name="SelectionFill"
+                    Background="{ThemeResource LiquidGlassHighlightBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Opacity="0" />
+            <Border x:Name="HoverFill"
+                    Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Opacity="0" />
+            <!-- Kept for template compatibility; Liquid Glass selection is the
+                 fill above, so the indicator bar stays hidden. -->
+            <Rectangle x:Name="SelectionIndicator"
+                       Width="3"
+                       Height="16"
+                       Fill="{ThemeResource LiquidGlassTintBrush}"
+                       Opacity="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       RadiusX="2"
+                       RadiusY="2" />
+
+            <Grid x:Name="MultiSelectGrid"
+                  Padding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.Indentation}"
+                  BorderBrush="Transparent"
+                  BorderThickness="0"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Grid Grid.Column="0">
+                <CheckBox x:Name="MultiSelectCheckBox"
+                          Width="32"
+                          MinWidth="32"
+                          MinHeight="32"
+                          Margin="10,0,0,0"
+                          VerticalAlignment="Center"
+                          Visibility="Collapsed"
+                          IsTabStop="False"
+                          AutomationProperties.AccessibilityView="Raw" />
+                <Border x:Name="MultiArrangeOverlayTextBorder"
+                        Visibility="Collapsed"
+                        IsHitTestVisible="False"
+                        MinWidth="20"
+                        Height="20"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="{ThemeResource LiquidGlassTintBrush}"
+                        CornerRadius="10">
+                  <TextBlock x:Name="MultiArrangeOverlayText"
+                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.DragItemsCount}"
+                             FontSize="12"
+                             Foreground="{ThemeResource LiquidGlassOnTintBrush}"
+                             IsHitTestVisible="False"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             AutomationProperties.AccessibilityView="Raw" />
+                </Border>
+              </Grid>
+              <Grid x:Name="ExpandCollapseChevron"
+                    Grid.Column="1"
+                    Padding="12,0"
+                    Width="Auto"
+                    Opacity="{TemplateBinding GlyphOpacity}"
+                    Background="Transparent">
+                <TextBlock x:Name="CollapsedGlyph"
+                           Foreground="{TemplateBinding GlyphBrush}"
+                           Width="12"
+                           Height="12"
+                           Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.CollapsedGlyphVisibility}"
+                           FontSize="{TemplateBinding GlyphSize}"
+                           Text="{TemplateBinding CollapsedGlyph}"
+                           FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                           Padding="2"
+                           VerticalAlignment="Center"
+                           AutomationProperties.AccessibilityView="Raw"
+                           IsTextScaleFactorEnabled="False"
+                           IsHitTestVisible="False" />
+                <TextBlock x:Name="ExpandedGlyph"
+                           Foreground="{TemplateBinding GlyphBrush}"
+                           Width="12"
+                           Height="12"
+                           Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TreeViewItemTemplateSettings.ExpandedGlyphVisibility}"
+                           FontSize="{TemplateBinding GlyphSize}"
+                           Text="{TemplateBinding ExpandedGlyph}"
+                           FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                           Padding="2"
+                           VerticalAlignment="Center"
+                           AutomationProperties.AccessibilityView="Raw"
+                           IsTextScaleFactorEnabled="False"
+                           IsHitTestVisible="False" />
+              </Grid>
+              <ContentPresenter x:Name="ContentPresenter"
+                                Grid.Column="2"
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                Foreground="{TemplateBinding Foreground}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                MinHeight="24"
+                                Margin="{TemplateBinding Padding}" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- BreadcrumbBarItem                                            -->
+  <!-- ============================================================ -->
+
+  <!-- Chromeless text buttons in the secondary label color; the current (last)
+       item switches to the full label color in SemiBold via the stock LastItem
+       state. Separators are small tertiary chevrons. All PART_ names and the
+       ItemTypeStates / InlineItemTypeStates / EllipsisDropDownItemCommonStates
+       groups are kept; hover/press feedback uses opacity, not brush swaps. -->
+  <Style x:Key="LiquidGlassBreadcrumbBarItemStyle" TargetType="BreadcrumbBarItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="FocusVisualMargin" Value="1" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="IsTabStop" Value="True" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="BreadcrumbBarItem">
+          <Grid x:Name="PART_LayoutRoot" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="ItemTypeStates">
+                <VisualState x:Name="Inline" />
+                <VisualState x:Name="EllipsisDropDown">
+                  <VisualState.Setters>
+                    <Setter Target="PART_ItemButton.Visibility" Value="Collapsed" />
+                    <Setter Target="PART_ChevronTextBlock.Visibility" Value="Collapsed" />
+                    <Setter Target="PART_ContentColumn.Width" Value="*" />
+                    <Setter Target="PART_EllipsisDropDownItemContentPresenter.Visibility" Value="Visible" />
+                    <Setter Target="PART_LayoutRoot.Padding" Value="11,7,11,9" />
+                    <Setter Target="PART_LayoutRoot.Margin" Value="5,3" />
+                    <Setter Target="PART_LayoutRoot.FocusVisualMargin" Value="-3" />
+                    <Setter Target="PART_ItemButton.(Control.IsTemplateFocusTarget)" Value="False" />
+                    <Setter Target="PART_LayoutRoot.(Control.IsTemplateFocusTarget)" Value="True" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="EllipsisDropDownItemCommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="DropDownHoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="DropDownPressedFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="PART_EllipsisDropDownItemContentPresenter.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="InlineItemTypeStates">
+                <VisualState x:Name="Default">
+                  <VisualState.Setters>
+                    <Setter Target="PART_ChevronTextBlock.Text" Value="&#xE76C;" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="DefaultRTL">
+                  <VisualState.Setters>
+                    <Setter Target="PART_ChevronTextBlock.Text" Value="&#xE76B;" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LastItem">
+                  <VisualState.Setters>
+                    <Setter Target="PART_ItemButton.Visibility" Value="Collapsed" />
+                    <Setter Target="PART_ChevronTextBlock.Visibility" Value="Collapsed" />
+                    <Setter Target="PART_LastItemContentPresenter.Visibility" Value="Visible" />
+                    <Setter Target="PART_ItemButton.(Control.IsTemplateFocusTarget)" Value="False" />
+                    <Setter Target="PART_LastItemContentPresenter.(Control.IsTemplateFocusTarget)" Value="True" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Ellipsis">
+                  <VisualState.Setters>
+                    <Setter Target="PART_ChevronTextBlock.Text" Value="&#xE76C;" />
+                    <Setter Target="PART_EllipsisTextBlock.Visibility" Value="Visible" />
+                    <Setter Target="PART_ItemContentPresenter.Visibility" Value="Collapsed" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="EllipsisRTL">
+                  <VisualState.Setters>
+                    <Setter Target="PART_EllipsisTextBlock.Visibility" Value="Visible" />
+                    <Setter Target="PART_ItemContentPresenter.Visibility" Value="Collapsed" />
+                    <Setter Target="PART_ChevronTextBlock.Text" Value="&#xE76B;" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Grid.Resources>
+              <Flyout x:Name="PART_EllipsisFlyout" ShouldConstrainToRootBounds="False">
+                <Flyout.FlyoutPresenterStyle>
+                  <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="{ThemeResource LiquidGlassSurfaceBrush}" />
+                    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Padding" Value="0,2" />
+                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+                    <Setter Property="MinHeight" Value="40" />
+                    <Setter Property="CornerRadius" Value="16" />
+                    <Setter Property="Template">
+                      <Setter.Value>
+                        <ControlTemplate TargetType="FlyoutPresenter">
+                          <Border Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  CornerRadius="{TemplateBinding CornerRadius}">
+                            <ScrollViewer x:Name="FlyoutPresenterScrollViewer"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          Content="{TemplateBinding Content}"
+                                          ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}" />
+                          </Border>
+                        </ControlTemplate>
+                      </Setter.Value>
+                    </Setter>
+                  </Style>
+                </Flyout.FlyoutPresenterStyle>
+              </Flyout>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" x:Name="PART_ContentColumn" />
+              <ColumnDefinition Width="Auto" x:Name="PART_ChevronColumn" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Hover/press fills for ellipsis-dropdown mode (opacity-toggled) -->
+            <Border x:Name="DropDownHoverFill"
+                    Grid.ColumnSpan="2"
+                    Margin="-11,-7,-11,-9"
+                    Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                    CornerRadius="10"
+                    Opacity="0" />
+            <Border x:Name="DropDownPressedFill"
+                    Grid.ColumnSpan="2"
+                    Margin="-11,-7,-11,-9"
+                    Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                    CornerRadius="10"
+                    Opacity="0" />
+
+            <Button x:Name="PART_ItemButton" x:DeferLoadStrategy="Lazy"
+                    AutomationProperties.AccessibilityView="Raw"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Control.IsTemplateFocusTarget="True"
+                    IsTabStop="False"
+                    FocusVisualMargin="-3"
+                    Padding="1,3"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+              <Button.Style>
+                <Style TargetType="Button">
+                  <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                  <Setter Property="Background" Value="Transparent" />
+                  <Setter Property="BorderBrush" Value="Transparent" />
+                  <Setter Property="BorderThickness" Value="0" />
+                  <Setter Property="HorizontalAlignment" Value="Left" />
+                  <Setter Property="VerticalAlignment" Value="Center" />
+                  <Setter Property="FontWeight" Value="Normal" />
+                  <Setter Property="FontSize" Value="15" />
+                  <Setter Property="Padding" Value="0" />
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                          <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                              <VisualState x:Name="Normal" />
+                              <!-- Current refers to the last item -->
+                              <VisualState x:Name="CurrentNormal" />
+                              <VisualState x:Name="PointerOver">
+                                <VisualState.Setters>
+                                  <Setter Target="PART_ContentPresenter.Opacity" Value="0.8" />
+                                </VisualState.Setters>
+                              </VisualState>
+                              <VisualState x:Name="CurrentPointerOver" />
+                              <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                  <Setter Target="PART_ContentPresenter.Opacity" Value="0.55" />
+                                </VisualState.Setters>
+                              </VisualState>
+                              <VisualState x:Name="CurrentPressed" />
+                              <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                  <Setter Target="PART_ContentPresenter.Opacity" Value="0.4" />
+                                </VisualState.Setters>
+                              </VisualState>
+                              <VisualState x:Name="CurrentDisabled">
+                                <VisualState.Setters>
+                                  <Setter Target="PART_ContentPresenter.Opacity" Value="0.4" />
+                                </VisualState.Setters>
+                              </VisualState>
+                              <VisualState x:Name="Focus" />
+                              <VisualState x:Name="CurrentFocus" />
+                            </VisualStateGroup>
+                          </VisualStateManager.VisualStateGroups>
+                          <ContentPresenter x:Name="PART_ContentPresenter"
+                                            AutomationProperties.AccessibilityView="Raw"
+                                            Content="{TemplateBinding Content}"
+                                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            Padding="{TemplateBinding Padding}"
+                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </Button.Style>
+              <!-- This is the Button Content -->
+              <Grid AutomationProperties.AccessibilityView="Raw">
+                <ContentPresenter x:Name="PART_ItemContentPresenter"
+                                  AutomationProperties.AccessibilityView="Raw"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTransitions="{TemplateBinding ContentTransitions}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  FontFamily="{TemplateBinding FontFamily}"
+                                  FontSize="{TemplateBinding FontSize}"
+                                  FontWeight="{TemplateBinding FontWeight}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  LineHeight="20" />
+                <TextBlock x:Name="PART_EllipsisTextBlock"
+                           AutomationProperties.AccessibilityView="Raw"
+                           FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                           FontSize="{TemplateBinding FontSize}"
+                           Padding="3"
+                           Text="&#xE712;"
+                           Visibility="Collapsed"
+                           VerticalAlignment="Stretch"
+                           IsTextScaleFactorEnabled="False" />
+              </Grid>
+            </Button>
+
+            <!-- Shown only when the rendered item is the current (last) item -->
+            <ContentPresenter x:Name="PART_LastItemContentPresenter"
+                              AutomationProperties.AccessibilityView="Raw"
+                              Visibility="Collapsed"
+                              Content="{TemplateBinding Content}"
+                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              FocusVisualMargin="-3"
+                              FontFamily="{TemplateBinding FontFamily}"
+                              FontSize="{TemplateBinding FontSize}"
+                              FontWeight="SemiBold"
+                              Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              LineHeight="20"
+                              Padding="1,3"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              CornerRadius="{TemplateBinding CornerRadius}" />
+
+            <!-- Shown only when the rendered item is an ellipsis drop-down item -->
+            <ContentPresenter x:Name="PART_EllipsisDropDownItemContentPresenter" x:DeferLoadStrategy="Lazy"
+                              AutomationProperties.AccessibilityView="Raw"
+                              Visibility="Collapsed"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                              Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              HorizontalContentAlignment="Stretch"
+                              FontWeight="Normal"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+            <!-- Chevron separator -->
+            <TextBlock x:Name="PART_ChevronTextBlock"
+                       AutomationProperties.AccessibilityView="Raw"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       IsTextScaleFactorEnabled="False"
+                       FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                       FontSize="10"
+                       Foreground="{ThemeResource LiquidGlassTertiaryLabelBrush}"
+                       Text="&#xE76C;"
+                       Padding="6,3,6,0"
+                       VerticalAlignment="Center" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- PipsPager                                                    -->
+  <!-- ============================================================ -->
+
+  <!-- Pip dots. The stock PipsPager template (ItemsRepeater + nav buttons) is
+       kept — the control applies these styles to the generated pip buttons via
+       its NormalPipStyle / SelectedPipStyle properties. -->
+  <Style x:Key="LiquidGlassPipsPagerNormalPipStyle" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
+    <Setter Property="Margin" Value="3,2" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="PipRoot" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="HoverPip.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="HoverPip.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="PipRoot.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Ellipse x:Name="Pip"
+                     Width="6"
+                     Height="6"
+                     Fill="{ThemeResource LiquidGlassTertiaryLabelBrush}"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+            <Ellipse x:Name="HoverPip"
+                     Width="8"
+                     Height="8"
+                     Fill="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                     Opacity="0"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassPipsPagerSelectedPipStyle" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
+    <Setter Property="Margin" Value="3,2" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="PipRoot" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="PressedPip.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="PressedPip.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="PipRoot.Opacity" Value="0.4" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Ellipse x:Name="Pip"
+                     Width="8"
+                     Height="8"
+                     Fill="{ThemeResource LiquidGlassTintBrush}"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+            <Ellipse x:Name="PressedPip"
+                     Width="8"
+                     Height="8"
+                     Fill="{ThemeResource LiquidGlassTintPressedBrush}"
+                     Opacity="0"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Nav caret buttons; the stock PipsPager template rotates them -90° for
+       horizontal orientation, so the glyphs stay the vertical carets. -->
+  <Style x:Key="LiquidGlassPipsPagerPreviousButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Width" Value="20" />
+    <Setter Property="Height" Value="20" />
+    <Setter Property="Margin" Value="2" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="NavHoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="NavHoverFill.Opacity" Value="1" />
+                    <Setter Target="NavGlyph.Opacity" Value="0.6" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="NavGlyph.Opacity" Value="0.3" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="NavHoverFill"
+                    Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                    CornerRadius="10"
+                    Opacity="0" />
+            <FontIcon x:Name="NavGlyph"
+                      Glyph="&#xEDDB;"
+                      FontSize="8"
+                      Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassPipsPagerNextButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Width" Value="20" />
+    <Setter Property="Height" Value="20" />
+    <Setter Property="Margin" Value="2" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="NavHoverFill.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="NavHoverFill.Opacity" Value="1" />
+                    <Setter Target="NavGlyph.Opacity" Value="0.6" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="NavGlyph.Opacity" Value="0.3" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="NavHoverFill"
+                    Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                    CornerRadius="10"
+                    Opacity="0" />
+            <FontIcon x:Name="NavGlyph"
+                      Glyph="&#xEDDC;"
+                      FontSize="8"
+                      Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- PipsPager keeps its stock template; only the pip / nav button styles and
+       chrome are swapped via the control's style properties. -->
+  <Style x:Key="LiquidGlassPipsPagerStyle" TargetType="PipsPager">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="PreviousButtonStyle" Value="{StaticResource LiquidGlassPipsPagerPreviousButtonStyle}" />
+    <Setter Property="NextButtonStyle" Value="{StaticResource LiquidGlassPipsPagerNextButtonStyle}" />
+    <Setter Property="SelectedPipStyle" Value="{StaticResource LiquidGlassPipsPagerSelectedPipStyle}" />
+    <Setter Property="NormalPipStyle" Value="{StaticResource LiquidGlassPipsPagerNormalPipStyle}" />
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- FlipView                                                     -->
+  <!-- ============================================================ -->
+
+  <!-- Stock template structure kept intact (ScrollingHost + the four named nav
+       buttons + Uno's non-virtualizing ItemsPanel workaround); only the nav
+       buttons are restyled as circular glass buttons with chromeless chevrons. -->
+  <Style x:Key="LiquidGlassFlipViewStyle" TargetType="FlipView">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="TabNavigation" Value="Once" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="CornerRadius" Value="16" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+    <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
+    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False" />
+    <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True" />
+    <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True" />
+    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <!-- UNO WORKAROUND: VirtualizingStackPanel is not yet implemented. -->
+          <StackPanel AreScrollSnapPointsRegular="True" Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="FlipView">
+          <Grid Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid.Resources>
+              <ControlTemplate x:Key="HorizontalNextTemplate" TargetType="Button">
+                <Grid>
+                  <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                      <VisualState x:Name="Normal" />
+                      <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                          <Setter Target="HoverOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                      <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                          <Setter Target="PressedOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                    </VisualStateGroup>
+                  </VisualStateManager.VisualStateGroups>
+                  <Border x:Name="Root"
+                          Background="{ThemeResource LiquidGlassFillBrush}"
+                          BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                          BorderThickness="1"
+                          CornerRadius="999" />
+                  <Border x:Name="HoverOverlay"
+                          Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <Border x:Name="PressedOverlay"
+                          Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <FontIcon x:Name="Arrow"
+                            Glyph="&#xE76C;"
+                            FontSize="11"
+                            Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MirroredWhenRightToLeft="True"
+                            UseLayoutRounding="False" />
+                </Grid>
+              </ControlTemplate>
+              <ControlTemplate x:Key="HorizontalPreviousTemplate" TargetType="Button">
+                <Grid>
+                  <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                      <VisualState x:Name="Normal" />
+                      <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                          <Setter Target="HoverOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                      <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                          <Setter Target="PressedOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                    </VisualStateGroup>
+                  </VisualStateManager.VisualStateGroups>
+                  <Border x:Name="Root"
+                          Background="{ThemeResource LiquidGlassFillBrush}"
+                          BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                          BorderThickness="1"
+                          CornerRadius="999" />
+                  <Border x:Name="HoverOverlay"
+                          Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <Border x:Name="PressedOverlay"
+                          Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <FontIcon x:Name="Arrow"
+                            Glyph="&#xE76B;"
+                            FontSize="11"
+                            Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MirroredWhenRightToLeft="True"
+                            UseLayoutRounding="False" />
+                </Grid>
+              </ControlTemplate>
+              <ControlTemplate x:Key="VerticalNextTemplate" TargetType="Button">
+                <Grid>
+                  <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                      <VisualState x:Name="Normal" />
+                      <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                          <Setter Target="HoverOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                      <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                          <Setter Target="PressedOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                    </VisualStateGroup>
+                  </VisualStateManager.VisualStateGroups>
+                  <Border x:Name="Root"
+                          Background="{ThemeResource LiquidGlassFillBrush}"
+                          BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                          BorderThickness="1"
+                          CornerRadius="999" />
+                  <Border x:Name="HoverOverlay"
+                          Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <Border x:Name="PressedOverlay"
+                          Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <FontIcon x:Name="Arrow"
+                            Glyph="&#xE70D;"
+                            FontSize="11"
+                            Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            UseLayoutRounding="False" />
+                </Grid>
+              </ControlTemplate>
+              <ControlTemplate x:Key="VerticalPreviousTemplate" TargetType="Button">
+                <Grid>
+                  <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                      <VisualState x:Name="Normal" />
+                      <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                          <Setter Target="HoverOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                      <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                          <Setter Target="PressedOverlay.Opacity" Value="1" />
+                        </VisualState.Setters>
+                      </VisualState>
+                    </VisualStateGroup>
+                  </VisualStateManager.VisualStateGroups>
+                  <Border x:Name="Root"
+                          Background="{ThemeResource LiquidGlassFillBrush}"
+                          BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                          BorderThickness="1"
+                          CornerRadius="999" />
+                  <Border x:Name="HoverOverlay"
+                          Background="{ThemeResource LiquidGlassHoverOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <Border x:Name="PressedOverlay"
+                          Background="{ThemeResource LiquidGlassPressedOverlayBrush}"
+                          CornerRadius="999"
+                          Opacity="0" />
+                  <FontIcon x:Name="Arrow"
+                            Glyph="&#xE70E;"
+                            FontSize="11"
+                            Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            UseLayoutRounding="False" />
+                </Grid>
+              </ControlTemplate>
+            </Grid.Resources>
+            <ScrollViewer x:Name="ScrollingHost"
+                          VerticalSnapPointsType="MandatorySingle"
+                          HorizontalSnapPointsType="MandatorySingle"
+                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                          BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                          Padding="{TemplateBinding Padding}"
+                          ZoomMode="Disabled"
+                          TabNavigation="{TemplateBinding TabNavigation}"
+                          IsTabStop="False"
+                          AutomationProperties.AccessibilityView="Raw">
+              <ItemsPresenter />
+            </ScrollViewer>
+            <Button x:Name="PreviousButtonHorizontal"
+                    Template="{StaticResource HorizontalPreviousTemplate}"
+                    Width="32"
+                    Height="32"
+                    Margin="12,0"
+                    IsTabStop="False"
+                    UseSystemFocusVisuals="False"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" />
+            <Button x:Name="NextButtonHorizontal"
+                    Template="{StaticResource HorizontalNextTemplate}"
+                    Width="32"
+                    Height="32"
+                    Margin="12,0"
+                    IsTabStop="False"
+                    UseSystemFocusVisuals="False"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center" />
+            <Button x:Name="PreviousButtonVertical"
+                    Template="{StaticResource VerticalPreviousTemplate}"
+                    Width="32"
+                    Height="32"
+                    Margin="0,12"
+                    IsTabStop="False"
+                    UseSystemFocusVisuals="False"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top" />
+            <Button x:Name="NextButtonVertical"
+                    Template="{StaticResource VerticalNextTemplate}"
+                    Width="32"
+                    Height="32"
+                    Margin="0,12"
+                    IsTabStop="False"
+                    UseSystemFocusVisuals="False"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- SplitView                                                    -->
+  <!-- ============================================================ -->
+
+  <!-- No retemplate needed: PaneBackground is a plain property. The frosted
+       sidebar material lets the content layer extend underneath. -->
+  <Style x:Key="LiquidGlassSplitViewStyle" TargetType="SplitView">
+    <Setter Property="PaneBackground" Value="{ThemeResource LiquidGlassPaneBrush}" />
+    <Setter Property="OpenPaneLength" Value="260" />
+  </Style>
+
+  <!-- ============================================================ -->
+  <!-- Implicit registrations                                       -->
+  <!-- ============================================================ -->
+
+</ResourceDictionary>

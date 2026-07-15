@@ -1,0 +1,72 @@
+<Page x:Class="LiquidGlassGallery.Pages.DevSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:dev="using:DevWinUI.LiquidGlass">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Settings cards" FontSize="30" FontWeight="Bold" Foreground="White" />
+      <TextBlock Text="DevWinUI-style SettingsCard, SettingsExpander and SettingsGroup, restyled as Liquid Glass rows."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <dev:SettingsGroup Header="General"
+                         Description="A SettingsGroup stacks settings rows under a shared header.">
+        <dev:SettingsCard Header="Wi-Fi" Description="Connect to wireless networks">
+          <dev:SettingsCard.HeaderIcon>
+            <FontIcon Glyph="&#xE701;" />
+          </dev:SettingsCard.HeaderIcon>
+          <ToggleSwitch IsOn="True" MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+        </dev:SettingsCard>
+
+        <dev:SettingsCard Header="Appearance" Description="Choose how the app looks">
+          <dev:SettingsCard.HeaderIcon>
+            <FontIcon Glyph="&#xE790;" />
+          </dev:SettingsCard.HeaderIcon>
+          <ComboBox MinWidth="130" SelectedIndex="0">
+            <ComboBoxItem Content="Auto" />
+            <ComboBoxItem Content="Light" />
+            <ComboBoxItem Content="Dark" />
+          </ComboBox>
+        </dev:SettingsCard>
+
+        <dev:SettingsCard x:Name="UpdatesCard"
+                          Header="Check for updates"
+                          Description="Never checked"
+                          IsClickEnabled="True"
+                          Click="OnCheckForUpdates">
+          <dev:SettingsCard.HeaderIcon>
+            <FontIcon Glyph="&#xE895;" />
+          </dev:SettingsCard.HeaderIcon>
+        </dev:SettingsCard>
+      </dev:SettingsGroup>
+
+      <dev:SettingsGroup Header="Network"
+                         Description="A SettingsExpander hosts nested rows in a collapsible clear-glass area.">
+        <dev:SettingsExpander Header="Ethernet"
+                              Description="Connected — 1 Gbps"
+                              IsExpanded="True">
+          <dev:SettingsExpander.HeaderIcon>
+            <FontIcon Glyph="&#xE968;" />
+          </dev:SettingsExpander.HeaderIcon>
+
+          <dev:SettingsCard Header="Metered connection" Description="Limit background data usage">
+            <ToggleSwitch MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+          </dev:SettingsCard>
+
+          <dev:SettingsCard Header="IP address">
+            <TextBlock Text="192.168.1.24"
+                       FontSize="13"
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </dev:SettingsCard>
+
+          <dev:SettingsCard Header="Random hardware addresses" Description="Make it harder to track this device">
+            <ToggleSwitch MinWidth="0" OnContent="{x:Null}" OffContent="{x:Null}" />
+          </dev:SettingsCard>
+        </dev:SettingsExpander>
+      </dev:SettingsGroup>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

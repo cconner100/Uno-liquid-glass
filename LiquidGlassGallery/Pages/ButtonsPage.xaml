@@ -1,0 +1,67 @@
+<Page x:Class="LiquidGlassGallery.Pages.ButtonsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Buttons" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Button" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Glass is the default; the tinted prominent style is reserved for the primary action."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <Button Content="Glass" />
+            <Button Content="Prominent" Style="{StaticResource LiquidGlassProminentButtonStyle}" />
+            <Button Content="Delete" Style="{StaticResource LiquidGlassDestructiveButtonStyle}" />
+            <Button Content="Disabled" IsEnabled="False" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="ToggleButton and RepeatButton" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="A checked ToggleButton takes on the prominent tint. RepeatButton fires repeatedly while held."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <ToggleButton Content="Toggle me" />
+            <ToggleButton Content="Checked" IsChecked="True" />
+            <RepeatButton x:Name="Repeater" Content="Hold: 0" Click="OnRepeat" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="HyperlinkButton" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <HyperlinkButton Content="Adopting Liquid Glass" NavigateUri="https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass" />
+            <HyperlinkButton Content="Uno Platform" NavigateUri="https://platform.uno" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="DropDownButton" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <DropDownButton Content="Options">
+              <DropDownButton.Flyout>
+                <MenuFlyout>
+                  <MenuFlyoutItem Text="Duplicate" />
+                  <MenuFlyoutItem Text="Rename" />
+                  <MenuFlyoutSeparator />
+                  <MenuFlyoutItem Text="Delete" />
+                </MenuFlyout>
+              </DropDownButton.Flyout>
+            </DropDownButton>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

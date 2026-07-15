@@ -1,0 +1,29 @@
+<Application x:Class="LiquidGlassGallery.App"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:lg="using:Uno.Themes.LiquidGlass"
+       xmlns:devlg="using:DevWinUI.LiquidGlass"
+       xmlns:ctlg="using:CommunityToolkit.LiquidGlass">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <!-- Load WinUI resources -->
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+        <!-- Apply the Liquid Glass theme (same pattern as Uno.Themes' MaterialTheme) -->
+        <lg:LiquidGlassTheme />
+
+        <!-- DevWinUI-inspired controls, restyled with Liquid Glass materials -->
+        <devlg:DevWinUIGlassTheme />
+
+        <!-- Windows Community Toolkit controls, restyled with Liquid Glass materials -->
+        <ctlg:CommunityToolkitGlassTheme />
+      </ResourceDictionary.MergedDictionaries>
+
+      <!-- Add resources here -->
+
+    </ResourceDictionary>
+  </Application.Resources>
+
+</Application>

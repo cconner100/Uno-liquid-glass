@@ -1,0 +1,287 @@
+<!--
+  Uno.Themes.LiquidGlass — Pickers.xaml
+  DatePicker / TimePicker as segmented glass fields. The templates keep the part
+  names the controls resolve at runtime (FlyoutButton, FlyoutButtonContentGrid,
+  Day/Month/Year and Hour/Minute/Period text blocks, picker spacings) so all
+  behavior — flyout, culture-based column ordering, text updates — keeps working.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- The glass field the picker buttons share: flat content, no capsule -->
+  <Style x:Key="LiquidGlassPickerFieldButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassControlFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="40" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="RootGrid">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="GlassFill.Background" Value="{ThemeResource LiquidGlassFillPointerOverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="GlassFill.Background" Value="{ThemeResource LiquidGlassFillPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="GlassFill"
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="{TemplateBinding CornerRadius}" />
+            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    IsHitTestVisible="False" />
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Padding="{TemplateBinding Padding}"
+                              AutomationProperties.AccessibilityView="Raw" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================ DatePicker ============================ -->
+  <Style x:Key="LiquidGlassDatePickerStyle" TargetType="DatePicker">
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassControlFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="MinWidth" Value="296" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DatePicker">
+          <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="LayoutRoot.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HasDateStates">
+                <VisualState x:Name="HasDate" />
+                <VisualState x:Name="HasNoDate">
+                  <VisualState.Setters>
+                    <Setter Target="DayTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                    <Setter Target="MonthTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                    <Setter Target="YearTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <ContentPresenter x:Name="HeaderContentPresenter"
+                              Grid.Row="0"
+                              Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                              FontSize="13"
+                              Margin="2,0,0,6"
+                              Visibility="Collapsed" />
+
+            <Button x:Name="FlyoutButton"
+                    Grid.Row="1"
+                    Style="{StaticResource LiquidGlassPickerFieldButtonStyle}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Foreground="{TemplateBinding Foreground}"
+                    IsEnabled="{TemplateBinding IsEnabled}">
+              <Grid x:Name="FlyoutButtonContentGrid">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*" x:Name="DayColumn" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="1*" x:Name="MonthColumn" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="1*" x:Name="YearColumn" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="DayTextBlock"
+                           Text="day"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+                <TextBlock x:Name="MonthTextBlock"
+                           Text="month"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+                <TextBlock x:Name="YearTextBlock"
+                           Text="year"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+
+                <Rectangle x:Name="FirstPickerSpacing"
+                           Grid.Column="1"
+                           Width="8"
+                           Fill="Transparent"
+                           Margin="0" />
+                <Rectangle x:Name="SecondPickerSpacing"
+                           Grid.Column="3"
+                           Width="8"
+                           Fill="Transparent"
+                           Margin="0" />
+              </Grid>
+            </Button>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- ============================ TimePicker ============================ -->
+  <Style x:Key="LiquidGlassTimePickerStyle" TargetType="TimePicker">
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassControlFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="MinWidth" Value="242" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TimePicker">
+          <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="LayoutRoot.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HasTimeStates">
+                <VisualState x:Name="HasTime" />
+                <VisualState x:Name="HasNoTime">
+                  <VisualState.Setters>
+                    <Setter Target="HourTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                    <Setter Target="MinuteTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                    <Setter Target="PeriodTextBlock.Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <ContentPresenter x:Name="HeaderContentPresenter"
+                              Grid.Row="0"
+                              Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                              FontSize="13"
+                              Margin="2,0,0,6"
+                              Visibility="Collapsed" />
+
+            <Button x:Name="FlyoutButton"
+                    Grid.Row="1"
+                    Style="{StaticResource LiquidGlassPickerFieldButtonStyle}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Foreground="{TemplateBinding Foreground}"
+                    IsEnabled="{TemplateBinding IsEnabled}">
+              <Grid x:Name="FlyoutButtonContentGrid">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="78*" x:Name="HourColumn" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="78*" x:Name="MinuteColumn" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="78*" x:Name="PeriodColumn" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="HourTextBlock"
+                           Text="hour"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+                <TextBlock x:Name="MinuteTextBlock"
+                           Grid.Column="2"
+                           Text="minute"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+                <TextBlock x:Name="PeriodTextBlock"
+                           Grid.Column="4"
+                           Text="AM"
+                           TextAlignment="Center"
+                           Padding="0,10,0,11"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           AutomationProperties.AccessibilityView="Raw" />
+
+                <Rectangle x:Name="FirstPickerSpacing"
+                           Grid.Column="1"
+                           Width="8"
+                           Fill="Transparent"
+                           Margin="0" />
+                <Rectangle x:Name="SecondPickerSpacing"
+                           Grid.Column="3"
+                           Width="8"
+                           Fill="Transparent"
+                           Margin="0" />
+              </Grid>
+            </Button>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

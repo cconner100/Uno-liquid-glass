@@ -1,0 +1,87 @@
+<Page x:Class="LiquidGlassGallery.Pages.ToolkitDataGridPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:dgrid="using:CommunityToolkit.WinUI.UI.Controls">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Data grid" FontSize="30" FontWeight="Bold" Foreground="White" />
+      <TextBlock Text="The Windows Community Toolkit DataGrid (from the Uno.WindowsCommunityToolkit 7.x fork — 8.x never shipped one) on a glass card: chromeless sortable headers, hairline grid lines, tint selection, and glass cell editors."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Editable DataGrid" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Click a header to sort. Double-click a cell (or press F2) to edit: Material and Blur radius use glass TextBox editors, Layer edits with a glass ComboBox, Effect edits with a glass AutoSuggestBox (type 'b' or 's' for suggestions). Esc cancels, Enter commits."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+
+          <dgrid:DataGrid x:Name="Grid"
+                          AutoGenerateColumns="False"
+                          Background="Transparent"
+                          RowBackground="Transparent"
+                          AlternatingRowBackground="#0DFFFFFF"
+                          Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                          BorderThickness="0"
+                          GridLinesVisibility="Horizontal"
+                          HeadersVisibility="Column"
+                          CanUserSortColumns="True"
+                          CanUserResizeColumns="True"
+                          SelectionMode="Single"
+                          IsReadOnly="False"
+                          RowHeight="44"
+                          MinHeight="380"
+                          Sorting="OnSorting"
+                          SelectionChanged="OnRowSelected"
+                          CellEditEnded="OnCellEditEnded">
+            <dgrid:DataGrid.Columns>
+              <dgrid:DataGridTextColumn Header="Material"
+                                        Binding="{Binding Material, Mode=TwoWay}"
+                                        Tag="Material"
+                                        Width="*"
+                                        EditingElementStyle="{StaticResource LiquidGlassDataGridTextEditorStyle}" />
+              <dgrid:DataGridComboBoxColumn x:Name="LayerColumn"
+                                            Header="Layer"
+                                            Binding="{Binding Layer, Mode=TwoWay}"
+                                            Tag="Layer"
+                                            Width="*"
+                                            EditingElementStyle="{StaticResource LiquidGlassDataGridComboBoxEditorStyle}" />
+              <dgrid:DataGridTextColumn Header="Blur radius"
+                                        Binding="{Binding BlurRadius, Mode=TwoWay}"
+                                        Tag="BlurRadius"
+                                        Width="Auto"
+                                        EditingElementStyle="{StaticResource LiquidGlassDataGridTextEditorStyle}" />
+              <dgrid:DataGridTemplateColumn Header="Effect" Tag="Effect" Width="*">
+                <dgrid:DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Effect}" VerticalAlignment="Center" Margin="12,0" />
+                  </DataTemplate>
+                </dgrid:DataGridTemplateColumn.CellTemplate>
+                <dgrid:DataGridTemplateColumn.CellEditingTemplate>
+                  <DataTemplate>
+                    <AutoSuggestBox Text="{Binding Effect, Mode=TwoWay}"
+                                    Style="{StaticResource LiquidGlassDataGridAutoSuggestEditorStyle}"
+                                    PlaceholderText="Effect…"
+                                    TextChanged="OnEffectSuggestions"
+                                    SuggestionChosen="OnEffectChosen"
+                                    Margin="4,0" />
+                  </DataTemplate>
+                </dgrid:DataGridTemplateColumn.CellEditingTemplate>
+              </dgrid:DataGridTemplateColumn>
+            </dgrid:DataGrid.Columns>
+          </dgrid:DataGrid>
+
+          <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0">
+            <Button Content="Add row" Click="OnAddRow" />
+            <Button Content="Remove selected" Click="OnRemoveRow" />
+            <TextBlock x:Name="SelectionText"
+                       Text="No row selected."
+                       FontSize="13" VerticalAlignment="Center"
+                       Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

@@ -1,0 +1,25 @@
+<!-- Timeline: vertical timeline; dots, connectors, and text are generated in code into PART_Root. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:DevWinUI.LiquidGlass">
+
+  <Style TargetType="local:Timeline" BasedOn="{StaticResource LiquidGlassTimelineStyle}" />
+
+  <Style x:Key="LiquidGlassTimelineStyle" TargetType="local:Timeline">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="InfoBrush" Value="{ThemeResource LiquidGlassTintBrush}" />
+    <Setter Property="SuccessBrush" Value="{ThemeResource LiquidGlassSuccessBrush}" />
+    <Setter Property="WarningBrush" Value="#FF9F0A" />
+    <Setter Property="ErrorBrush" Value="{ThemeResource LiquidGlassDestructiveBrush}" />
+    <Setter Property="ConnectorBrush" Value="{ThemeResource LiquidGlassSeparatorBrush}" />
+    <Setter Property="HeaderBrush" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="SecondaryBrush" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="local:Timeline">
+          <StackPanel x:Name="PART_Root" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

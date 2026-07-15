@@ -1,0 +1,44 @@
+<Page x:Class="LiquidGlassGallery.Pages.DevDialogsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:dev="using:DevWinUI.LiquidGlass">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Dialogs &amp; windows" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="MessageBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="DevWinUI's MessageBox API rebuilt on ContentDialog — a severity glyph beside the message, floating on the glass surface material."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <Button Content="Information" Click="OnShowInformation" />
+            <Button Content="Success" Click="OnShowSuccess" />
+            <Button Content="Warning" Click="OnShowWarning" />
+            <Button Content="Error" Click="OnShowError" />
+            <Button Content="Question (YesNoCancel)" Click="OnShowQuestion" />
+          </StackPanel>
+          <dev:Divider Margin="0,10,0,0" />
+          <TextBlock x:Name="MessageBoxResultText" Text="Result: (none yet)" FontSize="13" Margin="0,6,0,0"
+                     Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Secondary window" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Opens a second window with its own vibrant content layer and a glass card floating above it."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+          <Button Content="Open glass window" Click="OnOpenGlassWindow" HorizontalAlignment="Left" />
+          <TextBlock x:Name="WindowFallbackText"
+                     Text="Multi-window is not supported on this platform."
+                     FontSize="13" Margin="0,6,0,0" Visibility="Collapsed"
+                     Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

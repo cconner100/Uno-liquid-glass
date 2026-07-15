@@ -1,0 +1,18 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net10.0-ios;net10.0-desktop</TargetFrameworks>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>DevWinUI.LiquidGlass</RootNamespace>
+    <Description>DevWinUI-inspired controls (https://github.com/ghost1372/DevWinUI, MIT) ported to Uno Platform and restyled with the Liquid Glass design language. The upstream library is Windows App SDK-only; these are cross-platform re-implementations of its signature controls.</Description>
+
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+</Project>

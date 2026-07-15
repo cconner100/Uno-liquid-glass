@@ -1,0 +1,22 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net10.0-ios;net10.0-desktop</TargetFrameworks>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>Uno.Themes.LiquidGlass</RootNamespace>
+    <Description>Liquid Glass theme for Uno Platform — Apple's Liquid Glass design language (translucent materials, specular highlights, capsule controls) as a drop-in Uno theme.</Description>
+
+    <!--
+      UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+</Project>

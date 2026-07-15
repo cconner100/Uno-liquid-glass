@@ -1,0 +1,18 @@
+<!--
+  CommunityToolkit.LiquidGlass — HeaderedControls (HeaderedContentControl / HeaderedItemsControl)
+
+  Intentionally (near-)empty: the WCT HeaderedControls templates
+  (HeaderedContentControl.xaml / HeaderedItemsControl.xaml in
+  CommunityToolkit.WinUI.Controls.HeaderedControls) expose NO lightweight
+  resource keys — they are bare layout wrappers (Grid + ContentPresenters /
+  ItemsPresenter) with no brushes, thicknesses, or metrics resolved via
+  ThemeResource. There is nothing to override globally without replacing the
+  entire template, which we deliberately avoid for NuGet-referenced controls.
+
+  Liquid glass treatment is therefore applied per-instance in the gallery
+  (ToolkitLayoutsPage): SemiBold LiquidGlassLabelBrush headers via the
+  Header property, glass tiles as content.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+</ResourceDictionary>

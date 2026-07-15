@@ -1,0 +1,33 @@
+<!--
+  CommunityToolkit.LiquidGlass — ColorPicker.xaml
+  Light-touch lightweight overrides for CommunityToolkit.WinUI.Controls.ColorPicker.
+  No retemplating: the picker's text/number inputs already inherit the theme's
+  TextControl* glass overrides; here we only adjust the remaining chrome keys the
+  toolkit templates reference (ColorPicker.xaml / ColorPickerSlider.xaml):
+  - ControlSolidFillColorDefaultBrush: fill of the channel-slider thumbs — forced to
+    white in both themes so they match the theme's white round slider knobs.
+  - NumberBoxPopup*: the spin-button popup of the channel NumberBoxes — glass surface.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ResourceDictionary.ThemeDictionaries>
+
+    <!-- ================================ LIGHT ================================ -->
+    <ResourceDictionary x:Key="Light">
+      <SolidColorBrush x:Key="ControlSolidFillColorDefaultBrush" Color="#FFFFFF" />
+
+      <SolidColorBrush x:Key="NumberBoxPopupBackground" Color="#E6F5F5F7" />
+      <SolidColorBrush x:Key="NumberBoxPopupBorderBrush" Color="#38FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- ================================ DARK ================================ -->
+    <ResourceDictionary x:Key="Default">
+      <SolidColorBrush x:Key="ControlSolidFillColorDefaultBrush" Color="#FFFFFF" />
+
+      <SolidColorBrush x:Key="NumberBoxPopupBackground" Color="#E62C2C2E" />
+      <SolidColorBrush x:Key="NumberBoxPopupBorderBrush" Color="#26FFFFFF" />
+    </ResourceDictionary>
+
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

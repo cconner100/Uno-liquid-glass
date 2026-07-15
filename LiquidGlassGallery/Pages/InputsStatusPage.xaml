@@ -1,0 +1,156 @@
+<Page x:Class="LiquidGlassGallery.Pages.InputsStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Inputs &amp; status" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="NumberBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="A glass field with chromeless inline spinners."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="12" Margin="0,10,0,0">
+            <NumberBox Header="Quantity"
+                       Value="42" Minimum="0" Maximum="100"
+                       SmallChange="1" LargeChange="10"
+                       SpinButtonPlacementMode="Inline" />
+            <NumberBox Header="Compact — spinners pop up on focus"
+                       Value="7" Minimum="0" Maximum="20"
+                       SmallChange="1"
+                       SpinButtonPlacementMode="Compact" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="RatingControl" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="10" Margin="0,10,0,0">
+            <RatingControl Value="3" MaxRating="5" Caption="tap to rate" HorizontalAlignment="Left" />
+            <RatingControl Value="4.2" MaxRating="5" IsReadOnly="True" Caption="4.2 average (read-only)" HorizontalAlignment="Left" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="InfoBar" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Every severity stays a glass card — only the icon changes color."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="10" Margin="0,10,0,0">
+            <InfoBar Severity="Informational" IsOpen="True"
+                     Title="Heads up"
+                     Message="A new version of Liquid Glass is available." />
+            <InfoBar Severity="Success" IsOpen="True"
+                     Title="Saved"
+                     Message="Your changes were synced to all devices." />
+            <InfoBar Severity="Warning" IsOpen="True"
+                     Title="Storage almost full"
+                     Message="Only 2 GB remain in your library." />
+            <InfoBar Severity="Error" IsOpen="True"
+                     Title="Sync failed"
+                     Message="The server could not be reached.">
+              <InfoBar.ActionButton>
+                <Button Content="Retry" />
+              </InfoBar.ActionButton>
+            </InfoBar>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="InfoBadge" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,12,0,0" VerticalAlignment="Center">
+
+            <!-- Plain attention dot -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+              <InfoBadge HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" />
+              <TextBlock Text="Dot" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+
+            <!-- Value badge on an icon -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+              <Grid Width="44" Height="40" HorizontalAlignment="Center">
+                <FontIcon Glyph="&#xE715;" FontSize="22"
+                          Foreground="{ThemeResource LiquidGlassLabelBrush}"
+                          HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <InfoBadge Value="3" HorizontalAlignment="Right" VerticalAlignment="Top" />
+              </Grid>
+              <TextBlock Text="On an icon" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+
+            <!-- Severity by instance background -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8" HorizontalAlignment="Center">
+                <InfoBadge Value="9" Background="{ThemeResource LiquidGlassSuccessBrush}" />
+                <InfoBadge Value="12" Background="{ThemeResource LiquidGlassDestructiveBrush}" />
+              </StackPanel>
+              <TextBlock Text="Severity tints" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+
+            <!-- On a NavigationView-like glass chip -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+              <Border Background="{ThemeResource LiquidGlassFillBrush}"
+                      BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                      BorderThickness="1"
+                      CornerRadius="18"
+                      Padding="14,7">
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                  <FontIcon Glyph="&#xE90B;" FontSize="14" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  <TextBlock Text="Inbox" FontSize="14" VerticalAlignment="Center"
+                             Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  <InfoBadge Value="24" VerticalAlignment="Center" />
+                </StackPanel>
+              </Border>
+              <TextBlock Text="In a glass chip" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="ToolTip" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Hover the button to see the glass tooltip surface."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <Button Content="Hover me"
+                  Margin="0,10,0,0"
+                  ToolTipService.ToolTip="Tooltips float on the heavier glass surface." />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="PersonPicture" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,12,0,0">
+            <StackPanel Spacing="8">
+              <PersonPicture Initials="CC" />
+              <TextBlock Text="Initials" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+            <StackPanel Spacing="8">
+              <PersonPicture DisplayName="Liquid Glass" />
+              <TextBlock Text="DisplayName" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+            <StackPanel Spacing="8">
+              <PersonPicture VerticalAlignment="Bottom" />
+              <TextBlock Text="Placeholder" FontSize="12" HorizontalAlignment="Center"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

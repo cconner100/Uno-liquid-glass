@@ -1,0 +1,58 @@
+<Page x:Class="LiquidGlassGallery.Pages.TextInputPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Text input" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="TextBlock" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="2" Margin="0,8,0,0">
+            <TextBlock Text="Large Title" FontSize="34" FontWeight="Bold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="Title" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="Body — the quick brown fox jumps over the lazy dog." FontSize="15" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="Secondary label for supporting copy." FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="TextBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <StackPanel Spacing="10" Margin="0,8,0,0">
+            <TextBox PlaceholderText="Search settings…" />
+            <TextBox Header="Display name" Text="Curtis" />
+            <TextBox Header="Disabled" Text="Read only content" IsEnabled="False" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="PasswordBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <PasswordBox Header="Password" Password="hunter2" Margin="0,8,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="AutoSuggestBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <AutoSuggestBox x:Name="Suggest" PlaceholderText="Type a fruit…" QueryIcon="Find"
+                          TextChanged="OnSuggestTextChanged" Margin="0,8,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="NumberBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <NumberBox Header="Quantity" Value="2" Minimum="0" Maximum="99"
+                     SpinButtonPlacementMode="Inline" Margin="0,8,0,0" />
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

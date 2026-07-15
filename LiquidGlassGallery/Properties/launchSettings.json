@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LiquidGlassGallery (Desktop)": {
+      "commandName": "Project",
+      "compatibleTargetFramework": "desktop"
+    }
+  }
+}

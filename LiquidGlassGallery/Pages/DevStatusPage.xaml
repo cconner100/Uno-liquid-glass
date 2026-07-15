@@ -1,0 +1,105 @@
+<Page x:Class="LiquidGlassGallery.Pages.DevStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:dev="using:DevWinUI.LiquidGlass">
+
+  <Grid>
+    <ScrollViewer Padding="28,0">
+      <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+        <TextBlock Text="Status &amp; feedback" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+        <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+          <StackPanel Spacing="4">
+            <TextBlock Text="StepBar" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="A horizontal step indicator. Completed steps fill with the tint color, the current step shows a tint ring."
+                       FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            <dev:StepBar x:Name="Steps" StepIndex="1" Margin="0,14,0,4" />
+            <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0">
+              <Button Content="Previous" Click="OnPreviousStep" />
+              <Button Content="Next" Click="OnNextStep" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+          <StackPanel Spacing="4">
+            <TextBlock Text="Timeline" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="A vertical timeline of events. Dot colors follow each item's severity."
+                       FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,12" />
+            <dev:Timeline>
+              <dev:TimelineItem Header="Deployment started"
+                                Description="Build 2437 was queued for the production ring."
+                                Time="09:12"
+                                Severity="Info" />
+              <dev:TimelineItem Header="Health checks passed"
+                                Description="All 14 service probes returned green within the rollout window."
+                                Time="09:26"
+                                Severity="Success" />
+              <dev:TimelineItem Header="Latency warning"
+                                Description="P95 latency briefly exceeded the 300 ms budget in eu-west."
+                                Time="09:41"
+                                Severity="Warning" />
+              <dev:TimelineItem Header="Rollback triggered"
+                                Description="Error rate crossed 2%; traffic was shifted back to build 2436."
+                                Time="09:47"
+                                Severity="Error" />
+            </dev:Timeline>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+          <StackPanel Spacing="4">
+            <TextBlock Text="LoadingIndicator" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="Storyboard-driven loading animations. Each indicator shows one mode."
+                       FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,12" />
+            <StackPanel Orientation="Horizontal" Spacing="36">
+              <StackPanel Spacing="8">
+                <dev:LoadingIndicator Mode="Arcs" IsActive="True" />
+                <TextBlock Text="Arcs" FontSize="12" HorizontalAlignment="Center"
+                           Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <dev:LoadingIndicator Mode="Ring" IsActive="True" />
+                <TextBlock Text="Ring" FontSize="12" HorizontalAlignment="Center"
+                           Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <dev:LoadingIndicator Mode="ThreeDots" IsActive="True" />
+                <TextBlock Text="ThreeDots" FontSize="12" HorizontalAlignment="Center"
+                           Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <dev:LoadingIndicator Mode="Pulse" IsActive="True" />
+                <TextBlock Text="Pulse" FontSize="12" HorizontalAlignment="Center"
+                           Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+          <StackPanel Spacing="4">
+            <TextBlock Text="Growl" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            <TextBlock Text="Toast notifications on the glass surface. They slide in at the top-right and auto-dismiss after four seconds."
+                       FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" Margin="0,0,0,10" />
+            <StackPanel Orientation="Horizontal" Spacing="12">
+              <Button Content="Success" Click="OnGrowlSuccess" />
+              <Button Content="Info" Click="OnGrowlInfo" />
+              <Button Content="Warning" Click="OnGrowlWarning" />
+              <Button Content="Error" Click="OnGrowlError" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- Growl host: toasts stack here, overlaid at the top-right of the page. -->
+    <StackPanel x:Name="GrowlHost"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,16,20,0"
+                Width="340" />
+  </Grid>
+</Page>

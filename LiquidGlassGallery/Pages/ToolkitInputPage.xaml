@@ -1,0 +1,111 @@
+<Page x:Class="LiquidGlassGallery.Pages.ToolkitInputPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:CommunityToolkit.WinUI.Controls">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Input &amp; selection" FontSize="30" FontWeight="Bold" Foreground="White" />
+      <TextBlock Text="Windows Community Toolkit (CommunityToolkit.WinUI 8.x) controls running on Uno Platform, restyled with liquid glass: frosted tracks and chips, Apple tint for selection, white round thumbs."
+                 FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Segmented" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="An iOS-style segmented control: a frosted capsule track where the selected segment floats as a brighter glass pill."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="12" Margin="0,10,0,0">
+            <controls:Segmented x:Name="ScaleSegmented"
+                                SelectedIndex="1"
+                                HorizontalAlignment="Left"
+                                Background="{ThemeResource LiquidGlassHighlightBrush}"
+                                CornerRadius="18"
+                                Padding="3">
+              <!-- The default panel gets its Orientation from an ancestor binding
+                   Uno can't resolve (renders vertically); pin it horizontal. -->
+              <controls:Segmented.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <controls:EqualPanel Orientation="Horizontal" Spacing="2" />
+                </ItemsPanelTemplate>
+              </controls:Segmented.ItemsPanel>
+              <controls:SegmentedItem Content="Day" CornerRadius="15" />
+              <controls:SegmentedItem Content="Week" CornerRadius="15" />
+              <controls:SegmentedItem Content="Month" CornerRadius="15" />
+              <controls:SegmentedItem Content="Year" CornerRadius="15" />
+            </controls:Segmented>
+
+            <TextBlock Text="Multiple selection:"
+                       FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            <controls:Segmented SelectionMode="Multiple"
+                                HorizontalAlignment="Left"
+                                Background="{ThemeResource LiquidGlassHighlightBrush}"
+                                CornerRadius="18"
+                                Padding="3">
+              <controls:Segmented.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <controls:EqualPanel Orientation="Horizontal" Spacing="2" />
+                </ItemsPanelTemplate>
+              </controls:Segmented.ItemsPanel>
+              <controls:SegmentedItem Content="Bold" CornerRadius="15" IsSelected="True" />
+              <controls:SegmentedItem Content="Italic" CornerRadius="15" />
+              <controls:SegmentedItem Content="Underline" CornerRadius="15" IsSelected="True" />
+            </controls:Segmented>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="TokenizingTextBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Tags as glass token chips on a glass input. Type to get suggestions (try 'a'), press Enter or a comma to commit, and click a chip to select it — selection turns it tint."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <controls:TokenizingTextBox x:Name="TagBox"
+                                      Margin="0,10,0,0"
+                                      PlaceholderText="Type to add a tag…"
+                                      TokenDelimiter=","
+                                      TextChanged="OnTagTextChanged" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="RangeSelector" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="A two-thumb slider matching the theme's Slider: translucent out-of-range track, tint band between the white round thumbs."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="10" Margin="0,10,0,0">
+            <controls:RangeSelector x:Name="PriceRange"
+                                    Minimum="0" Maximum="100"
+                                    RangeStart="20" RangeEnd="70"
+                                    StepFrequency="1"
+                                    Background="{ThemeResource SliderTrackFill}"
+                                    Foreground="{ThemeResource LiquidGlassTintBrush}"
+                                    ValueChanged="OnRangeChanged" />
+            <TextBlock x:Name="RangeValueText" Text="Selected range: 20 – 70"
+                       FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="ColorPicker" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="The toolkit's ColorPicker (spectrum, palette and channel sliders) sitting directly on the glass card; its text inputs pick up the theme's glass control fill."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="10" Margin="0,10,0,0">
+            <controls:ColorPicker x:Name="GlassColorPicker"
+                                  Color="#FF007AFF"
+                                  IsAlphaEnabled="False"
+                                  Background="Transparent"
+                                  CornerRadius="10"
+                                  HorizontalAlignment="Left"
+                                  ColorChanged="OnColorChanged" />
+            <TextBlock x:Name="ColorHexText" Text="Selected: #007AFF"
+                       FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

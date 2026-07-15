@@ -1,0 +1,97 @@
+<Page x:Class="LiquidGlassGallery.Pages.DevCardsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:dev="using:DevWinUI.LiquidGlass">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Cards &amp; layout" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Card" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="A glass content card with optional icon, header and description. Set IsInteractive for hover and pressed glass states."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Spacing="12" Margin="0,10,0,0">
+            <dev:Card>
+              <TextBlock Text="A plain card: just content on glass." TextWrapping="Wrap" />
+            </dev:Card>
+            <dev:Card Header="Card header"
+                      Description="A short description under the header.">
+              <dev:Card.Icon>
+                <FontIcon Glyph="&#xE7C3;" />
+              </dev:Card.Icon>
+              <TextBlock Text="Content sits below the header area."
+                         FontSize="13" TextWrapping="Wrap"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </dev:Card>
+            <dev:Card IsInteractive="True"
+                      Header="Interactive card"
+                      Description="Hover and press to see the glass respond." />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Divider" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Hairline separators, with optional inline content, horizontal or vertical."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <StackPanel Margin="0,6,0,0">
+            <TextBlock Text="Above the line" FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            <dev:Divider />
+            <TextBlock Text="Below the line" FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            <dev:Divider Content="or" />
+            <StackPanel Orientation="Horizontal" Height="28">
+              <TextBlock Text="Left" VerticalAlignment="Center" FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+              <dev:Divider Orientation="Vertical" Margin="12,2" />
+              <TextBlock Text="Right" VerticalAlignment="Center" FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="UniformGrid" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Lays children out in equally sized cells; rows and columns are computed automatically when not set."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <dev:UniformGrid Columns="3" ColumnSpacing="10" RowSpacing="10" Margin="0,10,0,0">
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+            <Border Height="64" CornerRadius="14" BorderThickness="1"
+                    Background="{ThemeResource LiquidGlassControlFillBrush}"
+                    BorderBrush="{ThemeResource LiquidGlassStrokeBrush}">
+              <TextBlock Text="6" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+            </Border>
+          </dev:UniformGrid>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

@@ -1,0 +1,27 @@
+<!-- PinBox: PIN entry rendered as a row of glass cells; the cells themselves
+     are created in code (PinBox.cs) and pick up Background/BorderBrush/
+     Foreground/FocusBorderBrush from these setters. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:DevWinUI.LiquidGlass">
+
+  <Style TargetType="local:PinBox" BasedOn="{StaticResource LiquidGlassPinBoxStyle}" />
+
+  <Style x:Key="LiquidGlassPinBoxStyle" TargetType="local:PinBox">
+    <Setter Property="Background" Value="{ThemeResource LiquidGlassControlFillBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
+    <Setter Property="FocusBorderBrush" Value="{ThemeResource LiquidGlassTintBrush}" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="local:PinBox">
+          <StackPanel x:Name="PART_StackPanel"
+                      Orientation="Horizontal"
+                      Spacing="8" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

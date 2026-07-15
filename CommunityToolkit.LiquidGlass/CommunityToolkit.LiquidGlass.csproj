@@ -1,0 +1,35 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net10.0-ios;net10.0-desktop</TargetFrameworks>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>CommunityToolkit.LiquidGlass</RootNamespace>
+    <Description>Liquid Glass theme for the Windows Community Toolkit controls (CommunityToolkit.WinUI 8.x, which ships Uno Platform support out of the box — the Uno.WindowsCommunityToolkit 7.x fork is legacy). References the toolkit packages and restyles their controls with the Liquid Glass design language.</Description>
+
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.HeaderedControls" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.TokenizingTextBox" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.ColorPicker" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.RangeSelector" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.LayoutTransformControl" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.MetadataControl" />
+
+    <!-- DataGrid from the Uno.WindowsCommunityToolkit 7.x fork (namespace
+         CommunityToolkit.WinUI.UI.Controls) — WCT 8.x never shipped a DataGrid -->
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.DataGrid" />
+  </ItemGroup>
+</Project>

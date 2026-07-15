@@ -1,0 +1,151 @@
+<Page x:Class="LiquidGlassGallery.Pages.ContainersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ScrollViewer Padding="28,0">
+    <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Stretch" Padding="0,24,0,32">
+
+      <TextBlock Text="Containers &amp; trees" FontSize="30" FontWeight="Bold" Foreground="White" />
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Expander" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Glass header rows that expand into a clear-glass content area."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <Expander Header="Wi-Fi" IsExpanded="True" Margin="0,8,0,0">
+            <StackPanel Spacing="10">
+              <ToggleSwitch Header="Wi-Fi" IsOn="True" />
+              <TextBlock Text="Known networks join automatically. If none are available, you'll be asked before joining a new one."
+                         FontSize="13" TextWrapping="Wrap"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+          </Expander>
+          <Expander Header="Bluetooth" Margin="0,4,0,0">
+            <StackPanel Spacing="10">
+              <CheckBox Content="Show Bluetooth in menu bar" IsChecked="True" />
+              <TextBlock Text="Connect accessories like keyboards, mice, and headphones."
+                         FontSize="13" TextWrapping="Wrap"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+          </Expander>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="TreeView" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Hierarchy with chevron expanders; selection uses the persistent highlight fill."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <TreeView x:Name="SampleTree" SelectionMode="Single" Margin="0,8,0,0" MaxHeight="320" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="BreadcrumbBar" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Chromeless path buttons; the current location is emphasized."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <BreadcrumbBar x:Name="Crumbs" Margin="0,8,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="PipsPager" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Page dots: tertiary pips with a tinted selected dot."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <PipsPager NumberOfPages="5" SelectedPageIndex="1" Margin="0,8,0,0" HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="FlipView" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Circular glass navigation buttons over the slides; the pager below is wired to the FlipView."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <FlipView x:Name="Slides" Height="200" Margin="0,8,0,0" CornerRadius="10">
+            <FlipViewItem>
+              <Grid>
+                <Grid.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#FF5E5CE6" />
+                    <GradientStop Offset="1" Color="#FFBF5AF2" />
+                  </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Text="Aurora" FontSize="22" FontWeight="SemiBold" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Grid>
+            </FlipViewItem>
+            <FlipViewItem>
+              <Grid>
+                <Grid.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#FF0A84FF" />
+                    <GradientStop Offset="1" Color="#FF64D2FF" />
+                  </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Text="Ocean" FontSize="22" FontWeight="SemiBold" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Grid>
+            </FlipViewItem>
+            <FlipViewItem>
+              <Grid>
+                <Grid.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#FFFF9F0A" />
+                    <GradientStop Offset="1" Color="#FFFF375F" />
+                  </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Text="Sunset" FontSize="22" FontWeight="SemiBold" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Grid>
+            </FlipViewItem>
+          </FlipView>
+          <PipsPager x:Name="SlidePips" NumberOfPages="3" Margin="0,10,0,0" HorizontalAlignment="Center" />
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
+          <TextBlock Text="SplitView" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Splitter windows: a frosted inline pane next to the content area."
+                     FontSize="13" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+          <ToggleButton x:Name="PaneToggle" Content="Show pane" IsChecked="True"
+                        Click="OnPaneToggleClick" Margin="0,8,0,0" HorizontalAlignment="Left" />
+          <Border BorderBrush="{ThemeResource LiquidGlassStrokeBrush}" BorderThickness="1"
+                  CornerRadius="16" Margin="0,8,0,0"
+                  Background="{ThemeResource LiquidGlassClearFillBrush}">
+            <SplitView x:Name="DemoSplitView" Height="240" IsPaneOpen="True"
+                       DisplayMode="Inline" OpenPaneLength="200">
+              <SplitView.Pane>
+                <StackPanel Padding="10,12" Spacing="2">
+                  <TextBlock Text="Library" FontSize="13" FontWeight="SemiBold"
+                             Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                             Margin="10,0,0,6" />
+                  <Border CornerRadius="10" Background="{ThemeResource LiquidGlassHighlightBrush}" Padding="10,7">
+                    <TextBlock Text="Recents" FontSize="15" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  </Border>
+                  <Border CornerRadius="10" Padding="10,7">
+                    <TextBlock Text="Shared" FontSize="15" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  </Border>
+                  <Border CornerRadius="10" Padding="10,7">
+                    <TextBlock Text="Favorites" FontSize="15" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  </Border>
+                  <Border CornerRadius="10" Padding="10,7">
+                    <TextBlock Text="Trash" FontSize="15" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+                  </Border>
+                </StackPanel>
+              </SplitView.Pane>
+              <Grid>
+                <TextBlock Text="Content area" FontSize="15"
+                           Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Grid>
+            </SplitView>
+          </Border>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Page>

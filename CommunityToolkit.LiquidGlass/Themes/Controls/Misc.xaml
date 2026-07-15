@@ -1,0 +1,43 @@
+<!--
+  CommunityToolkit.LiquidGlass — Misc.xaml
+  MetadataControl (CommunityToolkit.WinUI.Controls.MetadataControl).
+
+  The control exposes NO lightweight brush keys: its template is a single
+  TextBlock (x:Name="TextContainer"), the separator is a plain text Run, and
+  hyperlink items copy the TextBlock's Foreground (MetadataControl.cs). The
+  only styling hooks are the control's Foreground/FontSize and the
+  TextBlockStyle property, so we ship:
+  - an implicit style with a full Template setter (a faithful copy of the
+    stock trivial template — required, because a template-less implicit style
+    would blank the control on Uno) that maps text onto the glass
+    secondary-label color;
+  - a keyed TextBlock style for opting individual instances in via
+    TextBlockStyle.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:CommunityToolkit.WinUI.Controls">
+
+  <!-- Optional per-instance style: <controls:MetadataControl TextBlockStyle="{StaticResource LiquidGlassMetadataTextBlockStyle}" /> -->
+  <Style x:Key="LiquidGlassMetadataTextBlockStyle" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+  </Style>
+
+  <Style TargetType="controls:MetadataControl">
+    <Setter Property="Foreground" Value="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="controls:MetadataControl">
+          <!-- Same shape as the stock template: the control looks up this exact part name. -->
+          <TextBlock x:Name="TextContainer"
+                     Style="{TemplateBinding TextBlockStyle}"
+                     TextWrapping="Wrap" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

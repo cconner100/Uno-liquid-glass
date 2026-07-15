@@ -1,0 +1,115 @@
+<!--
+  Liquid Glass overrides for the WCT DataGrid (Uno.CommunityToolkit 7.x fork —
+  the 8.x toolkit never shipped a DataGrid). The control's template resolves
+  these lightweight keys via ThemeResource, so app-level theme dictionaries
+  restyle it without touching the ~2000-line template. Note the mix of key
+  types: *Color keys are Colors (composited with the *Opacity doubles by the
+  template), *Brush keys are Brushes.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ResourceDictionary.ThemeDictionaries>
+
+    <ResourceDictionary x:Key="Light">
+      <!-- Column headers: chromeless caps on the glass card, secondary text -->
+      <Color x:Key="DataGridColumnHeaderBackgroundColor">#00FFFFFF</Color>
+      <Color x:Key="DataGridColumnHeaderHoveredBackgroundColor">#26FFFFFF</Color>
+      <Color x:Key="DataGridColumnHeaderPressedBackgroundColor">#40FFFFFF</Color>
+      <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="DataGridColumnHeaderForegroundBrush" Color="#993C3C43" />
+
+      <!-- Cells and grid lines: hairlines matching the glass separator -->
+      <SolidColorBrush x:Key="DataGridCellBackgroundBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="GridLinesBrush" Color="#2E3C3C43" />
+      <SolidColorBrush x:Key="FillerGridLinesBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="DataGridFillerColumnGridLinesBrush" Color="Transparent" />
+
+      <!-- Rows: white hover wash, Apple tint selection -->
+      <Color x:Key="DataGridRowHoveredBackgroundColor">#26FFFFFF</Color>
+      <Color x:Key="DataGridRowSelectedBackgroundColor">#007AFF</Color>
+      <Color x:Key="DataGridRowSelectedHoveredBackgroundColor">#3395FF</Color>
+      <Color x:Key="DataGridRowSelectedUnfocusedBackgroundColor">#007AFF</Color>
+      <Color x:Key="DataGridRowSelectedHoveredUnfocusedBackgroundColor">#3395FF</Color>
+
+      <!-- Row / group headers on the clear glass material -->
+      <SolidColorBrush x:Key="DataGridRowHeaderBackgroundBrush" Color="#14FFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowHeaderForegroundBrush" Color="#993C3C43" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderBackgroundBrush" Color="#26FFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderForegroundBrush" Color="#000000" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderHoveredBackgroundBrush" Color="#40FFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderPressedBackgroundBrush" Color="#59FFFFFF" />
+
+      <!-- Focus / currency visuals follow the tint -->
+      <SolidColorBrush x:Key="DataGridCellFocusVisualPrimaryBrush" Color="#007AFF" />
+      <SolidColorBrush x:Key="DataGridCellFocusVisualSecondaryBrush" Color="#66FFFFFF" />
+      <SolidColorBrush x:Key="DataGridCurrencyVisualPrimaryBrush" Color="Transparent" />
+
+      <SolidColorBrush x:Key="DataGridDetailsPresenterBackgroundBrush" Color="#26FFFFFF" />
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Default">
+      <Color x:Key="DataGridColumnHeaderBackgroundColor">#00FFFFFF</Color>
+      <Color x:Key="DataGridColumnHeaderHoveredBackgroundColor">#1AFFFFFF</Color>
+      <Color x:Key="DataGridColumnHeaderPressedBackgroundColor">#26FFFFFF</Color>
+      <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="DataGridColumnHeaderForegroundBrush" Color="#99EBEBF5" />
+
+      <SolidColorBrush x:Key="DataGridCellBackgroundBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="GridLinesBrush" Color="#40545458" />
+      <SolidColorBrush x:Key="FillerGridLinesBrush" Color="Transparent" />
+      <SolidColorBrush x:Key="DataGridFillerColumnGridLinesBrush" Color="Transparent" />
+
+      <Color x:Key="DataGridRowHoveredBackgroundColor">#14FFFFFF</Color>
+      <Color x:Key="DataGridRowSelectedBackgroundColor">#0A84FF</Color>
+      <Color x:Key="DataGridRowSelectedHoveredBackgroundColor">#409CFF</Color>
+      <Color x:Key="DataGridRowSelectedUnfocusedBackgroundColor">#0A84FF</Color>
+      <Color x:Key="DataGridRowSelectedHoveredUnfocusedBackgroundColor">#409CFF</Color>
+
+      <SolidColorBrush x:Key="DataGridRowHeaderBackgroundBrush" Color="#0DFFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowHeaderForegroundBrush" Color="#99EBEBF5" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderBackgroundBrush" Color="#1AFFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderForegroundBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderHoveredBackgroundBrush" Color="#26FFFFFF" />
+      <SolidColorBrush x:Key="DataGridRowGroupHeaderPressedBackgroundBrush" Color="#33FFFFFF" />
+
+      <SolidColorBrush x:Key="DataGridCellFocusVisualPrimaryBrush" Color="#0A84FF" />
+      <SolidColorBrush x:Key="DataGridCellFocusVisualSecondaryBrush" Color="#40000000" />
+      <SolidColorBrush x:Key="DataGridCurrencyVisualPrimaryBrush" Color="Transparent" />
+
+      <SolidColorBrush x:Key="DataGridDetailsPresenterBackgroundBrush" Color="#1AFFFFFF" />
+    </ResourceDictionary>
+
+  </ResourceDictionary.ThemeDictionaries>
+
+  <!--
+    Compact glass styles for the cell EDITORS the DataGrid creates when a cell
+    enters edit mode. The theme's implicit TextBox/ComboBox/AutoSuggestBox
+    styles apply inside cells too, but their 44px capsule metrics inflate row
+    heights — these keep the glass materials at cell-friendly metrics. Apply
+    via DataGridTextColumn/DataGridComboBoxColumn EditingElementStyle, or on
+    the editor element inside a DataGridTemplateColumn's CellEditingTemplate.
+    (BasedOn resolves because App.xaml merges LiquidGlassTheme first.)
+  -->
+  <Style x:Key="LiquidGlassDataGridTextEditorStyle" TargetType="TextBox" BasedOn="{StaticResource LiquidGlassTextBoxStyle}">
+    <Setter Property="MinHeight" Value="30" />
+    <Setter Property="Padding" Value="10,3,10,4" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <Style x:Key="LiquidGlassDataGridComboBoxEditorStyle" TargetType="ComboBox" BasedOn="{StaticResource LiquidGlassComboBoxStyle}">
+    <Setter Property="MinHeight" Value="30" />
+    <Setter Property="Padding" Value="10,3,6,4" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+  </Style>
+
+  <Style x:Key="LiquidGlassDataGridAutoSuggestEditorStyle" TargetType="AutoSuggestBox" BasedOn="{StaticResource LiquidGlassAutoSuggestBoxStyle}">
+    <Setter Property="MinHeight" Value="30" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+</ResourceDictionary>

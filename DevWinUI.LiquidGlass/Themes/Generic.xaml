@@ -1,0 +1,19 @@
+<!--
+  Default-style lookup for the templated controls (DefaultStyleKey resolution).
+  Merges the same per-control dictionaries as Theme.xaml.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/Divider.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/Card.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/Settings.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/PinBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/KeyVisual.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/StepBar.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/Timeline.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/LoadingIndicator.xaml" />
+    <ResourceDictionary Source="ms-appx:///DevWinUI.LiquidGlass/Themes/Controls/Growl.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
