@@ -15,6 +15,11 @@
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
 
+    <!-- CommunityToolkit.WinUI 8.3 depends on the WinUI component from this
+         Windows App SDK release. Keep Uno's meta-package on the matching
+         version so WinUI props/targets and default XAML items load once. -->
+    <WinAppSdkVersion>1.8.260209005</WinAppSdkVersion>
+
     <!--
       Adding NoWarn to remove build warnings
       NU1507: Warning when there are multiple package sources when using CPM with no source mapping
