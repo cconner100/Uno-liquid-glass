@@ -2,7 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:LiquidGlassGallery"
-      xmlns:lg="using:Uno.Themes.LiquidGlass">
+      xmlns:lg="using:LiquidGlass.Uno">
 
   <Page.Resources>
     <!-- Chromeless icon button for the in-panel sidebar toggle -->
@@ -175,7 +175,7 @@
         </NavigationViewItem>
 
         <!-- Windows Community Toolkit controls (CommunityToolkit.WinUI 8.x with Uno
-             support), restyled liquid glass by the CommunityToolkit.LiquidGlass project -->
+             support), restyled liquid glass by the LiquidGlass.CommunityToolkit project -->
         <NavigationViewItemSeparator />
         <NavigationViewItemHeader Content="Community Toolkit" />
         <NavigationViewItem Content="Layouts &amp; panels" Tag="ctlayouts">
@@ -196,6 +196,14 @@
         <NavigationViewItem Content="Data grid" Tag="ctdatagrid">
           <NavigationViewItem.Icon>
             <FontIcon Glyph="&#xE80A;" />
+          </NavigationViewItem.Icon>
+        </NavigationViewItem>
+
+        <NavigationViewItemSeparator />
+        <NavigationViewItemHeader Content="Uno Toolkit" />
+        <NavigationViewItem Content="Toolkit controls" Tag="unotoolkit">
+          <NavigationViewItem.Icon>
+            <FontIcon Glyph="&#xE950;" />
           </NavigationViewItem.Icon>
         </NavigationViewItem>
       </NavigationView.MenuItems>

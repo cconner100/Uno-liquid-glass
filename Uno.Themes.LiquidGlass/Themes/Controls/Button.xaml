@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — Button.xaml
+  LiquidGlass.Uno — Button.xaml
   Glass capsule buttons: layered translucent fill, specular top highlight, rim light.
   "Glass" (monochrome) is the default; "Prominent" is the tinted variant Apple reserves
   for the primary action.

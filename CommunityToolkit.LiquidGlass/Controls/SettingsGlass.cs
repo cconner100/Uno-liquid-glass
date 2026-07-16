@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CommunityToolkit.LiquidGlass;
+namespace LiquidGlass.CommunityToolkit;
 
 /// <summary>
 /// Workaround for an Uno quirk that breaks the WCT SettingsExpander header on
@@ -57,7 +57,7 @@ public static class SettingsGlass
 
         expander.Loaded += (_, _) => ScheduleFix(expander);
         expander.ActualThemeChanged += (_, _) => ScheduleFix(expander);
-        if (expander is WinUI.Controls.SettingsExpander settingsExpander)
+        if (expander is global::CommunityToolkit.WinUI.Controls.SettingsExpander settingsExpander)
         {
             settingsExpander.Expanded += (_, _) => ScheduleFix(expander);
             settingsExpander.Collapsed += (_, _) => ScheduleFix(expander);

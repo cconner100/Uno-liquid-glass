@@ -1,0 +1,164 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:utu="using:Uno.Toolkit.UI">
+
+  <DataTemplate x:Key="LiquidGlassToolkitCardHeaderTemplate">
+    <TextBlock Text="{Binding}" FontSize="18" FontWeight="SemiBold" Foreground="{ThemeResource UnoToolkitGlassForeground}" />
+  </DataTemplate>
+  <DataTemplate x:Key="LiquidGlassToolkitCardSubHeaderTemplate">
+    <TextBlock Text="{Binding}" Margin="0,3,0,0" FontSize="14" TextWrapping="Wrap" Foreground="{ThemeResource UnoToolkitGlassSecondaryForeground}" />
+  </DataTemplate>
+  <DataTemplate x:Key="LiquidGlassToolkitCardSupportingTemplate">
+    <TextBlock Text="{Binding}" Margin="0,14,0,0" FontSize="15" TextWrapping="Wrap" Foreground="{ThemeResource UnoToolkitGlassForeground}" />
+  </DataTemplate>
+
+  <Style x:Key="LiquidGlassToolkitCardStyle" TargetType="utu:Card">
+    <Setter Property="MinWidth" Value="220" />
+    <Setter Property="Padding" Value="18" />
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassFill}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource UnoToolkitGlassCardCornerRadius}" />
+    <Setter Property="Foreground" Value="{ThemeResource UnoToolkitGlassForeground}" />
+    <Setter Property="HeaderContentTemplate" Value="{StaticResource LiquidGlassToolkitCardHeaderTemplate}" />
+    <Setter Property="SubHeaderContentTemplate" Value="{StaticResource LiquidGlassToolkitCardSubHeaderTemplate}" />
+    <Setter Property="SupportingContentTemplate" Value="{StaticResource LiquidGlassToolkitCardSupportingTemplate}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="utu:Card">
+          <Grid x:Name="Root"
+                Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ContentPresenter Content="{TemplateBinding MediaContent}"
+                              ContentTemplate="{TemplateBinding MediaContentTemplate}"
+                              HorizontalContentAlignment="Stretch"
+                              Margin="0,0,0,14"
+                              Visibility="{Binding MediaContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <ContentPresenter Grid.Row="1"
+                              Content="{TemplateBinding AvatarContent}"
+                              ContentTemplate="{TemplateBinding AvatarContentTemplate}"
+                              Margin="0,0,0,10"
+                              Visibility="{Binding AvatarContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <ContentPresenter Grid.Row="2"
+                              Content="{TemplateBinding HeaderContent}"
+                              ContentTemplate="{TemplateBinding HeaderContentTemplate}"
+                              Visibility="{Binding HeaderContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <ContentPresenter Grid.Row="3"
+                              Content="{TemplateBinding SubHeaderContent}"
+                              ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
+                              Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <ContentPresenter Grid.Row="4"
+                              Content="{TemplateBinding SupportingContent}"
+                              ContentTemplate="{TemplateBinding SupportingContentTemplate}"
+                              Visibility="{Binding SupportingContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <ContentPresenter Grid.Row="5"
+                              Content="{TemplateBinding IconsContent}"
+                              ContentTemplate="{TemplateBinding IconsContentTemplate}"
+                              HorizontalAlignment="Right"
+                              Margin="0,14,0,0"
+                              Visibility="{Binding IconsContent, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPointerOver}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPressed}" />
+                    <Setter Target="Root.Opacity" Value="0.92" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitCardContentControlStyle" TargetType="utu:CardContentControl">
+    <Setter Property="Padding" Value="18" />
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassFill}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource UnoToolkitGlassCardCornerRadius}" />
+    <Setter Property="Foreground" Value="{ThemeResource UnoToolkitGlassForeground}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="utu:CardContentControl">
+          <Grid x:Name="Root"
+                Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPointerOver}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPressed}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitDividerStyle" TargetType="utu:Divider">
+    <Setter Property="Foreground" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="SubHeaderForeground" Value="{ThemeResource UnoToolkitGlassSecondaryForeground}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="utu:Divider">
+          <StackPanel Spacing="6">
+            <Rectangle Height="1" Fill="{TemplateBinding Foreground}" />
+            <TextBlock Text="{TemplateBinding SubHeader}"
+                       FontSize="13"
+                       Foreground="{TemplateBinding SubHeaderForeground}" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

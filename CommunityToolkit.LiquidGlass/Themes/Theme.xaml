@@ -1,21 +1,21 @@
 <!--
-  CommunityToolkit.LiquidGlass — Theme.xaml
+  LiquidGlass.CommunityToolkit — Theme.xaml
   Aggregates the Liquid Glass styles for the Windows Community Toolkit controls,
   mirroring the LiquidGlassTheme / DevWinUIGlassTheme pattern.
 -->
-<ResourceDictionary x:Class="CommunityToolkit.LiquidGlass.CommunityToolkitGlassTheme"
+<ResourceDictionary x:Class="LiquidGlass.CommunityToolkit.CommunityToolkitGlassTheme"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/Settings.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/Segmented.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/TokenizingTextBox.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/RangeSelector.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/ColorPicker.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/Sizers.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/Headered.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/Misc.xaml" />
-    <ResourceDictionary Source="ms-appx:///CommunityToolkit.LiquidGlass/Themes/Controls/DataGrid.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/Settings.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/Segmented.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/TokenizingTextBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/RangeSelector.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/ColorPicker.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/Sizers.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/Headered.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/Misc.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.CommunityToolkit/Themes/Controls/DataGrid.xaml" />
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -13,7 +13,7 @@ Merge the core theme first, followed by the DevWinUI theme:
 ```xml
 <ResourceDictionary.MergedDictionaries>
   <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-  <LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass" />
+  <LiquidGlassTheme xmlns="using:LiquidGlass.Uno" />
   <DevWinUIGlassTheme xmlns="using:DevWinUI.LiquidGlass" />
 </ResourceDictionary.MergedDictionaries>
 ```

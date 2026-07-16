@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — NavigationViewItem.xaml
+  LiquidGlass.Uno — NavigationViewItem.xaml
   Apple-style sidebar rows: rounded, no selection indicator bar, frosted glass pill
   for the selected row. The presenter template preserves every part and state the
   control resolves (PresenterContentRootGrid, SelectionIndicator, IconColumn/IconBox,

@@ -4,7 +4,7 @@ using System.Xml.Linq;
 namespace LiquidGlassGallery.Tests;
 
 /// <summary>
-/// Validates the Uno.Themes.LiquidGlass resource dictionaries: structure, light/dark
+/// Validates the Uno.Themes.LiquidGlass project resource dictionaries: structure, light/dark
 /// symmetry, Apple palette fidelity, and the Liquid Glass translucency invariants.
 /// XAML is validated from source so the tests run on any TFM without a UI dispatcher.
 /// </summary>
@@ -85,7 +85,7 @@ public class LiquidGlassThemeTests
         // Every merged source resolves to a file on disk
         foreach (var source in sources)
         {
-            var relative = source.Replace("ms-appx:///Uno.Themes.LiquidGlass/Themes/", string.Empty);
+            var relative = source.Replace("ms-appx:///LiquidGlass.Uno/Themes/", string.Empty);
             File.Exists(Path.Combine(ThemesDir, relative))
                 .Should().BeTrue($"merged source '{source}' must exist");
         }
@@ -306,7 +306,7 @@ public class LiquidGlassThemeTests
     {
         // Mirrors Uno.Themes' MaterialTheme surface: a ResourceDictionary entry point
         // with color/font override sources for rebranding without forking.
-        var type = typeof(Uno.Themes.LiquidGlass.LiquidGlassTheme);
+        var type = typeof(LiquidGlass.Uno.LiquidGlassTheme);
 
         type.BaseType!.Name.Should().Be("ResourceDictionary");
         type.GetProperty("ColorOverrideSource").Should().NotBeNull();

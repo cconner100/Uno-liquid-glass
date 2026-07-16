@@ -13,7 +13,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <RootNamespace>Uno.Themes.LiquidGlass</RootNamespace>
+    <RootNamespace>LiquidGlass.Uno</RootNamespace>
+    <AssemblyName>LiquidGlass.Uno</AssemblyName>
     <Description>Liquid Glass theme for Uno Platform — Apple's Liquid Glass design language (translucent materials, specular highlights, capsule controls) as a drop-in Uno theme.</Description>
 
     <!--

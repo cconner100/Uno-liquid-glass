@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — Containers.xaml
+  LiquidGlass.Uno — Containers.xaml
   Container / navigation controls: Expander, TreeViewItem, BreadcrumbBarItem,
   PipsPager, FlipView, SplitView.
 
@@ -9,7 +9,7 @@
   - Visual states use opacity-toggled overlays or literal setters only — never
     ThemeResource brush-swap keyframes (they mis-resolve on runtime theme switch).
   - The stock Expander lightweight keys (ExpanderHeaderBackground, ...) are
-    overridden app-wide by CommunityToolkit.LiquidGlass/Settings.xaml for the WCT
+    overridden app-wide by LiquidGlass.CommunityToolkit/Settings.xaml for the WCT
     SettingsExpander; this template deliberately uses LiquidGlass* brushes
     directly so the two never fight.
 -->

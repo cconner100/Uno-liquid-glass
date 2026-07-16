@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — AutoSuggestBox.xaml
+  LiquidGlass.Uno — AutoSuggestBox.xaml
   Glass search field. The inner TextBox template keeps the "QueryButton" part
   (the control assigns QueryIcon to it and wires the click), and the suggestions
   popup floats on the heavier glass surface material.

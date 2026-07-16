@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — ToggleSwitch.xaml
+  LiquidGlass.Uno — ToggleSwitch.xaml
   Apple-style switch: 51x31 capsule track, white round knob, system green when on.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

@@ -13,7 +13,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <RootNamespace>CommunityToolkit.LiquidGlass</RootNamespace>
+    <RootNamespace>LiquidGlass.CommunityToolkit</RootNamespace>
+    <AssemblyName>LiquidGlass.CommunityToolkit</AssemblyName>
     <Description>Liquid Glass theme for the Windows Community Toolkit controls (CommunityToolkit.WinUI 8.x, which ships Uno Platform support out of the box — the Uno.WindowsCommunityToolkit 7.x fork is legacy). References the toolkit packages and restyles their controls with the Liquid Glass design language.</Description>
 
     <UnoFeatures>

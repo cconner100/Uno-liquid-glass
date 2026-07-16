@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — PickerFlyouts.xaml
+  LiquidGlass.Uno — PickerFlyouts.xaml
   DatePickerFlyoutPresenter / TimePickerFlyoutPresenter on the heavier glass surface.
   Templates replicate the part names the presenters resolve at runtime (Background,
   ContentPanel, PickerHostGrid / *PickerHost borders, *Column definitions, picker

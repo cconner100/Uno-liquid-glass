@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — Pickers.xaml
+  LiquidGlass.Uno — Pickers.xaml
   DatePicker / TimePicker as segmented glass fields. The templates keep the part
   names the controls resolve at runtime (FlyoutButton, FlyoutButtonContentGrid,
   Day/Month/Year and Hour/Minute/Period text blocks, picker spacings) so all

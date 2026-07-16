@@ -1,5 +1,5 @@
 <!--
-  CommunityToolkit.LiquidGlass — Sizers (GridSplitter / ContentSizer / PropertySizer / SizerBase)
+  LiquidGlass.CommunityToolkit — Sizers (GridSplitter / ContentSizer / PropertySizer / SizerBase)
 
   The WCT SizerBase template (SizerBase.xaml in CommunityToolkit.WinUI.Controls.Sizers)
   resolves all of its brushes and grip metrics via ThemeResource lookups, so we restyle it

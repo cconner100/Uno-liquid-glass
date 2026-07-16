@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Uno.Themes.LiquidGlass\Uno.Themes.LiquidGlass.csproj" />
     <ProjectReference Include="..\DevWinUI.LiquidGlass\DevWinUI.LiquidGlass.csproj" />
     <ProjectReference Include="..\CommunityToolkit.LiquidGlass\CommunityToolkit.LiquidGlass.csproj" />
+    <ProjectReference Include="..\Uno.Toolkit.LiquidGlass\Uno.Toolkit.LiquidGlass.csproj" />
   </ItemGroup>
 
 </Project>

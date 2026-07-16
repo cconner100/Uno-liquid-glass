@@ -1,5 +1,5 @@
 <!--
-  CommunityToolkit.LiquidGlass — Settings.xaml
+  LiquidGlass.CommunityToolkit — Settings.xaml
   Lightweight styling overrides for the Windows Community Toolkit (8.x)
   SettingsCard and SettingsExpander. The toolkit templates resolve every one of
   these keys via {ThemeResource}, so redefining them at app scope re-skins the
@@ -13,10 +13,10 @@
     (note: the Expander* keys are the stock WinUI Expander keys, so a plain
     Expander picks up the same clear-glass content area — intentional.)
 
-  Brush values mirror Uno.Themes.LiquidGlass/Themes/Colors.xaml
+  Brush values mirror LiquidGlass.Uno/Themes/Colors.xaml
   (LiquidGlassFillBrush, LiquidGlassStrokeBrush, label brushes). They are
   duplicated as concrete values so this dictionary has no merge-order
-  dependency on the Uno.Themes.LiquidGlass dictionaries.
+  dependency on the LiquidGlass.Uno dictionaries.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">

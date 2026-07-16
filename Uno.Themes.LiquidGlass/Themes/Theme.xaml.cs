@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
 
-namespace Uno.Themes.LiquidGlass;
+namespace LiquidGlass.Uno;
 
 /// <summary>
 /// Liquid Glass theme for Uno Platform, used the same way as Uno.Themes' MaterialTheme:

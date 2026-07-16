@@ -1,11 +1,11 @@
 <!--
-  CommunityToolkit.LiquidGlass — RangeSelector.xaml
+  LiquidGlass.CommunityToolkit — RangeSelector.xaml
   Lightweight styling overrides for CommunityToolkit.WinUI.Controls.RangeSelector.
 
   The toolkit's RangeSelector template reuses the WinUI Slider lightweight keys
   (SliderTrackFill, SliderTrackValueFill*, SliderThumbBackground*, SliderOuterThumbBackground,
   SliderThumbBorderBrush, *Disabled) — see RangeSelector.xaml in the toolkit sources.
-  Values match the Liquid Glass Slider look defined in Uno.Themes.LiquidGlass
+  Values match the Liquid Glass Slider look defined in LiquidGlass.Uno
   (translucent gray track, tint value band between the thumbs, white round thumbs);
   the base Slider* keys are restated here so the dictionary stands on its own.
 -->

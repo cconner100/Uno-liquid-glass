@@ -1,5 +1,5 @@
 <!--
-  CommunityToolkit.LiquidGlass — Segmented.xaml
+  LiquidGlass.CommunityToolkit — Segmented.xaml
   Lightweight styling overrides for CommunityToolkit.WinUI.Controls.Segmented / SegmentedItem.
 
   iOS-style segmented control: frosted translucent track, selected segment renders as a
@@ -7,7 +7,7 @@
   Key names come from the toolkit sources (Segmented.xaml / SegmentedItem.xaml):
   Segmented* (track), SegmentedItem* (default style), SegmentedPill* (accent underline),
   PivotItem* (PivotSegmentedStyle) and ButtonItem* (ButtonSegmentedStyle).
-  Brush values are literal (mirroring Uno.Themes.LiquidGlass/Colors.xaml) so this
+  Brush values are literal (mirroring LiquidGlass.Uno/Colors.xaml) so this
   dictionary is self-contained regardless of merge order.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

@@ -1,37 +1,37 @@
 <!--
-  Uno.Themes.LiquidGlass — Theme.xaml
+  LiquidGlass.Uno — Theme.xaml
   Aggregates the Liquid Glass theme, mirroring Uno.Themes' MaterialTheme:
 
     <Application.Resources>
       <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
           <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-          <LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass" />
+          <LiquidGlassTheme xmlns="using:LiquidGlass.Uno" />
         </ResourceDictionary.MergedDictionaries>
       </ResourceDictionary>
     </Application.Resources>
 -->
-<ResourceDictionary x:Class="Uno.Themes.LiquidGlass.LiquidGlassTheme"
+<ResourceDictionary x:Class="LiquidGlass.Uno.LiquidGlassTheme"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Colors.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Common.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Button.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/TextBox.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/ToggleSwitch.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Selection.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Pickers.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/PickerFlyouts.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Menus.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/TabView.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/NavigationViewItem.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/AutoSuggestBox.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Controls.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Commanding.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/InputsStatus.xaml" />
-    <ResourceDictionary Source="ms-appx:///Uno.Themes.LiquidGlass/Themes/Controls/Containers.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Colors.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Common.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Button.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/TextBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/ToggleSwitch.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Selection.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Pickers.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/PickerFlyouts.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Menus.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/TabView.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/NavigationViewItem.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/AutoSuggestBox.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Controls.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Commanding.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/InputsStatus.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.Uno/Themes/Controls/Containers.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
   <!-- Framework style-key overrides: WinUI looks these up by name -->

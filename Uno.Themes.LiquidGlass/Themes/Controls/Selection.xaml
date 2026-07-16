@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — Selection.xaml
+  LiquidGlass.Uno — Selection.xaml
   RadioButton (tint fill, white dot) and Slider (tint value track, white round knob).
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

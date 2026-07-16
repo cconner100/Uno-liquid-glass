@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
 
-namespace CommunityToolkit.LiquidGlass;
+namespace LiquidGlass.CommunityToolkit;
 
 /// <summary>
 /// Liquid Glass styles for the Windows Community Toolkit controls. Merge into

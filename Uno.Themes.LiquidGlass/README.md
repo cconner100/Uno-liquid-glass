@@ -7,6 +7,10 @@ design language as a reusable Uno Platform theme, structured the same way as
 dictionaries, explicit `LiquidGlass*` styles, implicit styles applied by default,
 and override hooks for rebranding.
 
+> **Breaking change:** The public namespace and assembly changed from
+> `Uno.Themes.LiquidGlass` to `LiquidGlass.Uno` so they match the NuGet package
+> ID. Update XAML `using:` declarations, C# imports, and assembly-qualified names.
+
 ## Getting started
 
 ```xml
@@ -14,7 +18,7 @@ and override hooks for rebranding.
   <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
       <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-      <LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass" />
+      <LiquidGlassTheme xmlns="using:LiquidGlass.Uno" />
     </ResourceDictionary.MergedDictionaries>
   </ResourceDictionary>
 </Application.Resources>
@@ -23,7 +27,7 @@ and override hooks for rebranding.
 Optional overrides (mirroring `MaterialTheme`):
 
 ```xml
-<LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass"
+<LiquidGlassTheme xmlns="using:LiquidGlass.Uno"
                   ColorOverrideSource="ms-appx:///MyApp/Styles/LiquidGlassColorsOverride.xaml"
                   FontOverrideSource="ms-appx:///MyApp/Styles/LiquidGlassFontsOverride.xaml" />
 ```

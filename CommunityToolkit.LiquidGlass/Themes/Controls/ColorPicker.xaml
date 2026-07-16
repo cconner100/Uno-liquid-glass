@@ -1,5 +1,5 @@
 <!--
-  CommunityToolkit.LiquidGlass — ColorPicker.xaml
+  LiquidGlass.CommunityToolkit — ColorPicker.xaml
   Light-touch lightweight overrides for CommunityToolkit.WinUI.Controls.ColorPicker.
   No retemplating: the picker's text/number inputs already inherit the theme's
   TextControl* glass overrides; here we only adjust the remaining chrome keys the

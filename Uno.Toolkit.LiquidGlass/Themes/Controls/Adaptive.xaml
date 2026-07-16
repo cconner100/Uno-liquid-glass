@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:utu="using:Uno.Toolkit.UI">
+
+  <Style x:Key="LiquidGlassToolkitSafeAreaStyle" TargetType="utu:SafeArea">
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassFill}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource UnoToolkitGlassCardCornerRadius}" />
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="utu:SafeArea">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                              Padding="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitZoomContentStyle"
+         TargetType="utu:ZoomContentControl"
+         BasedOn="{StaticResource DefaultZoomContentControlStyle}">
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassFill}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource UnoToolkitGlassCardCornerRadius}" />
+    <Setter Property="Padding" Value="12" />
+  </Style>
+
+  <!-- ResponsiveView and AutoLayout are layout-only controls; their content is
+       themed by the implicit Liquid Glass styles already active in the app. -->
+</ResourceDictionary>

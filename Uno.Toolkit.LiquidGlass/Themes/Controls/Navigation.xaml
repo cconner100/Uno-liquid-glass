@@ -1,0 +1,144 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:utu="using:Uno.Toolkit.UI">
+
+  <Style x:Key="LiquidGlassToolkitChipStyle"
+         TargetType="utu:Chip">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Elevation" Value="2" />
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassFill}" />
+    <Setter Property="Foreground" Value="{ThemeResource UnoToolkitGlassForeground}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="18" />
+    <Setter Property="Padding" Value="14,8" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="utu:Chip">
+          <Grid x:Name="Root"
+                MinHeight="38"
+                Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="IconPresenter"
+                              Width="18" Height="18"
+                              Content="{TemplateBinding Icon}"
+                              ContentTemplate="{TemplateBinding IconTemplate}"
+                              Foreground="{TemplateBinding Foreground}"
+                              VerticalAlignment="Center"
+                              Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed}" />
+            <ContentPresenter x:Name="ContentPresenter"
+                              Grid.Column="1"
+                              Margin="6,0"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Foreground="{TemplateBinding Foreground}"
+                              VerticalAlignment="Center" />
+            <Button x:Name="PART_RemoveButton"
+                    Grid.Column="2"
+                    Width="24" Height="24"
+                    Padding="0"
+                    Margin="3,0,-6,0"
+                    Content="&#x00D7;"
+                    Foreground="{TemplateBinding Foreground}"
+                    Style="{StaticResource LiquidGlassQueryButtonStyle}"
+                    Visibility="{Binding CanRemove, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource FalseToCollapsedConverter}, FallbackValue=Collapsed}" />
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPointerOver}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource UnoToolkitGlassFillPressed}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Checked">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource LiquidGlassProminentFillBrush}" />
+                    <Setter Target="Root.BorderBrush" Value="{ThemeResource LiquidGlassProminentStrokeBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="PART_RemoveButton.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource LiquidGlassProminentFillBrush}" />
+                    <Setter Target="Root.BorderBrush" Value="{ThemeResource LiquidGlassProminentStrokeBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="PART_RemoveButton.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPressed">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{ThemeResource LiquidGlassProminentFillPressedBrush}" />
+                    <Setter Target="Root.BorderBrush" Value="{ThemeResource LiquidGlassProminentStrokeBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                    <Setter Target="PART_RemoveButton.Foreground" Value="{ThemeResource LiquidGlassOnTintBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Opacity" Value="0.45" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitChipGroupStyle"
+         TargetType="utu:ChipGroup"
+         BasedOn="{StaticResource DefaultChipGroupStyle}" />
+
+  <Style x:Key="LiquidGlassToolkitNavigationBarStyle"
+         TargetType="utu:NavigationBar"
+         BasedOn="{StaticResource DefaultNavigationBar}">
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassSurface}" />
+    <Setter Property="Foreground" Value="{ThemeResource UnoToolkitGlassForeground}" />
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitTabBarStyle"
+         TargetType="utu:TabBar"
+         BasedOn="{StaticResource DefaultTabBarStyle}">
+    <Setter Property="Margin" Value="8" />
+    <Setter Property="Padding" Value="6" />
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassSurface}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource UnoToolkitGlassStroke}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource UnoToolkitGlassCardCornerRadius}" />
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitTabBarItemStyle"
+         TargetType="utu:TabBarItem"
+         BasedOn="{StaticResource DefaultTabBarItemStyle}">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+
+  <Style x:Key="LiquidGlassToolkitTabBarIndicatorStyle"
+         TargetType="utu:TabBarSelectionIndicatorPresenter"
+         BasedOn="{StaticResource DefaultTabBarSelectionIndicatorPresenterStyle}">
+    <Setter Property="Background" Value="{ThemeResource UnoToolkitGlassTint}" />
+    <Setter Property="CornerRadius" Value="3" />
+  </Style>
+
+</ResourceDictionary>

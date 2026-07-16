@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — TabView.xaml
+  LiquidGlass.Uno — TabView.xaml
   Tabs as an Apple-style segmented control: the selected tab is a glass pill.
   The template keeps the state names (Normal/PointerOver/Pressed/Selected/
   PointerOverSelected/PressedSelected, DisabledStates) and the CloseButton part;

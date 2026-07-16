@@ -24,6 +24,7 @@ public sealed partial class MainPage : Page
         ("ctsettings", typeof(ToolkitSettingsPage)),
         ("ctinput", typeof(ToolkitInputPage)),
         ("ctdatagrid", typeof(ToolkitDataGridPage)),
+        ("unotoolkit", typeof(UnoToolkitPage)),
     ];
 
     public MainPage()

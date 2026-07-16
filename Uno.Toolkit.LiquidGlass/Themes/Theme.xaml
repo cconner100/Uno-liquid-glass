@@ -1,0 +1,34 @@
+<ResourceDictionary x:Class="LiquidGlass.UnoToolkit.UnoToolkitGlassTheme"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:utu="using:Uno.Toolkit.UI">
+
+  <ResourceDictionary.MergedDictionaries>
+    <!-- Uno Toolkit owns the behavioral templates. Liquid Glass layers its
+         visual tokens and selected templates over those canonical resources. -->
+    <utu:ToolkitResources />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.UnoToolkit/Themes/Tokens.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.UnoToolkit/Themes/Controls/Cards.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.UnoToolkit/Themes/Controls/Navigation.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.UnoToolkit/Themes/Controls/Surfaces.xaml" />
+    <ResourceDictionary Source="ms-appx:///LiquidGlass.UnoToolkit/Themes/Controls/Adaptive.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- Uno resolves implicit styles from the application-level dictionary, not
+       from a nested merge. Keep these registrations at the theme root. -->
+  <Style TargetType="utu:Card" BasedOn="{StaticResource LiquidGlassToolkitCardStyle}" />
+  <Style TargetType="utu:CardContentControl" BasedOn="{StaticResource LiquidGlassToolkitCardContentControlStyle}" />
+  <Style TargetType="utu:Chip" BasedOn="{StaticResource LiquidGlassToolkitChipStyle}" />
+  <Style TargetType="utu:ChipGroup" BasedOn="{StaticResource LiquidGlassToolkitChipGroupStyle}" />
+  <Style TargetType="utu:Divider" BasedOn="{StaticResource LiquidGlassToolkitDividerStyle}" />
+  <Style TargetType="utu:DrawerControl" BasedOn="{StaticResource LiquidGlassToolkitDrawerStyle}" />
+  <Style TargetType="utu:DrawerFlyoutPresenter" BasedOn="{StaticResource LiquidGlassToolkitDrawerFlyoutPresenterStyle}" />
+  <Style TargetType="utu:ExtendedSplashScreen" BasedOn="{StaticResource LiquidGlassToolkitExtendedSplashScreenStyle}" />
+  <Style TargetType="utu:LoadingView" BasedOn="{StaticResource LiquidGlassToolkitLoadingViewStyle}" />
+  <Style TargetType="utu:NavigationBar" BasedOn="{StaticResource LiquidGlassToolkitNavigationBarStyle}" />
+  <Style TargetType="utu:SafeArea" BasedOn="{StaticResource LiquidGlassToolkitSafeAreaStyle}" />
+  <Style TargetType="utu:TabBar" BasedOn="{StaticResource LiquidGlassToolkitTabBarStyle}" />
+  <Style TargetType="utu:TabBarItem" BasedOn="{StaticResource LiquidGlassToolkitTabBarItemStyle}" />
+  <Style TargetType="utu:TabBarSelectionIndicatorPresenter" BasedOn="{StaticResource LiquidGlassToolkitTabBarIndicatorStyle}" />
+  <Style TargetType="utu:ZoomContentControl" BasedOn="{StaticResource LiquidGlassToolkitZoomContentStyle}" />
+</ResourceDictionary>

@@ -109,7 +109,7 @@ jobs:
       - name: Create base NuGet packages
         run: |
           mkdir -p artifacts/packages
-          for project in Uno.Themes.LiquidGlass CommunityToolkit.LiquidGlass DevWinUI.LiquidGlass; do
+          for project in Uno.Themes.LiquidGlass CommunityToolkit.LiquidGlass DevWinUI.LiquidGlass Uno.Toolkit.LiquidGlass; do
             dotnet pack "$project/$project.csproj" --configuration Release --output artifacts/packages -p:PackageVersion="$PACKAGE_VERSION"
           done
       - name: Upload base packages
@@ -139,7 +139,7 @@ jobs:
           New-Item -ItemType Directory -Force artifacts/packages | Out-Null
           $msbuild = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" | Select-Object -First 1
           if (-not $msbuild) { throw "Visual Studio MSBuild was not found." }
-          foreach ($project in @('Uno.Themes.LiquidGlass', 'CommunityToolkit.LiquidGlass', 'DevWinUI.LiquidGlass')) {
+          foreach ($project in @('Uno.Themes.LiquidGlass', 'CommunityToolkit.LiquidGlass', 'DevWinUI.LiquidGlass', 'Uno.Toolkit.LiquidGlass')) {
             & $msbuild "$project/$project.csproj" /restore /target:Pack /property:Configuration=Release /property:PackageOutputPath="$pwd/artifacts/packages" /property:PackageVersion="$env:PACKAGE_VERSION" /property:TargetFrameworks=net10.0-windows10.0.26100
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
@@ -176,8 +176,8 @@ jobs:
           shopt -s nullglob
           packages=(artifacts/packages/*.nupkg)
           symbols=(artifacts/packages/*.snupkg)
-          test ${#packages[@]} -eq 3
-          test ${#symbols[@]} -eq 3
+          test ${#packages[@]} -eq 4
+          test ${#symbols[@]} -eq 4
           for package in "${packages[@]}"; do
             listing=$(unzip -Z1 "$package")
             for tfm in net10.0 net10.0-android net10.0-ios net10.0-windows net10.0-browserwasm net10.0-desktop; do

@@ -1,5 +1,5 @@
 <!--
-  CommunityToolkit.LiquidGlass — TokenizingTextBox.xaml
+  LiquidGlass.CommunityToolkit — TokenizingTextBox.xaml
   Lightweight styling overrides for CommunityToolkit.WinUI.Controls.TokenizingTextBox.
 
   Token chips as glass: translucent white chips (regular glass fallback colors) at rest,

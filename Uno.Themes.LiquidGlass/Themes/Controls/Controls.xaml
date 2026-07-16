@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — Controls.xaml
+  LiquidGlass.Uno — Controls.xaml
   Styles for controls that keep their stock WinUI templates. Their glass appearance
   comes from the lightweight styling resources overridden in Colors.xaml; these styles
   adjust shape and metrics to Liquid Glass conventions.

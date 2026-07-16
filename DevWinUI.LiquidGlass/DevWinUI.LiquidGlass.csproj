@@ -14,6 +14,7 @@
     <Nullable>enable</Nullable>
 
     <RootNamespace>DevWinUI.LiquidGlass</RootNamespace>
+    <AssemblyName>DevWinUI.LiquidGlass</AssemblyName>
     <Description>DevWinUI-inspired controls (https://github.com/ghost1372/DevWinUI, MIT) ported to Uno Platform and restyled with the Liquid Glass design language. The upstream library is Windows App SDK-only; these are cross-platform re-implementations of its signature controls.</Description>
 
     <UnoFeatures>

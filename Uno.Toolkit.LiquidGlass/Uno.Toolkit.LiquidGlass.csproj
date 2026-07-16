@@ -1,0 +1,42 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net10.0-ios;net10.0-android;net10.0-windows10.0.26100;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
+    <PackageId>LiquidGlass.UnoToolkit</PackageId>
+    <Title>Liquid Glass Theme for Uno Toolkit</Title>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>uno-platform;uno-toolkit;winui;liquid-glass;theme;android;ios;wasm;linux</PackageTags>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <IncludeContentInPack>false</IncludeContentInPack>
+    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);AddLiquidGlassPackageReadme</GenerateNuspecDependsOn>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LiquidGlass.UnoToolkit</RootNamespace>
+    <AssemblyName>LiquidGlass.UnoToolkit</AssemblyName>
+    <Description>Liquid Glass styles for every visual control in Uno.Toolkit.WinUI, including cards, chips, dividers, drawers, loading views, navigation bars, safe areas, tab bars, and zoom content.</Description>
+    <UnoFeatures>SkiaRenderer;</UnoFeatures>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Uno.Themes.LiquidGlass\Uno.Themes.LiquidGlass.csproj" />
+    <PackageReference Include="Uno.Toolkit.WinUI" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+
+  <!-- The theme XAML is compiled into the assembly. Content packing is disabled
+       above because Android dependencies expose generated obj/ resources as
+       Content; add only the package README back explicitly. -->
+  <Target Name="AddLiquidGlassPackageReadme">
+    <ItemGroup>
+      <_PackageFiles Include="$(MSBuildProjectDirectory)/README.md">
+        <BuildAction>None</BuildAction>
+        <PackagePath>/</PackagePath>
+      </_PackageFiles>
+    </ItemGroup>
+  </Target>
+</Project>

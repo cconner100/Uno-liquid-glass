@@ -8,9 +8,29 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
+## Breaking namespace change
+
+> **Breaking change:** Package namespaces and assembly names now match their
+> NuGet package IDs. This is a source- and binary-breaking change and must ship
+> in a new major version.
+
+Update XAML namespace declarations, C# `using` directives, and any reflection or
+assembly-qualified type names as follows:
+
+| Package | Previous namespace and assembly | New namespace and assembly |
+| --- | --- | --- |
+| `LiquidGlass.Uno` | `Uno.Themes.LiquidGlass` | `LiquidGlass.Uno` |
+| `LiquidGlass.CommunityToolkit` | `CommunityToolkit.LiquidGlass` | `LiquidGlass.CommunityToolkit` |
+| `DevWinUI.LiquidGlass` | `DevWinUI.LiquidGlass` | Unchanged |
+| `LiquidGlass.UnoToolkit` | `Uno.Toolkit.LiquidGlass` | `LiquidGlass.UnoToolkit` |
+
+For example, replace `xmlns:lg="using:Uno.Themes.LiquidGlass"` with
+`xmlns:lg="using:LiquidGlass.Uno"`. No control style keys or theme class names
+were renamed.
+
 ## Supported platforms and target frameworks
 
-The gallery and all three NuGet libraries target every platform supported by the
+The gallery and all four NuGet libraries target every platform supported by the
 Uno Platform 6.5 single-project template.
 
 | Platform | TFM | Build host and runtime |
@@ -35,6 +55,7 @@ while Skia-based Windows applications use `net10.0-desktop`.
 | `LiquidGlass.Uno` | Reusable Liquid Glass styles for WinUI and Uno controls. |
 | `LiquidGlass.CommunityToolkit` | Liquid Glass resources for the Windows Community Toolkit controls used by the gallery. |
 | `DevWinUI.LiquidGlass` | Liquid Glass implementations of the DevWinUI-inspired controls used by the gallery. |
+| `LiquidGlass.UnoToolkit` | Liquid Glass theme for the visual controls in `Uno.Toolkit.WinUI`. |
 | `LiquidGlassGallery` | Sample application for Android, iOS/iPadOS, WinUI 3, WebAssembly, Linux, macOS, and Skia Windows. |
 | `LiquidGlassGallery.Tests` | NUnit tests for the theme dictionaries, styles, and design invariants. |
 
@@ -121,6 +142,21 @@ instance. The design system uses:
 | `MessageBox`, `GlassWindowHelper` | Glass dialog/window treatment with capsule actions and theme-aware hosting behavior. |
 | `UniformGrid` | Responsive equal-cell layout used to present controls consistently in the sample gallery. |
 
+### Uno Toolkit controls
+
+| Controls | Liquid Glass treatment |
+| --- | --- |
+| `Card`, `CardContentControl` | Translucent cards with specular rims, concentric corners, adaptive typography, and hover/pressed states. |
+| `Chip`, `ChipGroup` | Capsule glass chips with tint-selected states, removable actions, and multi-selection support. |
+| `Divider` | Theme-aware glass hairline with optional secondary-label text. |
+| `DrawerControl`, `DrawerFlyoutPresenter` | Heavy frosted drawer material, rounded exposed corners, rim lighting, dimmed backdrop, and directional flyout styles. |
+| `LoadingView`, `ExtendedSplashScreen` | Preserve Toolkit loading transitions while applying tint and glass surface tokens. |
+| `NavigationBar` | Frosted navigation surface with Liquid Glass foreground and command styling. |
+| `SafeArea` | Inset-aware glass container for mobile, WebAssembly, and desktop layouts. |
+| `TabBar`, `TabBarItem` | Floating rounded glass tab bar with tint selection and adaptive interaction states. |
+| `ZoomContentControl` | Pan-and-zoom viewport enclosed by a rounded glass surface. |
+| `AutoLayout`, `ResponsiveView` | Layout-only controls; their hosted content receives the application-level Liquid Glass styles. |
+
 ## Using the theme in your own app
 
 Reference the libraries you need and merge their theme dictionaries in `App.xaml`:
@@ -130,9 +166,10 @@ Reference the libraries you need and merge their theme dictionaries in `App.xaml
   <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
       <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-      <LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass" />
-      <CommunityToolkitGlassTheme xmlns="using:CommunityToolkit.LiquidGlass" />
+      <LiquidGlassTheme xmlns="using:LiquidGlass.Uno" />
+      <CommunityToolkitGlassTheme xmlns="using:LiquidGlass.CommunityToolkit" />
       <DevWinUIGlassTheme xmlns="using:DevWinUI.LiquidGlass" />
+      <UnoToolkitGlassTheme xmlns="using:LiquidGlass.UnoToolkit" />
     </ResourceDictionary.MergedDictionaries>
   </ResourceDictionary>
 </Application.Resources>
@@ -149,7 +186,7 @@ Standard controls pick up Liquid Glass implicitly. Opt-in variants use explicit 
 Rebrand without forking the theme:
 
 ```xml
-<LiquidGlassTheme xmlns="using:Uno.Themes.LiquidGlass"
+<LiquidGlassTheme xmlns="using:LiquidGlass.Uno"
                   ColorOverrideSource="ms-appx:///MyApp/Styles/LiquidGlassColorsOverride.xaml" />
 ```
 
@@ -165,6 +202,7 @@ package when the application uses those controls:
 dotnet add package LiquidGlass.Uno
 dotnet add package LiquidGlass.CommunityToolkit
 dotnet add package DevWinUI.LiquidGlass
+dotnet add package LiquidGlass.UnoToolkit
 ```
 
 The Community Toolkit and DevWinUI packages declare `LiquidGlass.Uno` as a
@@ -193,6 +231,8 @@ dotnet pack CommunityToolkit.LiquidGlass/CommunityToolkit.LiquidGlass.csproj \
   --configuration Release --output artifacts/packages
 dotnet pack DevWinUI.LiquidGlass/DevWinUI.LiquidGlass.csproj \
   --configuration Release --output artifacts/packages
+dotnet pack Uno.Toolkit.LiquidGlass/Uno.Toolkit.LiquidGlass.csproj \
+  --configuration Release --output artifacts/packages
 ```
 
 Packing on macOS includes the reference, Android, iOS, WebAssembly, and Desktop
@@ -201,7 +241,7 @@ assets. Packing on Windows supplies the WinUI 3 assets used by the merge job.
 ### Publishing a release
 
 The [Uno builds and NuGet packages workflow](.github/workflows/nuget.yml) builds the
-gallery and libraries for every TFM and validates all three packages on pull requests
+gallery and libraries for every TFM and validates all four packages on pull requests
 and pushes to `main`. A manual workflow run accepts a NuGet version, uploads the exact
 `.nupkg` and `.snupkg` files as a reviewable GitHub artifact, and then waits for
 approval before publishing those same files to NuGet.org.
@@ -250,7 +290,7 @@ intended platform is unambiguous.
 
 ### WebAssembly
 
-Build the gallery and all three referenced libraries:
+Build the gallery and all four referenced libraries:
 
 ```bash
 dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \

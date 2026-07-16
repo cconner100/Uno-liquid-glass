@@ -2,7 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
-namespace Uno.Themes.LiquidGlass;
+namespace LiquidGlass.Uno;
 
 /// <summary>
 /// Glass treatment for NavigationView. Its pane brushes are hardcoded to framework

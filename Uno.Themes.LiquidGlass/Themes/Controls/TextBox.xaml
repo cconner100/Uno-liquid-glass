@@ -1,5 +1,5 @@
 <!--
-  Uno.Themes.LiquidGlass — TextBox.xaml
+  LiquidGlass.Uno — TextBox.xaml
   Custom templates for text inputs: translucent glass field with rim light,
   tint-colored border when focused. (Uno's stock Fluent templates don't honor
   app-level lightweight resource overrides, so the theme retemplates these,
