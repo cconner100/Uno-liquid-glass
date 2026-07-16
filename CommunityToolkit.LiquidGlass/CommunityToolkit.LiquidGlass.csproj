@@ -35,9 +35,13 @@
     <PackageReference Include="CommunityToolkit.WinUI.Controls.LayoutTransformControl" />
     <PackageReference Include="CommunityToolkit.WinUI.Controls.MetadataControl" />
 
-    <!-- DataGrid from the Uno.WindowsCommunityToolkit 7.x fork (namespace
-         CommunityToolkit.WinUI.UI.Controls) — WCT 8.x never shipped a DataGrid -->
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.DataGrid" />
+    <!-- DataGrid uses the same CommunityToolkit.WinUI.UI.Controls namespace in
+         both packages. Native WinUI must consume the Windows package so its
+         XAML compiler does not try to resolve the Uno.UI assembly. -->
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid"
+                      Condition="'$(TargetFramework)' == 'net10.0-windows10.0.26100'" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI.Controls.DataGrid"
+                      Condition="'$(TargetFramework)' != 'net10.0-windows10.0.26100'" />
   </ItemGroup>
 
   <ItemGroup>

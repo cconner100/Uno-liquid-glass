@@ -18,7 +18,9 @@
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.RangeSelector" Version="8.3.260402-preview2" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.LayoutTransformControl" Version="8.3.260402-preview2" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.MetadataControl" Version="8.3.260402-preview2" />
-    <!-- DataGrid never shipped in WCT 8.x — it lives on in the Uno.WindowsCommunityToolkit 7.x fork -->
+    <!-- DataGrid never shipped in WCT 8.x. Use the native WinUI package on Windows
+         and the Uno.WindowsCommunityToolkit fork on Uno targets. -->
+    <PackageVersion Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
     <PackageVersion Include="Uno.CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.205" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="FluentAssertions" Version="6.12.0" />
