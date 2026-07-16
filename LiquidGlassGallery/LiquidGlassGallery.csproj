@@ -26,6 +26,12 @@
     </UnoFeatures>
   </PropertyGroup>
 
+  <!-- Uno.Sdk already includes .resw files as PRIResource items. Disable the
+       WinAppSDK default glob so the Windows head does not add them twice. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <EnableDefaultPriItems>false</EnableDefaultPriItems>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Uno.Themes.LiquidGlass\Uno.Themes.LiquidGlass.csproj" />
     <ProjectReference Include="..\DevWinUI.LiquidGlass\DevWinUI.LiquidGlass.csproj" />
