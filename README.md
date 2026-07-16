@@ -8,26 +8,34 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
-## Supported operating systems and target frameworks
+## Supported platforms and target frameworks
 
-This project currently supports **macOS and iPadOS only**.
+The gallery and all three NuGet libraries target every platform supported by the
+Uno Platform 6.5 single-project template.
 
-| Operating system | Gallery target framework | How it is used |
+| Platform | TFM | Build host and runtime |
 | --- | --- | --- |
-| macOS | `net10.0-desktop` | Skia desktop gallery with real backdrop blur from Uno's `AcrylicBrush` rendering. |
-| iPadOS | `net10.0-ios` | iPad app and simulator build; the simulator command uses `iossimulator-arm64`. |
-| Build and tests only | `net10.0` | Shared .NET compilation and NUnit tests. This is not a separately supported operating-system target. |
+| Android | `net10.0-android` | Build on Windows, macOS, or Linux with the Android workload. |
+| iOS and iPadOS | `net10.0-ios` | Build on macOS with the iOS workload and full Xcode. |
+| Windows / WinUI 3 | `net10.0-windows10.0.26100` | Build and run on Windows using Windows App SDK. |
+| Browser / WebAssembly | `net10.0-browserwasm` | Build on Windows, macOS, or Linux with `wasm-tools`; run in a modern browser. |
+| Linux, macOS, and Skia Windows | `net10.0-desktop` | Uno Skia Desktop using X11/framebuffer, macOS, or Win32 hosting. |
+| Reference and tests | `net10.0` | Platform-neutral compilation used by the test project. |
 
 The projects use **Uno Platform 6.5.36**, the **.NET 10** TFMs above, and the
-`SkiaRenderer` Uno feature. Windows, Linux, Android, and browser/WebAssembly targets
-are not part of the current supported or validated system.
+`SkiaRenderer` Uno feature. CI builds the demo and libraries on Linux, macOS, and
+Windows so each platform is validated on a compatible host.
+
+The `net10.0-desktop` TFM is Uno's Linux target; there is no separate
+`net10.0-linux` TFM. Likewise, WinUI 3 uses the Windows-qualified TFM above,
+while Skia-based Windows applications use `net10.0-desktop`.
 
 | Package / project | Purpose |
 | --- | --- |
 | `LiquidGlass.Uno` | Reusable Liquid Glass styles for WinUI and Uno controls. |
 | `LiquidGlass.CommunityToolkit` | Liquid Glass resources for the Windows Community Toolkit controls used by the gallery. |
 | `DevWinUI.LiquidGlass` | Liquid Glass implementations of the DevWinUI-inspired controls used by the gallery. |
-| `LiquidGlassGallery` | Sample application for macOS and iPadOS. |
+| `LiquidGlassGallery` | Sample application for Android, iOS/iPadOS, WinUI 3, WebAssembly, Linux, macOS, and Skia Windows. |
 | `LiquidGlassGallery.Tests` | NUnit tests for the theme dictionaries, styles, and design invariants. |
 
 ## What the theme changes
@@ -161,16 +169,42 @@ dotnet add package DevWinUI.LiquidGlass
 
 The Community Toolkit and DevWinUI packages declare `LiquidGlass.Uno` as a
 dependency, so installing either extension also restores the core theme. Each package
-contains assemblies for `net10.0`, `net10.0-desktop`, and `net10.0-ios`, a NuGet
-README, MIT license metadata, repository/source metadata, and a portable-symbol
-`.snupkg`.
+contains assemblies for `net10.0`, `net10.0-android`, `net10.0-ios`,
+`net10.0-windows10.0.26100`, `net10.0-browserwasm`, and `net10.0-desktop`, plus
+a NuGet README, MIT license metadata, repository/source metadata, and a
+portable-symbol `.snupkg`.
+
+### Building NuGet packages
+
+To create packages for every TFM, use the GitHub Actions workflow. Apple targets
+must be built on macOS and WinUI 3 must be built on Windows, so a single local
+host cannot produce the complete package set. The workflow builds the compatible
+assets on macOS and Windows, merges them, and verifies that every `.nupkg`
+contains all six framework families.
+
+For a local package build containing the TFMs supported by the current host:
+
+```bash
+mkdir -p artifacts/packages
+
+dotnet pack Uno.Themes.LiquidGlass/Uno.Themes.LiquidGlass.csproj \
+  --configuration Release --output artifacts/packages
+dotnet pack CommunityToolkit.LiquidGlass/CommunityToolkit.LiquidGlass.csproj \
+  --configuration Release --output artifacts/packages
+dotnet pack DevWinUI.LiquidGlass/DevWinUI.LiquidGlass.csproj \
+  --configuration Release --output artifacts/packages
+```
+
+Packing on macOS includes the reference, Android, iOS, WebAssembly, and Desktop
+assets. Packing on Windows supplies the WinUI 3 assets used by the merge job.
 
 ### Publishing a release
 
-The [NuGet packages workflow](.github/workflows/nuget.yml) builds and validates all
-three packages on pull requests and pushes to `main`. A manual workflow run accepts a
-NuGet version, uploads the exact `.nupkg` and `.snupkg` files as a reviewable GitHub
-artifact, and then waits for approval before publishing those same files to NuGet.org.
+The [Uno builds and NuGet packages workflow](.github/workflows/nuget.yml) builds the
+gallery and libraries for every TFM and validates all three packages on pull requests
+and pushes to `main`. A manual workflow run accepts a NuGet version, uploads the exact
+`.nupkg` and `.snupkg` files as a reviewable GitHub artifact, and then waits for
+approval before publishing those same files to NuGet.org.
 
 One-time repository setup:
 
@@ -180,20 +214,128 @@ One-time repository setup:
 2. In NuGet.org **Trusted Publishing**, add a GitHub policy with repository owner
    `cconner100`, repository `Uno-liquid-glass`, workflow file `nuget.yml`, and
    environment `nuget.org`.
-3. In GitHub Actions, run **NuGet packages**, enter the new version, review the
-   generated package artifact, and approve the `nuget.org` deployment. The publish job
-   obtains a short-lived NuGet credential through GitHub OIDC; no long-lived API key is
-   stored in GitHub.
+3. In GitHub Actions, run **Uno builds and NuGet packages**, enter the new version,
+   review the generated package artifact, and approve the `nuget.org` deployment.
+   The publish job obtains a short-lived NuGet credential through GitHub OIDC; no
+   long-lived API key is stored in GitHub.
 
-## Running the gallery
+## Building and running the gallery
+
+### Prerequisites
+
+Install the .NET 10 SDK, then install only the workloads needed on the current
+development machine:
 
 ```bash
-# macOS
-dotnet run --project LiquidGlassGallery/LiquidGlassGallery.csproj -f net10.0-desktop
+# Android
+dotnet workload install android
 
-# iPad simulator (requires full Xcode installed and selected)
+# Browser / WebAssembly
+dotnet workload install wasm-tools
+
+# iOS and iPadOS; macOS only
+dotnet workload install ios
+```
+
+The repository pins Uno Platform through `global.json`. Restore the solution once
+after cloning or changing its TFMs:
+
+```bash
+dotnet restore LiquidGlassGallery.sln
+```
+
+Uno automatically skips TFMs that cannot be restored on the current operating
+system. Use an explicit `-f`/`--framework` when building or running so that the
+intended platform is unambiguous.
+
+### WebAssembly
+
+Build the gallery and all three referenced libraries:
+
+```bash
 dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
-  -f net10.0-ios -t:Run -p:RuntimeIdentifier=iossimulator-arm64
+  --configuration Release --framework net10.0-browserwasm
+```
+
+Run the WASM development server:
+
+```bash
+dotnet run --project LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --framework net10.0-browserwasm
+```
+
+The command prints the HTTP and HTTPS URLs assigned by `WasmAppHost`; open either
+URL in a browser. A typical local address is `http://127.0.0.1:5000/`, but the
+port is selected at launch.
+
+### Android
+
+Build a debug APK:
+
+```bash
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Debug --framework net10.0-android
+```
+
+Run it on a connected device or active emulator:
+
+```bash
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Debug --framework net10.0-android --target Run
+```
+
+### iOS and iPadOS
+
+Full Xcode must be installed and selected; the standalone Command Line Tools are
+not sufficient:
+
+```bash
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Debug --framework net10.0-ios \
+  -p:RuntimeIdentifier=iossimulator-arm64
+```
+
+To launch the simulator build, add `--target Run` to that command.
+
+### Linux, macOS, and Skia Windows
+
+Build or run the shared Uno Desktop target:
+
+```bash
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Release --framework net10.0-desktop
+
+dotnet run --project LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --framework net10.0-desktop
+```
+
+On Linux, the existing desktop host selects X11 or Linux framebuffer support.
+The same TFM selects the macOS host on macOS and Win32 on Windows.
+
+### Windows / WinUI 3
+
+Run these commands from Windows with the Windows App SDK build tooling available:
+
+```bash
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Release --framework net10.0-windows10.0.26100
+
+dotnet run --project LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --framework net10.0-windows10.0.26100
+```
+
+This is the native WinUI 3 head. To build Skia Windows instead, use the Desktop
+commands from the preceding section.
+
+### Platform-neutral build
+
+The reference TFM is useful for quick compilation and for the NUnit project:
+
+```bash
+dotnet build LiquidGlassGallery/LiquidGlassGallery.csproj \
+  --configuration Release --framework net10.0
 ```
 
 The **Dark appearance** switch changes the whole gallery between the matching light
@@ -223,3 +365,4 @@ The tests parse the theme XAML and verify, among other things:
 - buttons keep the 44-point capsule geometry
 - the palette matches Apple system colors
 - every implicit control style is based on a public `LiquidGlass*` explicit style
+- every product project declares all six supported Uno TFMs, including WebAssembly

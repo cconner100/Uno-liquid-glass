@@ -1,7 +1,8 @@
 # DevWinUI.LiquidGlass
 
 DevWinUI-inspired controls reimplemented for Uno Platform and restyled with the
-Liquid Glass design language for macOS and iPadOS.
+Liquid Glass design language for Android, iOS/iPadOS, WinUI 3, WebAssembly,
+Linux, macOS, and Skia Windows.
 
 The package includes Card, Divider, SettingsCard, SettingsExpander, SettingsGroup,
 PinBox, KeyVisual, Shortcut, StepBar, Timeline, LoadingIndicator, Growl,

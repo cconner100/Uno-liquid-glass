@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "Liquid Glass gallery for Uno Platform",
+  "display": "standalone",
+  "name": "LiquidGlassGallery",
+  "short_name": "LiquidGlass",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
