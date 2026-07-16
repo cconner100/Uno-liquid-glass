@@ -66,11 +66,12 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
 
-    for primary in sorted(args.primary.glob("*.nupkg")):
-        supplement = args.supplement / primary.name
-        if not supplement.exists():
-            raise FileNotFoundError(f"Missing supplemental package: {supplement}")
-        merge_package(primary, supplement, args.output / primary.name)
+    for pattern in ("*.nupkg", "*.snupkg"):
+        for primary in sorted(args.primary.glob(pattern)):
+            supplement = args.supplement / primary.name
+            if not supplement.exists():
+                raise FileNotFoundError(f"Missing supplemental package: {supplement}")
+            merge_package(primary, supplement, args.output / primary.name)
 
 
 if __name__ == "__main__":
