@@ -275,7 +275,8 @@ public class LiquidGlassThemeTests
             (string?)style.Attribute("TargetType") == "TeachingTip" &&
             ((string?)style.Attribute("BasedOn"))!.Contains("LiquidGlassTeachingTipStyle"));
         var themeCode = File.ReadAllText(Path.Combine(ThemesDir, "Theme.xaml.cs"));
-        themeCode.Should().Contain("MessageDialog.UseNativeDialog = false")
+        themeCode.Should().Contain("#if HAS_UNO")
+            .And.Contain("MessageDialog.UseNativeDialog = false")
             .And.Contain("MessageDialog.StyleOverride = \"LiquidGlassMessageDialogStyle\"");
 
         var menus = LoadXaml(Path.Combine("Controls", "Menus.xaml"));
