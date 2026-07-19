@@ -1,5 +1,7 @@
 # Liquid Glass for Uno Platform
 
+[![NuGet release](https://img.shields.io/nuget/vpre/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/2.0.0-preview.2)
+
 ![Liquid Glass gallery sample page showing the macOS sidebar, glass cards, and button styles](docs/light_buttons.png)
 
 A reusable **Liquid Glass** theme for Uno Platform, based on Apple's
@@ -7,6 +9,43 @@ A reusable **Liquid Glass** theme for Uno Platform, based on Apple's
 It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
+
+## Current release: 2.0.0-preview.2
+
+Published July 19, 2026. All four packages contain the same release version and
+the complete `net10.0`, Android, iOS, WinUI 3, WebAssembly, and Desktop asset set.
+
+| Package | Current release |
+| --- | --- |
+| `LiquidGlass.Uno` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.Uno/2.0.0-preview.2) |
+| `LiquidGlass.CommunityToolkit` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/2.0.0-preview.2) |
+| `DevWinUI.LiquidGlass` | [2.0.0-preview.2](https://www.nuget.org/packages/DevWinUI.LiquidGlass/2.0.0-preview.2) |
+| `LiquidGlass.UnoToolkit` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/2.0.0-preview.2) |
+
+Install the exact preview version with:
+
+```bash
+dotnet add package LiquidGlass.Uno --version 2.0.0-preview.2
+dotnet add package LiquidGlass.CommunityToolkit --version 2.0.0-preview.2
+dotnet add package DevWinUI.LiquidGlass --version 2.0.0-preview.2
+dotnet add package LiquidGlass.UnoToolkit --version 2.0.0-preview.2
+```
+
+### Changes in preview.2
+
+- Added consistent Liquid Glass surfaces and capsule actions for `ContentDialog`,
+  framework `MessageDialog`, and `TeachingTip`.
+- Added frosted, rim-lit `CalendarView` styling for `CalendarDatePicker` popups in
+  light and dark themes.
+- Routed Uno `MessageDialog` through the cross-platform XAML adapter so it can use
+  the theme, while preserving native WinUI compatibility.
+- Fixed the `DrawerFlyoutPresenter` gallery Close button so it dismisses its owning
+  flyout.
+- Added gallery examples, focused visual-capture paths, and regression coverage for
+  the new dialog and drawer behavior.
+
+See [PR #4](https://github.com/cconner100/Uno-liquid-glass/pull/4) for the complete
+implementation and validation history.
 
 ## Breaking namespace change
 
