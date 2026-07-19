@@ -13,6 +13,14 @@ public sealed partial class LiquidGlassTheme : ResourceDictionary
     public LiquidGlassTheme()
     {
         InitializeComponent();
+
+        // Uno's MessageDialog adapter otherwise applies DefaultContentDialogStyle
+        // explicitly (bypassing the implicit ContentDialog style), and mobile
+        // targets default to native dialogs that cannot consume XAML resources.
+        // Loading this theme opts MessageDialog into the cross-platform XAML path
+        // and points it at the same public style used by ContentDialog.
+        global::Uno.WinRTFeatureConfiguration.MessageDialog.UseNativeDialog = false;
+        global::Uno.WinRTFeatureConfiguration.MessageDialog.StyleOverride = "LiquidGlassMessageDialogStyle";
     }
 
     /// <summary>

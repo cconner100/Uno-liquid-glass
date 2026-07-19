@@ -75,6 +75,21 @@ public class UnoToolkitThemeTests
     }
 
     [Test]
+    public void Drawer_flyout_close_button_hides_its_owning_flyout()
+    {
+        var galleryRoot = Path.Combine(FindSolutionRoot(), "LiquidGlassGallery", "Pages");
+        var page = XDocument.Load(Path.Combine(galleryRoot, "UnoToolkitPage.xaml"));
+        var closeButton = page.Descendants(Xaml + "Button")
+            .Single(button => (string?)button.Attribute("Content") == "Close"
+                && (string?)button.Attribute("Click") == "OnCloseDrawerFlyout");
+
+        closeButton.Should().NotBeNull();
+
+        File.ReadAllText(Path.Combine(galleryRoot, "UnoToolkitPage.xaml.cs"))
+            .Should().Contain("BottomDrawerFlyout.Hide()");
+    }
+
+    [Test]
     public void Toolkit_light_and_dark_token_sets_are_symmetric()
     {
         var tokens = XDocument.Load(Path.Combine(ThemesRoot, "Tokens.xaml"));

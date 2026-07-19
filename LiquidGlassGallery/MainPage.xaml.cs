@@ -108,13 +108,19 @@ public sealed partial class MainPage : Page
             });
             await Task.Delay(500);
 
+            var requestedPage = Environment.GetEnvironmentVariable("LG_SCREENSHOT_PAGE");
+            var requestedDialog = Environment.GetEnvironmentVariable("LG_SCREENSHOT_DIALOG");
+            var pages = string.IsNullOrWhiteSpace(requestedPage)
+                ? _pages
+                : _pages.Where(page => string.Equals(page.Tag, requestedPage, StringComparison.OrdinalIgnoreCase));
+
             foreach (var theme in new[] { ElementTheme.Light, ElementTheme.Dark })
             {
                 App.SetRootTheme(theme);
                 ThemeToggle.IsOn = theme == ElementTheme.Dark;
                 await Task.Delay(400);
 
-                foreach (var (tag, pageType) in _pages)
+                foreach (var (tag, pageType) in pages)
                 {
                     ContentFrame.Navigate(pageType);
                     await Task.Delay(800);
@@ -132,6 +138,7 @@ public sealed partial class MainPage : Page
                     {
                         await CapturePickerFlyoutAsync<DatePicker>(Path.Combine(dir, $"{prefix}_datepicker_flyout.bmp"));
                         await CapturePickerFlyoutAsync<TimePicker>(Path.Combine(dir, $"{prefix}_timepicker_flyout.bmp"));
+                        await CaptureCalendarFlyoutAsync(Path.Combine(dir, $"{prefix}_calendar_flyout.bmp"));
                     }
 
                     if (theme == ElementTheme.Light && tag == "buttons")
@@ -147,6 +154,7 @@ public sealed partial class MainPage : Page
                     {
                         await CaptureMenuFlyoutAsync(Path.Combine(dir, $"{prefix}_menuflyout.bmp"));
                         await CaptureDialogAsync(Path.Combine(dir, $"{prefix}_dialog.bmp"));
+                        await CaptureTeachingTipAsync(Path.Combine(dir, $"{prefix}_teachingtip.bmp"));
                     }
 
                     if (tag == "ctdatagrid" && FindDescendant<CommunityToolkit.WinUI.UI.Controls.DataGrid>(ContentFrame) is { } dataGrid)
@@ -176,7 +184,14 @@ public sealed partial class MainPage : Page
 
                     if (tag == "devdialogs")
                     {
-                        await CaptureMessageBoxAsync(Path.Combine(dir, $"{prefix}_messagebox.bmp"));
+                        if (string.Equals(requestedDialog, "framework", StringComparison.OrdinalIgnoreCase))
+                        {
+                            await CaptureFrameworkMessageDialogAsync(Path.Combine(dir, $"{prefix}_framework_messagedialog.bmp"));
+                        }
+                        else
+                        {
+                            await CaptureMessageBoxAsync(Path.Combine(dir, $"{prefix}_messagebox.bmp"));
+                        }
                         await CaptureGlassWindowAsync(Path.Combine(dir, $"{prefix}_window.bmp"));
                     }
                 }
@@ -217,6 +232,34 @@ public sealed partial class MainPage : Page
             Console.Error.WriteLine($"No open popup found for {typeof(T).Name}");
         }
 
+        await Task.Delay(300);
+    }
+
+    private async Task CaptureCalendarFlyoutAsync(string path)
+    {
+        var picker = FindDescendant<CalendarDatePicker>(ContentFrame);
+        if (picker is null)
+        {
+            Console.Error.WriteLine("No CalendarDatePicker found");
+            return;
+        }
+
+        picker.IsCalendarOpen = true;
+        await Task.Delay(900);
+
+        var popup = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot)
+            .FirstOrDefault(p => p.Child is not null);
+        if (popup?.Child is FrameworkElement presenter)
+        {
+            await CaptureAsync(presenter, path);
+            popup.IsOpen = false;
+        }
+        else
+        {
+            Console.Error.WriteLine("CalendarDatePicker popup did not open");
+        }
+
+        picker.IsCalendarOpen = false;
         await Task.Delay(300);
     }
 
@@ -268,6 +311,33 @@ public sealed partial class MainPage : Page
         await Task.Delay(300);
     }
 
+    private async Task CaptureTeachingTipAsync(string path)
+    {
+        var button = FindDescendant<Button>(ContentFrame, "TeachingTipButton");
+        if (button is null)
+        {
+            Console.Error.WriteLine("No TeachingTipButton found");
+            return;
+        }
+
+        new Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer(button).Invoke();
+        await Task.Delay(900);
+
+        var popup = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot)
+            .FirstOrDefault(p => p.Child is not null);
+        if (popup?.Child is FrameworkElement tipRoot)
+        {
+            await CaptureAsync(tipRoot, path);
+            popup.IsOpen = false;
+        }
+        else
+        {
+            Console.Error.WriteLine("TeachingTip popup did not open");
+        }
+
+        await Task.Delay(300);
+    }
+
     private async Task CaptureGrowlAsync(string path)
     {
         // Same code path as the page's buttons: the page registered its host panel on Loaded.
@@ -294,15 +364,62 @@ public sealed partial class MainPage : Page
         await Task.Delay(900);
 
         var popup = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot)
-            .FirstOrDefault(p => p.Child is not null);
+            .FirstOrDefault(p => p.Child is FrameworkElement { ActualWidth: > 0, ActualHeight: > 0 });
         if (popup?.Child is FrameworkElement dialogRoot)
         {
             await CaptureAsync(dialogRoot, path);
-            popup.IsOpen = false;
+            var primaryButton = FindDescendant<Button>(dialogRoot, "PrimaryButton");
+            if (primaryButton is not null)
+            {
+                new Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer(primaryButton).Invoke();
+            }
+            else
+            {
+                popup.IsOpen = false;
+            }
         }
         else
         {
             Console.Error.WriteLine("MessageBox popup did not open");
+        }
+
+        await Task.Delay(300);
+    }
+
+    private async Task CaptureFrameworkMessageDialogAsync(string path)
+    {
+        var dialog = new Windows.UI.Popups.MessageDialog(
+            "The framework adapter now resolves the Liquid Glass ContentDialog style.",
+            "Framework MessageDialog");
+        dialog.Commands.Add(new Windows.UI.Popups.UICommand("OK"));
+        dialog.Commands.Add(new Windows.UI.Popups.UICommand("Cancel"));
+        if (App.ActiveWindow is { } window)
+        {
+            WinRT.Interop.InitializeWithWindow.Initialize(
+                dialog,
+                WinRT.Interop.WindowNative.GetWindowHandle(window));
+        }
+        _ = dialog.ShowAsync();
+        await Task.Delay(900);
+
+        var popup = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(XamlRoot)
+            .FirstOrDefault(p => p.Child is FrameworkElement { ActualWidth: > 0, ActualHeight: > 0 });
+        if (popup?.Child is FrameworkElement dialogRoot)
+        {
+            await CaptureAsync(dialogRoot, path);
+            var primaryButton = FindDescendant<Button>(dialogRoot, "PrimaryButton");
+            if (primaryButton is not null)
+            {
+                new Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer(primaryButton).Invoke();
+            }
+            else
+            {
+                popup.IsOpen = false;
+            }
+        }
+        else
+        {
+            Console.Error.WriteLine("Framework MessageDialog popup did not open");
         }
 
         await Task.Delay(300);

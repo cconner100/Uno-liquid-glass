@@ -263,6 +263,60 @@ public class LiquidGlassThemeTests
     }
 
     [Test]
+    public void Dialog_like_controls_are_registered_with_liquid_glass_styles()
+    {
+        var styles = LoadXaml("Theme.xaml").Root!.Elements(Xaml + "Style").ToList();
+
+        styles.Should().Contain(style =>
+            (string?)style.Attribute("TargetType") == "ContentDialog" &&
+            (string?)style.Attribute(X + "Key") == null &&
+            ((string?)style.Attribute("BasedOn"))!.Contains("LiquidGlassContentDialogStyle"));
+        styles.Should().Contain(style =>
+            (string?)style.Attribute("TargetType") == "TeachingTip" &&
+            ((string?)style.Attribute("BasedOn"))!.Contains("LiquidGlassTeachingTipStyle"));
+        var themeCode = File.ReadAllText(Path.Combine(ThemesDir, "Theme.xaml.cs"));
+        themeCode.Should().Contain("MessageDialog.UseNativeDialog = false")
+            .And.Contain("MessageDialog.StyleOverride = \"LiquidGlassMessageDialogStyle\"");
+
+        var menus = LoadXaml(Path.Combine("Controls", "Menus.xaml"));
+        var messageDialogStyle = menus.Root!.Elements(Xaml + "Style")
+            .Single(style => KeyOf(style) == "LiquidGlassMessageDialogStyle");
+        messageDialogStyle.Descendants(Xaml + "Setter")
+            .Where(setter => ((string?)setter.Attribute("Target"))?.EndsWith("Button.Style") == true)
+            .Select(setter => (string?)setter.Attribute("Value"))
+            .Should().OnlyContain(value => value!.Contains("LiquidGlassDialogProminentButtonStyle"),
+                "MessageDialog forces a default button and must not fall back to AccentButtonStyle");
+    }
+
+    [Test]
+    public void Nested_dialog_surfaces_have_light_and_dark_material_overrides()
+    {
+        string[] requiredKeys =
+        [
+            "CalendarViewBackground",
+            "CalendarViewBorderBrush",
+            "CalendarViewForeground",
+            "TeachingTipBackgroundBrush",
+            "TeachingTipTransientBackground",
+            "TeachingTipBorderBrush",
+            "TeachingTipForegroundBrush",
+        ];
+
+        var (light, dark) = LoadThemeDictionaries();
+        light.Elements().Select(KeyOf).Should().Contain(requiredKeys);
+        dark.Elements().Select(KeyOf).Should().Contain(requiredKeys);
+
+        foreach (var dictionary in new[] { light, dark })
+        {
+            foreach (var key in requiredKeys)
+            {
+                var resource = dictionary.Elements().Single(element => KeyOf(element) == key);
+                ((string?)resource.Attribute("ResourceKey")).Should().StartWith("LiquidGlass");
+            }
+        }
+    }
+
+    [Test]
     public void Static_resource_aliases_resolve_within_their_theme_dictionary()
     {
         var (light, dark) = LoadThemeDictionaries();

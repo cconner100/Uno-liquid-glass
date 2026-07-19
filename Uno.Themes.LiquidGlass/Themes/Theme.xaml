@@ -61,6 +61,7 @@
   <Style TargetType="MenuFlyoutItem" BasedOn="{StaticResource LiquidGlassMenuFlyoutItemStyle}" />
   <Style TargetType="MenuFlyoutSeparator" BasedOn="{StaticResource LiquidGlassMenuFlyoutSeparatorStyle}" />
   <Style TargetType="ContentDialog" BasedOn="{StaticResource LiquidGlassContentDialogStyle}" />
+  <Style TargetType="TeachingTip" BasedOn="{StaticResource LiquidGlassTeachingTipStyle}" />
   <Style TargetType="TabViewItem" BasedOn="{StaticResource LiquidGlassTabViewItemStyle}" />
   <Style TargetType="NavigationViewItem" BasedOn="{StaticResource LiquidGlassNavigationViewItemStyle}" />
   <Style TargetType="CalendarDatePicker" BasedOn="{StaticResource LiquidGlassCalendarDatePickerStyle}" />

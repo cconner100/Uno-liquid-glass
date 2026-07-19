@@ -44,6 +44,40 @@ public sealed partial class DevDialogsPage : Page
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
 
+    private async void OnShowFrameworkMessageDialog(object sender, RoutedEventArgs e)
+    {
+        if (_dialogOpen)
+        {
+            return;
+        }
+
+        _dialogOpen = true;
+        try
+        {
+            var dialog = new Windows.UI.Popups.MessageDialog(
+                "The framework adapter now resolves the Liquid Glass ContentDialog style.",
+                "Framework MessageDialog");
+            dialog.Commands.Add(new Windows.UI.Popups.UICommand("OK"));
+            dialog.Commands.Add(new Windows.UI.Popups.UICommand("Cancel"));
+            InitializeMessageDialog(dialog);
+            await dialog.ShowAsync();
+        }
+        finally
+        {
+            _dialogOpen = false;
+        }
+    }
+
+    private static void InitializeMessageDialog(Windows.UI.Popups.MessageDialog dialog)
+    {
+        if (App.ActiveWindow is { } window)
+        {
+            WinRT.Interop.InitializeWithWindow.Initialize(
+                dialog,
+                WinRT.Interop.WindowNative.GetWindowHandle(window));
+        }
+    }
+
     // Only one ContentDialog may be open per XamlRoot; a double-click would
     // otherwise throw inside an async void handler and crash the app.
     private bool _dialogOpen;

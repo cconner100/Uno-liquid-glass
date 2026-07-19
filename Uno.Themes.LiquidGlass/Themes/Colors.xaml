@@ -249,6 +249,17 @@
       <StaticResource x:Key="AutoSuggestBoxSuggestionsListBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="TimePickerFlyoutPresenterBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="CalendarViewBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="CalendarViewBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="CalendarViewForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="CalendarViewCalendarItemForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="CalendarViewOutOfScopeForeground" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="TeachingTipBackgroundBrush" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="TeachingTipTransientBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="TeachingTipBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="TeachingTipForegroundBrush" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="TeachingTipTitleForegroundBrush" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="TeachingTipSubtitleForegroundBrush" ResourceKey="LiquidGlassSecondaryLabelBrush" />
       <StaticResource x:Key="DatePickerButtonBackground" ResourceKey="LiquidGlassFillBrush" />
       <StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="LiquidGlassFillPointerOverBrush" />
       <StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="LiquidGlassFillPressedBrush" />
@@ -472,6 +483,17 @@
       <StaticResource x:Key="AutoSuggestBoxSuggestionsListBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="TimePickerFlyoutPresenterBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="CalendarViewBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="CalendarViewBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="CalendarViewForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="CalendarViewCalendarItemForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="CalendarViewOutOfScopeForeground" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="TeachingTipBackgroundBrush" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="TeachingTipTransientBackground" ResourceKey="LiquidGlassSurfaceBrush" />
+      <StaticResource x:Key="TeachingTipBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="TeachingTipForegroundBrush" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="TeachingTipTitleForegroundBrush" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="TeachingTipSubtitleForegroundBrush" ResourceKey="LiquidGlassSecondaryLabelBrush" />
       <StaticResource x:Key="DatePickerButtonBackground" ResourceKey="LiquidGlassFillBrush" />
       <StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="LiquidGlassFillPointerOverBrush" />
       <StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="LiquidGlassFillPressedBrush" />

@@ -71,6 +71,17 @@
               </Button.Flyout>
             </Button>
             <Button Content="Show dialog" Click="OnShowDialog" />
+            <Button x:Name="TeachingTipButton" Content="Show teaching tip" Click="OnShowTeachingTip">
+              <Button.Resources>
+                <TeachingTip x:Name="GlassTeachingTip"
+                             Title="Liquid Glass tip"
+                             Subtitle="Teaching tips now use the same frosted surface and capsule actions as dialogs."
+                             Target="{Binding ElementName=TeachingTipButton}"
+                             ActionButtonContent="Got it"
+                             CloseButtonContent="Later"
+                             PreferredPlacement="Top" />
+              </Button.Resources>
+            </Button>
           </StackPanel>
         </StackPanel>
       </Border>

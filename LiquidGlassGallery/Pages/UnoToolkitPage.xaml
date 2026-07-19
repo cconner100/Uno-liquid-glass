@@ -103,11 +103,13 @@
         <Button Content="Open drawer" Click="OnOpenDrawer" />
         <Button Content="Open bottom drawer flyout">
           <Button.Flyout>
-            <Flyout Placement="Full" FlyoutPresenterStyle="{StaticResource LiquidGlassBottomDrawerFlyoutPresenterStyle}">
+            <Flyout x:Name="BottomDrawerFlyout"
+                    Placement="Full"
+                    FlyoutPresenterStyle="{StaticResource LiquidGlassBottomDrawerFlyoutPresenterStyle}">
               <StackPanel Padding="24" Spacing="12" MinHeight="180">
                 <TextBlock Text="DrawerFlyoutPresenter" FontSize="20" FontWeight="SemiBold" />
                 <TextBlock Text="Gesture-capable drawer surfaces share the heavier Liquid Glass material." />
-                <Button Content="Done" HorizontalAlignment="Left" />
+                <Button Content="Close" Click="OnCloseDrawerFlyout" HorizontalAlignment="Left" />
               </StackPanel>
             </Flyout>
           </Button.Flyout>

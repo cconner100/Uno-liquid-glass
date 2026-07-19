@@ -19,6 +19,7 @@
             <Button Content="Warning" Click="OnShowWarning" />
             <Button Content="Error" Click="OnShowError" />
             <Button Content="Question (YesNoCancel)" Click="OnShowQuestion" />
+            <Button Content="Framework MessageDialog" Click="OnShowFrameworkMessageDialog" />
           </StackPanel>
           <dev:Divider Margin="0,10,0,0" />
           <TextBlock x:Name="MessageBoxResultText" Text="Result: (none yet)" FontSize="13" Margin="0,6,0,0"
