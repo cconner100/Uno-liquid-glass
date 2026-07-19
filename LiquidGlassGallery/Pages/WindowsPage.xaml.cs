@@ -35,4 +35,7 @@ public sealed partial class WindowsPage : Page
             _dialogOpen = false;
         }
     }
+
+    private void OnShowTeachingTip(object sender, RoutedEventArgs e)
+        => GlassTeachingTip.IsOpen = true;
 }

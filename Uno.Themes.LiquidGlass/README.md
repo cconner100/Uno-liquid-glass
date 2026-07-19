@@ -52,7 +52,7 @@ Implicit styles restyle `Button`, `ToggleButton`, `RepeatButton`, `HyperlinkButt
 `TextBox`, `PasswordBox`, `ToggleSwitch`, `RadioButton`, `CheckBox`, `Slider`,
 `ComboBox`, `ProgressBar`, `DatePicker`, `TimePicker`, `CalendarDatePicker`,
 `AutoSuggestBox`, `FlyoutPresenter`, `MenuFlyoutPresenter`, `MenuFlyoutItem`,
-`MenuFlyoutSeparator`, `ContentDialog`, `TabViewItem`, and the picker flyout
+`MenuFlyoutSeparator`, `ContentDialog`, `TeachingTip`, `TabViewItem`, and the picker flyout
 presenters by default. DatePicker/TimePicker are fully retemplated as
 segmented glass fields (their template part names are preserved so flyouts and
 culture-based field ordering keep working), and AutoSuggestBox gets a glass inner
@@ -82,7 +82,10 @@ Window-level surfaces:
 - `LiquidGlassMenuFlyoutSeparatorStyle`
 - `LiquidGlassContentDialogStyle` — glass dialog with capsule command buttons
   (`LiquidGlassDialogButtonStyle` / `LiquidGlassDialogProminentButtonStyle`); the theme also
-  overrides the framework's `AccentButtonStyle` key so `DefaultButton` stays prominent glass
+  overrides the framework's `AccentButtonStyle` key so default actions stay prominent glass;
+  loading the theme also routes Uno-backed `MessageDialog` instances through this style
+- `LiquidGlassTeachingTipStyle` — glass teaching-tip surface with matching action buttons
+- `LiquidGlassMessageDialogStyle` — Uno `MessageDialog` adapter template with glass default-button states
 - `LiquidGlassTabViewItemStyle` — tabs as an Apple segmented control (selected tab is a glass pill)
 - `LiquidGlassNavigationViewItemStyle` / `LiquidGlassNavigationViewItemPresenterStyle` —
   Apple-style sidebar rows: rounded, no selection indicator bar, frosted glass pill for

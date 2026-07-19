@@ -89,7 +89,7 @@ instance. The design system uses:
 | `RatingControl` | Applies the Apple tint and theme-aware neutral/disabled rating colors. |
 | `DatePicker`, `TimePicker` | Fully retemplated as segmented glass fields while preserving WinUI template-part names and culture-based field ordering. |
 | `DatePickerFlyoutPresenter`, `TimePickerFlyoutPresenter` | Rebuilt as heavier glass picker-wheel popups with an iOS-style rounded selection band and glass command buttons. |
-| `CalendarDatePicker` | Uses the rounded glass input surface, tint focus treatment, and theme-aware calendar chrome. |
+| `CalendarDatePicker`, `CalendarView` | Uses the rounded glass input surface plus a frosted, rim-lit calendar popup with theme-aware date chrome. |
 | `DropDownButton`, `SplitButton`, `ToggleSplitButton` | Capsule command surfaces with glass separators, chevrons, primary/secondary regions, and checked-state tint. |
 | `MenuBar`, `MenuBarItem` | Clear command chrome at rest with rounded glass hover/open states. |
 | `MenuFlyoutPresenter`, `MenuFlyoutItem`, `MenuFlyoutSubItem`, `MenuFlyoutSeparator` | Heavier glass menu surface, macOS-style rows, tint hover/selection, readable selected text, submenu chevrons, and glass separators. |
@@ -97,6 +97,7 @@ instance. The design system uses:
 | `AppBarButton`, `AppBarToggleButton`, `AppBarSeparator` | Chromeless toolbar actions that gain rounded glass feedback; toggled actions use the tint and separators use the glass hairline. |
 | `FlyoutPresenter` | Gives normal flyouts a rounded, elevated glass surface. |
 | `ContentDialog` | Rebuilt as a rounded glass window with capsule command buttons; the default action is prominent glass. |
+| `TeachingTip`, `MessageDialog` | Uses the heavier frosted dialog material, specular border, readable labels, and matching capsule actions—including Uno's framework `MessageDialog` adapter. |
 | `ToolTip` | Compact dark/light glass callout with rounded corners and readable label colors. |
 | `InfoBar` | Glass notification surface with semantic accent, rounded rim, and matching close/action buttons. |
 | `InfoBadge` | Capsule/circle badge geometry with Apple tint and high-contrast text. |
