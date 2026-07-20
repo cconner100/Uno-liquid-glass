@@ -2,15 +2,10 @@
 
 Liquid Glass styles for the controls in [`Uno.Toolkit.WinUI`](https://github.com/unoplatform/uno.toolkit.ui). The package targets .NET 10 for portable, Android, iOS, WinUI 3, WebAssembly, and Skia desktop applications.
 
-> **Breaking change:** The public namespace and assembly changed from
-> `Uno.Toolkit.LiquidGlass` to `LiquidGlass.UnoToolkit` so they match the NuGet
-> package ID. Update XAML `using:` declarations, C# imports, and
-> assembly-qualified names.
-
 ## Install and activate
 
 ```xml
-<PackageReference Include="LiquidGlass.UnoToolkit" Version="1.0.0-preview.1" />
+<PackageReference Include="LiquidGlass.UnoToolkit" Version="1.0.5" />
 ```
 
 Load it after the base Liquid Glass theme. `UnoToolkitGlassTheme` initializes the canonical `ToolkitResources` dictionary itself:
