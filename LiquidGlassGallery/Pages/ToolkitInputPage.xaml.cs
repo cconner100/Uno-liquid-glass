@@ -21,6 +21,8 @@ public sealed partial class ToolkitInputPage : Page
         this.InitializeComponent();
 
         TagBox.ItemsSource = _tags;
+        TagBox.SelectedIndex = 1;
+        DisabledTagBox.ItemsSource = new[] { "Disabled", "Token" };
     }
 
     private void OnTagTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

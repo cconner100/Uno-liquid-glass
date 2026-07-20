@@ -357,6 +357,52 @@ public class LiquidGlassThemeTests
     }
 
     [Test]
+    public void CalendarDatePicker_matches_standard_input_minimum_height()
+    {
+        var controls = LoadXaml(Path.Combine("Controls", "Controls.xaml")).Root!;
+        var style = controls.Elements(Xaml + "Style")
+            .Single(s => KeyOf(s) == "LiquidGlassCalendarDatePickerStyle");
+
+        var setters = style.Elements(Xaml + "Setter")
+            .ToDictionary(s => (string)s.Attribute("Property")!, s => (string?)s.Attribute("Value"));
+
+        double.Parse(setters["MinHeight"]!, CultureInfo.InvariantCulture).Should().Be(40,
+            "CalendarDatePicker should align with the other Liquid Glass input fields");
+        setters.Should().NotContainKey("Height",
+            "applications must remain free to specify a larger control height");
+    }
+
+    [Test]
+    public void SelectorBar_gallery_sample_is_interactive_and_themed()
+    {
+        var galleryPages = Path.Combine(FindSolutionRoot(), "LiquidGlassGallery", "Pages");
+        var page = XDocument.Load(Path.Combine(galleryPages, "SelectionPage.xaml"));
+        var selector = page.Descendants(Xaml + "SelectorBar").Single();
+        var items = selector.Elements(Xaml + "SelectorBarItem").ToList();
+
+        items.Should().HaveCountGreaterThanOrEqualTo(4);
+        items.Should().Contain(item => (string?)item.Attribute("IsEnabled") == "False");
+        ((string?)selector.Attribute("SelectionChanged")).Should().Be("OnDashboardSelectionChanged");
+
+        var code = File.ReadAllText(Path.Combine(galleryPages, "SelectionPage.xaml.cs"));
+        code.Should().Contain("DashboardSelector.SelectedItem = OverviewSelectorItem")
+            .And.Contain("DashboardContentTitle.Text = selectedItem.Text")
+            .And.Contain("DashboardContentDescription.Text = selectedItem.Tag as string");
+
+        string[] requiredResources =
+        [
+            "SelectorBarItemPillFill",
+            "SelectorBarItemBackgroundPointerOver",
+            "SelectorBarItemBackgroundSelected",
+            "SelectorBarItemBackgroundPressed",
+            "SelectorBarItemForegroundDisabled",
+        ];
+        var (light, dark) = LoadThemeDictionaries();
+        light.Elements().Select(KeyOf).Should().Contain(requiredResources);
+        dark.Elements().Select(KeyOf).Should().Contain(requiredResources);
+    }
+
+    [Test]
     public void LiquidGlassTheme_is_a_resource_dictionary_with_override_hooks()
     {
         // Mirrors Uno.Themes' MaterialTheme surface: a ResourceDictionary entry point

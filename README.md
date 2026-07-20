@@ -129,6 +129,7 @@ instance. The design system uses:
 | `DatePicker`, `TimePicker` | Fully retemplated as segmented glass fields while preserving WinUI template-part names and culture-based field ordering. |
 | `DatePickerFlyoutPresenter`, `TimePickerFlyoutPresenter` | Rebuilt as heavier glass picker-wheel popups with an iOS-style rounded selection band and glass command buttons. |
 | `CalendarDatePicker`, `CalendarView` | Uses the rounded glass input surface plus a frosted, rim-lit calendar popup with theme-aware date chrome. |
+| `SelectorBar`, `SelectorBarItem` | Uses Liquid Glass hover, pressed, selected, and disabled colors; the gallery includes an interactive dashboard selector. |
 | `DropDownButton`, `SplitButton`, `ToggleSplitButton` | Capsule command surfaces with glass separators, chevrons, primary/secondary regions, and checked-state tint. |
 | `MenuBar`, `MenuBarItem` | Clear command chrome at rest with rounded glass hover/open states. |
 | `MenuFlyoutPresenter`, `MenuFlyoutItem`, `MenuFlyoutSubItem`, `MenuFlyoutSeparator` | Heavier glass menu surface, macOS-style rows, tint hover/selection, readable selected text, submenu chevrons, and glass separators. |

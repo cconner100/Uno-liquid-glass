@@ -9,6 +9,66 @@
 
       <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
         <StackPanel Spacing="4">
+          <TextBlock Text="SelectorBar" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+          <TextBlock Text="Switch between dashboard views with pointer, touch, or the arrow keys. Hover and press the enabled items to see their interaction states."
+                     FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+
+          <SelectorBar x:Name="DashboardSelector"
+                       Margin="0,8,0,0"
+                       SelectionChanged="OnDashboardSelectionChanged"
+                       AutomationProperties.Name="Dashboard view">
+            <SelectorBarItem x:Name="OverviewSelectorItem"
+                             Text="Overview"
+                             Tag="A quick snapshot of activity across all connected services.">
+              <SelectorBarItem.Icon>
+                <FontIcon Glyph="&#xE80F;" />
+              </SelectorBarItem.Icon>
+            </SelectorBarItem>
+            <SelectorBarItem Text="Activity"
+                             Tag="Recent changes, alerts, and actions in chronological order.">
+              <SelectorBarItem.Icon>
+                <FontIcon Glyph="&#xE81C;" />
+              </SelectorBarItem.Icon>
+            </SelectorBarItem>
+            <SelectorBarItem Text="Favorites"
+                             Tag="Pinned items kept close for fast access.">
+              <SelectorBarItem.Icon>
+                <FontIcon Glyph="&#xE734;" />
+              </SelectorBarItem.Icon>
+            </SelectorBarItem>
+            <SelectorBarItem Text="Archived"
+                             Tag="Archived content"
+                             IsEnabled="False">
+              <SelectorBarItem.Icon>
+                <FontIcon Glyph="&#xE7B8;" />
+              </SelectorBarItem.Icon>
+            </SelectorBarItem>
+          </SelectorBar>
+
+          <Border Margin="0,8,0,0"
+                  Padding="16,14"
+                  Background="{ThemeResource LiquidGlassClearFillBrush}"
+                  BorderBrush="{ThemeResource LiquidGlassStrokeBrush}"
+                  BorderThickness="1"
+                  CornerRadius="14">
+            <StackPanel Spacing="4">
+              <TextBlock x:Name="DashboardContentTitle"
+                         Text="Overview"
+                         FontSize="16"
+                         FontWeight="SemiBold"
+                         Foreground="{ThemeResource LiquidGlassLabelBrush}" />
+              <TextBlock x:Name="DashboardContentDescription"
+                         Text="A quick snapshot of activity across all connected services."
+                         FontSize="13"
+                         TextWrapping="Wrap"
+                         Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
+        <StackPanel Spacing="4">
           <TextBlock Text="CheckBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
           <StackPanel Spacing="6" Margin="0,8,0,0">
             <CheckBox Content="Unchecked" />

@@ -233,6 +233,21 @@
       <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="#40007AFF" />
       <SolidColorBrush x:Key="GridViewItemBackgroundSelected" Color="#33007AFF" />
 
+      <!-- SelectorBar -->
+      <StaticResource x:Key="SelectorBarItemPillFill" ResourceKey="LiquidGlassTintBrush" />
+      <StaticResource x:Key="SelectorBarItemDisabledPillFill" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="SelectorBarItemForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundPointerOver" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundSelected" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundPressed" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundDisabled" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <SolidColorBrush x:Key="SelectorBarItemBackground" Color="Transparent" />
+      <StaticResource x:Key="SelectorBarItemBackgroundPointerOver" ResourceKey="LiquidGlassHoverOverlayBrush" />
+      <StaticResource x:Key="SelectorBarItemBackgroundSelected" ResourceKey="LiquidGlassHighlightBrush" />
+      <StaticResource x:Key="SelectorBarItemBackgroundPressed" ResourceKey="LiquidGlassPressedOverlayBrush" />
+      <SolidColorBrush x:Key="SelectorBarItemBackgroundDisabled" Color="Transparent" />
+
       <!-- NavigationView: frosted sidebar over the content layer -->
       <StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="LiquidGlassSurfaceBrush" />
@@ -468,6 +483,21 @@
       <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="#400A84FF" />
       <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="#4D0A84FF" />
       <SolidColorBrush x:Key="GridViewItemBackgroundSelected" Color="#400A84FF" />
+
+      <!-- SelectorBar -->
+      <StaticResource x:Key="SelectorBarItemPillFill" ResourceKey="LiquidGlassTintBrush" />
+      <StaticResource x:Key="SelectorBarItemDisabledPillFill" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemBorderBrush" ResourceKey="LiquidGlassStrokeBrush" />
+      <StaticResource x:Key="SelectorBarItemForeground" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundPointerOver" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundSelected" ResourceKey="LiquidGlassLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundPressed" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <StaticResource x:Key="SelectorBarItemForegroundDisabled" ResourceKey="LiquidGlassSecondaryLabelBrush" />
+      <SolidColorBrush x:Key="SelectorBarItemBackground" Color="Transparent" />
+      <StaticResource x:Key="SelectorBarItemBackgroundPointerOver" ResourceKey="LiquidGlassHoverOverlayBrush" />
+      <StaticResource x:Key="SelectorBarItemBackgroundSelected" ResourceKey="LiquidGlassHighlightBrush" />
+      <StaticResource x:Key="SelectorBarItemBackgroundPressed" ResourceKey="LiquidGlassPressedOverlayBrush" />
+      <SolidColorBrush x:Key="SelectorBarItemBackgroundDisabled" Color="Transparent" />
 
       <StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="LiquidGlassSurfaceBrush" />
       <StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="LiquidGlassSurfaceBrush" />
