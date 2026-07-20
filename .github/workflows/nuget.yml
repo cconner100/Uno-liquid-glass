@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: NuGet package version, for example 1.0.0 or 1.0.0-preview.1
+        description: Stable NuGet package version in the 1.x line, for example 1.0.5 or 1.0.6
         required: true
+        default: 1.0.5
         type: string
 
 permissions:
@@ -102,8 +103,12 @@ jobs:
       - name: Validate package version
         shell: bash
         run: |
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" && ! "$PACKAGE_VERSION" =~ ^1\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release version must be a stable 1.x version without a prerelease suffix: $PACKAGE_VERSION" >&2
+            exit 1
+          fi
           if [[ ! "$PACKAGE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
-            echo "Invalid NuGet version: $PACKAGE_VERSION" >&2
+            echo "Invalid package version: $PACKAGE_VERSION" >&2
             exit 1
           fi
       - name: Create base NuGet packages

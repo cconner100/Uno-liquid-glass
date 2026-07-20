@@ -1,6 +1,6 @@
 # Liquid Glass for Uno Platform
 
-[![NuGet release](https://img.shields.io/nuget/vpre/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/2.0.0-preview.2)
+[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.5)
 
 ![Liquid Glass gallery sample page showing the macOS sidebar, glass cards, and button styles](docs/light_buttons.png)
 
@@ -10,29 +10,30 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
-## Current release: 2.0.0-preview.2
+## Current release: 1.0.5
 
-Published July 19, 2026. All four packages contain the same release version and
+Published July 20, 2026. All four packages contain the same release version and
 the complete `net10.0`, Android, iOS, WinUI 3, WebAssembly, and Desktop asset set.
 
 | Package | Current release |
 | --- | --- |
-| `LiquidGlass.Uno` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.Uno/2.0.0-preview.2) |
-| `LiquidGlass.CommunityToolkit` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/2.0.0-preview.2) |
-| `DevWinUI.LiquidGlass` | [2.0.0-preview.2](https://www.nuget.org/packages/DevWinUI.LiquidGlass/2.0.0-preview.2) |
-| `LiquidGlass.UnoToolkit` | [2.0.0-preview.2](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/2.0.0-preview.2) |
+| `LiquidGlass.Uno` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.5) |
+| `LiquidGlass.CommunityToolkit` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.5) |
+| `DevWinUI.LiquidGlass` | [1.0.5](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.5) |
+| `LiquidGlass.UnoToolkit` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.5) |
 
-Install the exact preview version with:
+Install the stable release with:
 
 ```bash
-dotnet add package LiquidGlass.Uno --version 2.0.0-preview.2
-dotnet add package LiquidGlass.CommunityToolkit --version 2.0.0-preview.2
-dotnet add package DevWinUI.LiquidGlass --version 2.0.0-preview.2
-dotnet add package LiquidGlass.UnoToolkit --version 2.0.0-preview.2
+dotnet add package LiquidGlass.Uno --version 1.0.5
+dotnet add package LiquidGlass.CommunityToolkit --version 1.0.5
+dotnet add package DevWinUI.LiquidGlass --version 1.0.5
+dotnet add package LiquidGlass.UnoToolkit --version 1.0.5
 ```
 
-### Changes in preview.2
+### Changes in 1.0.5
 
+- Updated to Uno SDK 6.6.29 and SkiaSharp 4.148.0.
 - Added consistent Liquid Glass surfaces and capsule actions for `ContentDialog`,
   framework `MessageDialog`, and `TeachingTip`.
 - Added frosted, rim-lit `CalendarView` styling for `CalendarDatePicker` popups in
@@ -41,36 +42,18 @@ dotnet add package LiquidGlass.UnoToolkit --version 2.0.0-preview.2
   the theme, while preserving native WinUI compatibility.
 - Fixed the `DrawerFlyoutPresenter` gallery Close button so it dismisses its owning
   flyout.
+- Added the interactive `SelectorBar` sample, restyled `TokenizingTextBox` tokens,
+  and aligned `CalendarDatePicker` with the standard Liquid Glass input height.
 - Added gallery examples, focused visual-capture paths, and regression coverage for
   the new dialog and drawer behavior.
 
 See [PR #4](https://github.com/cconner100/Uno-liquid-glass/pull/4) for the complete
 implementation and validation history.
 
-## Breaking namespace change
-
-> **Breaking change:** Package namespaces and assembly names now match their
-> NuGet package IDs. This is a source- and binary-breaking change and must ship
-> in a new major version.
-
-Update XAML namespace declarations, C# `using` directives, and any reflection or
-assembly-qualified type names as follows:
-
-| Package | Previous namespace and assembly | New namespace and assembly |
-| --- | --- | --- |
-| `LiquidGlass.Uno` | `Uno.Themes.LiquidGlass` | `LiquidGlass.Uno` |
-| `LiquidGlass.CommunityToolkit` | `CommunityToolkit.LiquidGlass` | `LiquidGlass.CommunityToolkit` |
-| `DevWinUI.LiquidGlass` | `DevWinUI.LiquidGlass` | Unchanged |
-| `LiquidGlass.UnoToolkit` | `Uno.Toolkit.LiquidGlass` | `LiquidGlass.UnoToolkit` |
-
-For example, replace `xmlns:lg="using:Uno.Themes.LiquidGlass"` with
-`xmlns:lg="using:LiquidGlass.Uno"`. No control style keys or theme class names
-were renamed.
-
 ## Supported platforms and target frameworks
 
 The gallery and all four NuGet libraries target every platform supported by the
-Uno Platform 6.5 single-project template.
+Uno Platform 6.6 single-project template.
 
 | Platform | TFM | Build host and runtime |
 | --- | --- | --- |
@@ -81,9 +64,12 @@ Uno Platform 6.5 single-project template.
 | Linux, macOS, and Skia Windows | `net10.0-desktop` | Uno Skia Desktop using X11/framebuffer, macOS, or Win32 hosting. |
 | Reference and tests | `net10.0` | Platform-neutral compilation used by the test project. |
 
-The projects use **Uno Platform 6.5.36**, the **.NET 10** TFMs above, and the
-`SkiaRenderer` Uno feature. CI builds the demo and libraries on Linux, macOS, and
-Windows so each platform is validated on a compatible host.
+The projects use **Uno SDK 6.6.29**, the **.NET 10** TFMs above, and the
+`SkiaRenderer` Uno feature. The shared build configuration sets
+`<SkiaSharpVersion>4.148.0</SkiaSharpVersion>` so every Uno SDK project uses
+[SkiaSharp 4](https://platform.uno/blog/announcing-skiasharp-4-0/). CI builds the
+demo and libraries on Linux, macOS, and Windows so each platform is validated on
+a compatible host.
 
 The `net10.0-desktop` TFM is Uno's Linux target; there is no separate
 `net10.0-linux` TFM. Likewise, WinUI 3 uses the Windows-qualified TFM above,
