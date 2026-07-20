@@ -260,6 +260,7 @@
     <Setter Property="BorderBrush" Value="{ThemeResource LiquidGlassStrokeBrush}" />
     <Setter Property="Foreground" Value="{ThemeResource LiquidGlassLabelBrush}" />
     <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="MinHeight" Value="40" />
     <Setter Property="FontSize" Value="15" />
   </Style>
 

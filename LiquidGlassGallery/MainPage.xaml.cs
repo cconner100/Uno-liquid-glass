@@ -171,6 +171,14 @@ public sealed partial class MainPage : Page
                         dataGrid.SelectedIndex = -1;
                     }
 
+                    if (tag == "selection" && FindDescendant<SelectorBar>(ContentFrame) is { } selectorBar
+                        && selectorBar.Items.Count > 1)
+                    {
+                        selectorBar.SelectedItem = selectorBar.Items[1];
+                        await Task.Delay(400);
+                        await CaptureAsync(this, Path.Combine(dir, $"{prefix}_selectorbar_selected.bmp"));
+                    }
+
                     if (tag == "commanding")
                     {
                         await CaptureMenuBarAsync(Path.Combine(dir, $"{prefix}_menubar.bmp"));

@@ -58,13 +58,17 @@
       <Border Style="{StaticResource LiquidGlassCardBorderStyle}">
         <StackPanel Spacing="4">
           <TextBlock Text="TokenizingTextBox" FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource LiquidGlassLabelBrush}" />
-          <TextBlock Text="Tags as glass token chips on a glass input. Type to get suggestions (try 'a'), press Enter or a comma to commit, and click a chip to select it — selection turns it tint."
+          <TextBlock Text="Tags as iOS-style glass capsules. One token starts selected; type to focus the entry area, click tokens to select them, or use the disabled example to compare states."
                      FontSize="13" TextWrapping="Wrap" Foreground="{ThemeResource LiquidGlassSecondaryLabelBrush}" />
           <controls:TokenizingTextBox x:Name="TagBox"
                                       Margin="0,10,0,0"
                                       PlaceholderText="Type to add a tag…"
                                       TokenDelimiter=","
                                       TextChanged="OnTagTextChanged" />
+          <controls:TokenizingTextBox x:Name="DisabledTagBox"
+                                      Margin="0,8,0,0"
+                                      PlaceholderText="Disabled token entry"
+                                      IsEnabled="False" />
         </StackPanel>
       </Border>
 
