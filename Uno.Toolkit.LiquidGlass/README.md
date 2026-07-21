@@ -5,7 +5,7 @@ Liquid Glass styles for the controls in [`Uno.Toolkit.WinUI`](https://github.com
 ## Install and activate
 
 ```xml
-<PackageReference Include="LiquidGlass.UnoToolkit" Version="1.0.5" />
+<PackageReference Include="LiquidGlass.UnoToolkit" Version="1.0.6" />
 ```
 
 Load it after the base Liquid Glass theme. `UnoToolkitGlassTheme` initializes the canonical `ToolkitResources` dictionary itself:

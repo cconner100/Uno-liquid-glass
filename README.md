@@ -1,6 +1,6 @@
 # Liquid Glass for Uno Platform
 
-[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.5)
+[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.6)
 
 ![Liquid Glass gallery sample page showing the macOS sidebar, glass cards, and button styles](docs/light_buttons.png)
 
@@ -10,45 +10,31 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
-## Current release: 1.0.5
+## Current release: 1.0.6
 
-Published July 20, 2026. All four packages contain the same release version and
+Published July 21, 2026. All four packages contain the same release version and
 the complete `net10.0`, Android, iOS, WinUI 3, WebAssembly, and Desktop asset set.
 
 | Package | Current release |
 | --- | --- |
-| `LiquidGlass.Uno` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.5) |
-| `LiquidGlass.CommunityToolkit` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.5) |
-| `DevWinUI.LiquidGlass` | [1.0.5](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.5) |
-| `LiquidGlass.UnoToolkit` | [1.0.5](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.5) |
+| `LiquidGlass.Uno` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.6) |
+| `LiquidGlass.CommunityToolkit` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.6) |
+| `DevWinUI.LiquidGlass` | [1.0.6](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.6) |
+| `LiquidGlass.UnoToolkit` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.6) |
 
 Install the stable release with:
 
 ```bash
-dotnet add package LiquidGlass.Uno --version 1.0.5
-dotnet add package LiquidGlass.CommunityToolkit --version 1.0.5
-dotnet add package DevWinUI.LiquidGlass --version 1.0.5
-dotnet add package LiquidGlass.UnoToolkit --version 1.0.5
+dotnet add package LiquidGlass.Uno --version 1.0.6
+dotnet add package LiquidGlass.CommunityToolkit --version 1.0.6
+dotnet add package DevWinUI.LiquidGlass --version 1.0.6
+dotnet add package LiquidGlass.UnoToolkit --version 1.0.6
 ```
 
-### Changes in 1.0.5
+### Changes in 1.0.6
 
-- Updated to Uno SDK 6.6.29 and SkiaSharp 4.148.0.
-- Added consistent Liquid Glass surfaces and capsule actions for `ContentDialog`,
-  framework `MessageDialog`, and `TeachingTip`.
-- Added frosted, rim-lit `CalendarView` styling for `CalendarDatePicker` popups in
-  light and dark themes.
-- Routed Uno `MessageDialog` through the cross-platform XAML adapter so it can use
-  the theme, while preserving native WinUI compatibility.
-- Fixed the `DrawerFlyoutPresenter` gallery Close button so it dismisses its owning
-  flyout.
-- Added the interactive `SelectorBar` sample, restyled `TokenizingTextBox` tokens,
-  and aligned `CalendarDatePicker` with the standard Liquid Glass input height.
-- Added gallery examples, focused visual-capture paths, and regression coverage for
-  the new dialog and drawer behavior.
-
-See [PR #4](https://github.com/cconner100/Uno-liquid-glass/pull/4) for the complete
-implementation and validation history.
+- Removed the explicit renderer dependency version override. Renderer packages
+  now use the versions supplied by Uno SDK 6.6.29.
 
 ## Supported platforms and target frameworks
 
@@ -65,11 +51,9 @@ Uno Platform 6.6 single-project template.
 | Reference and tests | `net10.0` | Platform-neutral compilation used by the test project. |
 
 The projects use **Uno SDK 6.6.29**, the **.NET 10** TFMs above, and the
-`SkiaRenderer` Uno feature. The shared build configuration sets
-`<SkiaSharpVersion>4.148.0</SkiaSharpVersion>` so every Uno SDK project uses
-[SkiaSharp 4](https://platform.uno/blog/announcing-skiasharp-4-0/). CI builds the
-demo and libraries on Linux, macOS, and Windows so each platform is validated on
-a compatible host.
+`SkiaRenderer` Uno feature. Renderer dependency versions come from Uno SDK 6.6.
+CI builds the demo and libraries on Linux, macOS, and Windows so each platform is
+validated on a compatible host.
 
 The `net10.0-desktop` TFM is Uno's Linux target; there is no separate
 `net10.0-linux` TFM. Likewise, WinUI 3 uses the Windows-qualified TFM above,
