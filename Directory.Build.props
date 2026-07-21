@@ -15,9 +15,6 @@
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
 
-    <!-- Opt into the stable SkiaSharp 4 renderer across every Uno.Sdk project. -->
-    <SkiaSharpVersion>4.148.0</SkiaSharpVersion>
-
     <!-- CommunityToolkit.WinUI 8.3 depends on the WinUI component from this
          Windows App SDK release. Keep Uno's meta-package on the matching
          version so WinUI props/targets and default XAML items load once. -->

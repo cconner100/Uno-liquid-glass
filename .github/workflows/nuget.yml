@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Stable NuGet package version in the 1.x line, for example 1.0.5 or 1.0.6
+        description: Stable NuGet package version in the 1.x line, for example 1.0.6 or 1.0.7
         required: true
-        default: 1.0.5
+        default: 1.0.6
         type: string
 
 permissions:
