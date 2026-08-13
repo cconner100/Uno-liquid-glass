@@ -57,6 +57,7 @@
                     lg:LiquidGlassNavigation.GlassPane="True"
                     PaneDisplayMode="Left"
                     OpenPaneLength="220"
+                    CompactPaneLength="48"
                     IsSettingsVisible="False"
                     IsBackButtonVisible="Collapsed"
                     IsPaneToggleButtonVisible="False"
@@ -68,7 +69,7 @@
         <Grid Height="34" />
       </NavigationView.PaneHeader>
       <NavigationView.MenuItems>
-        <NavigationViewItem Content="Buttons" Tag="buttons" IsSelected="True">
+        <NavigationViewItem x:Name="ButtonsNavItem" Content="Buttons" Tag="buttons" IsSelected="True">
           <NavigationViewItem.Icon>
             <SymbolIcon Symbol="Keyboard" />
           </NavigationViewItem.Icon>
@@ -228,7 +229,7 @@
       <FontIcon Glyph="&#xE89F;" FontSize="15" />
     </Button>
 
-    <!-- Reopen button floating over the content when the sidebar is hidden -->
+    <!-- Reopen button at the top of the compact icon rail -->
     <Button x:Name="ShowSidebarButton"
             Style="{StaticResource LiquidGlassButtonStyle}"
             MinWidth="38" MinHeight="38"
