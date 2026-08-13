@@ -231,6 +231,24 @@ public class LiquidGlassThemeTests
     }
 
     [Test]
+    public void Navigation_view_compact_state_keeps_an_icon_only_rail()
+    {
+        var navigationViewItem = LoadXaml(Path.Combine("Controls", "NavigationViewItem.xaml"));
+        var compactState = navigationViewItem
+            .Descendants(Xaml + "VisualState")
+            .Single(state => (string?)state.Attribute(X + "Name") == "ClosedCompactAndTopLevelItem");
+        var setters = compactState
+            .Descendants(Xaml + "Setter")
+            .ToDictionary(setter => (string)setter.Attribute("Target")!, setter => (string)setter.Attribute("Value")!);
+
+        setters["IconColumn.Width"].Should().Be("40", "the icon must occupy the compact row");
+        setters["IconBox.Margin"].Should().Be("0", "the icon must be centered in the compact row");
+        setters["ContentPresenter.Visibility"].Should().Be("Collapsed");
+        setters["InfoBadgePresenter.Visibility"].Should().Be("Collapsed");
+        setters["ExpandCollapseChevron.Visibility"].Should().Be("Collapsed");
+    }
+
+    [Test]
     public void Implicit_styles_are_based_on_existing_explicit_styles()
     {
         var explicitKeys = Directory

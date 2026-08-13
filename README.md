@@ -1,6 +1,6 @@
 # Liquid Glass for Uno Platform
 
-[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.6)
+[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.7)
 
 ![Liquid Glass gallery sample page showing the macOS sidebar, glass cards, and button styles](docs/light_buttons.png)
 
@@ -10,31 +10,31 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
-## Current release: 1.0.6
+## Current release: 1.0.7
 
-Published July 21, 2026. All four packages contain the same release version and
+Published August 13, 2026. All four packages contain the same release version and
 the complete `net10.0`, Android, iOS, WinUI 3, WebAssembly, and Desktop asset set.
 
 | Package | Current release |
 | --- | --- |
-| `LiquidGlass.Uno` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.6) |
-| `LiquidGlass.CommunityToolkit` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.6) |
-| `DevWinUI.LiquidGlass` | [1.0.6](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.6) |
-| `LiquidGlass.UnoToolkit` | [1.0.6](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.6) |
+| `LiquidGlass.Uno` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.7) |
+| `LiquidGlass.CommunityToolkit` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.7) |
+| `DevWinUI.LiquidGlass` | [1.0.7](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.7) |
+| `LiquidGlass.UnoToolkit` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.7) |
 
 Install the stable release with:
 
 ```bash
-dotnet add package LiquidGlass.Uno --version 1.0.6
-dotnet add package LiquidGlass.CommunityToolkit --version 1.0.6
-dotnet add package DevWinUI.LiquidGlass --version 1.0.6
-dotnet add package LiquidGlass.UnoToolkit --version 1.0.6
+dotnet add package LiquidGlass.Uno --version 1.0.7
+dotnet add package LiquidGlass.CommunityToolkit --version 1.0.7
+dotnet add package DevWinUI.LiquidGlass --version 1.0.7
+dotnet add package LiquidGlass.UnoToolkit --version 1.0.7
 ```
 
-### Changes in 1.0.6
+### Changes in 1.0.7
 
-- Removed the explicit renderer dependency version override. Renderer packages
-  now use the versions supplied by Uno SDK 6.6.29.
+- Fixed the Liquid Glass `NavigationView` compact mode so closing a left pane
+  retains a centered icon rail while hiding item labels, badges, and chevrons.
 
 ## Supported platforms and target frameworks
 

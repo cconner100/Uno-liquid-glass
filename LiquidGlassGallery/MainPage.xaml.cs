@@ -53,17 +53,7 @@ public sealed partial class MainPage : Page
 
     private void OnPaneToggleClick(object sender, RoutedEventArgs e)
     {
-        if (Nav.IsPaneOpen)
-        {
-            // LeftMinimal hides the pane entirely when closed (Left collapses to an icon rail)
-            Nav.IsPaneOpen = false;
-            Nav.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftMinimal;
-        }
-        else
-        {
-            Nav.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
-            Nav.IsPaneOpen = true;
-        }
+        Nav.IsPaneOpen = !Nav.IsPaneOpen;
     }
 
     private void OnPaneClosed(NavigationView sender, object args)
@@ -71,9 +61,9 @@ public sealed partial class MainPage : Page
         HideSidebarButton.Visibility = Visibility.Collapsed;
         ShowSidebarButton.Visibility = Visibility.Visible;
 
-        // Keep only enough room for the floating reopen button. The page itself
-        // still receives the rest of the width released by the sidebar.
-        ContentFrame.Margin = new Thickness(44, 0, 0, 0);
+        // Left mode keeps the compact icon rail and lays out the content beside it.
+        ContentFrame.Margin = new Thickness(0);
+        ButtonsNavItem.Margin = new Thickness(0, 40, 0, 0);
     }
 
     private void OnPaneOpened(NavigationView sender, object args)
@@ -81,6 +71,7 @@ public sealed partial class MainPage : Page
         HideSidebarButton.Visibility = Visibility.Visible;
         ShowSidebarButton.Visibility = Visibility.Collapsed;
         ContentFrame.Margin = new Thickness(0);
+        ButtonsNavItem.Margin = new Thickness(0);
     }
 
     private async void OnLoaded(object sender, RoutedEventArgs e)

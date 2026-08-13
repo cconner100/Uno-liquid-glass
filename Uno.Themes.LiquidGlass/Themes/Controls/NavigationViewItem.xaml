@@ -114,7 +114,16 @@
               </VisualStateGroup>
               <VisualStateGroup x:Name="PaneAndTopLevelItemStates">
                 <VisualState x:Name="NotClosedCompactAndTopLevelItem" />
-                <VisualState x:Name="ClosedCompactAndTopLevelItem" />
+                <VisualState x:Name="ClosedCompactAndTopLevelItem">
+                  <VisualState.Setters>
+                    <Setter Target="ContentGrid.Margin" Value="0" />
+                    <Setter Target="IconColumn.Width" Value="40" />
+                    <Setter Target="IconBox.Margin" Value="0" />
+                    <Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+                    <Setter Target="InfoBadgePresenter.Visibility" Value="Collapsed" />
+                    <Setter Target="ExpandCollapseChevron.Visibility" Value="Collapsed" />
+                  </VisualState.Setters>
+                </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
 
