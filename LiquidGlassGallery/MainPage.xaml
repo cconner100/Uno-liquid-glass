@@ -5,10 +5,14 @@
       xmlns:lg="using:LiquidGlass.Uno">
 
   <Page.Resources>
-    <!-- Chromeless icon button for the in-panel sidebar toggle -->
-    <Style x:Key="SidebarToggleButtonStyle" TargetType="Button" BasedOn="{StaticResource LiquidGlassQueryButtonStyle}">
-      <Setter Property="Width" Value="34" />
-      <Setter Property="Height" Value="30" />
+    <!-- Compact glass button shared by the open and close sidebar actions -->
+    <Style x:Key="SidebarToggleButtonStyle" TargetType="Button" BasedOn="{StaticResource LiquidGlassButtonStyle}">
+      <Setter Property="Width" Value="32" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="MinWidth" Value="32" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Padding" Value="7" />
+      <Setter Property="CornerRadius" Value="16" />
     </Style>
   </Page.Resources>
 
@@ -224,20 +228,17 @@
             Style="{StaticResource SidebarToggleButtonStyle}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Margin="172,20,0,0"
+            Margin="176,14,0,0"
             Click="OnPaneToggleClick">
       <FontIcon Glyph="&#xE89F;" FontSize="15" />
     </Button>
 
     <!-- Reopen button at the top of the compact icon rail -->
     <Button x:Name="ShowSidebarButton"
-            Style="{StaticResource LiquidGlassButtonStyle}"
-            MinWidth="38" MinHeight="38"
-            Padding="10"
-            CornerRadius="12"
+            Style="{StaticResource SidebarToggleButtonStyle}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Margin="14,14,0,0"
+            Margin="8,14,0,0"
             Visibility="Collapsed"
             Click="OnPaneToggleClick">
       <FontIcon Glyph="&#xE8A0;" FontSize="15" />

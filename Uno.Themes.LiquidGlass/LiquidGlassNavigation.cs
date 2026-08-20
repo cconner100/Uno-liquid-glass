@@ -66,15 +66,20 @@ public static class LiquidGlassNavigation
                 glass = new Border
                 {
                     Tag = PanePanelTag,
-                    CornerRadius = new CornerRadius(26),
+                    CornerRadius = new CornerRadius(18),
                     BorderThickness = new Thickness(1),
                     IsHitTestVisible = false,
                 };
                 Grid.SetRowSpan(glass, Math.Max(1, paneGrid.RowDefinitions.Count));
                 Grid.SetColumnSpan(glass, Math.Max(1, paneGrid.ColumnDefinitions.Count));
                 paneGrid.Children.Insert(0, glass);
-                paneGrid.Margin = new Thickness(10, 10, 4, 10);
             }
+
+            // Keep the pane's full layout width so NavigationView's 48px compact
+            // geometry can center its 40px icon column. Inset only the visual glass
+            // panel, equally on both sides, instead of squeezing all pane content.
+            paneGrid.Margin = new Thickness(0, 10, 0, 10);
+            glass.Margin = new Thickness(4, 0, 4, 0);
 
             glass.Background = ResolveThemeBrush("LiquidGlassPaneBrush", theme);
             glass.BorderBrush = ResolveThemeBrush("LiquidGlassStrokeBrush", theme);

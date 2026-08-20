@@ -266,4 +266,9 @@
       </Setter.Value>
     </Setter>
   </Style>
+
+  <!-- Match separators to the inset glass panel instead of the full pane width. -->
+  <Style x:Key="LiquidGlassNavigationViewItemSeparatorStyle" TargetType="NavigationViewItemSeparator">
+    <Setter Property="Margin" Value="4,0,4,0" />
+  </Style>
 </ResourceDictionary>
