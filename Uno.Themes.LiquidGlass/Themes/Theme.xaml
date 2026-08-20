@@ -64,6 +64,7 @@
   <Style TargetType="TeachingTip" BasedOn="{StaticResource LiquidGlassTeachingTipStyle}" />
   <Style TargetType="TabViewItem" BasedOn="{StaticResource LiquidGlassTabViewItemStyle}" />
   <Style TargetType="NavigationViewItem" BasedOn="{StaticResource LiquidGlassNavigationViewItemStyle}" />
+  <Style TargetType="NavigationViewItemSeparator" BasedOn="{StaticResource LiquidGlassNavigationViewItemSeparatorStyle}" />
   <Style TargetType="CalendarDatePicker" BasedOn="{StaticResource LiquidGlassCalendarDatePickerStyle}" />
   <Style TargetType="ListViewItem" BasedOn="{StaticResource LiquidGlassListViewItemStyle}" />
   <Style TargetType="ListBoxItem" BasedOn="{StaticResource LiquidGlassListBoxItemStyle}" />

@@ -60,6 +60,7 @@ public sealed partial class MainPage : Page
     {
         HideSidebarButton.Visibility = Visibility.Collapsed;
         ShowSidebarButton.Visibility = Visibility.Visible;
+        ThemeToggle.Visibility = Visibility.Collapsed;
 
         // Left mode keeps the compact icon rail and lays out the content beside it.
         ContentFrame.Margin = new Thickness(0);
@@ -70,6 +71,7 @@ public sealed partial class MainPage : Page
     {
         HideSidebarButton.Visibility = Visibility.Visible;
         ShowSidebarButton.Visibility = Visibility.Collapsed;
+        ThemeToggle.Visibility = Visibility.Visible;
         ContentFrame.Margin = new Thickness(0);
         ButtonsNavItem.Margin = new Thickness(0);
     }

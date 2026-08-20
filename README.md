@@ -1,6 +1,6 @@
 # Liquid Glass for Uno Platform
 
-[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.7)
+[![NuGet release](https://img.shields.io/nuget/v/LiquidGlass.Uno?label=NuGet%20release)](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.8)
 
 ![Liquid Glass gallery sample page showing the macOS sidebar, glass cards, and button styles](docs/light_buttons.png)
 
@@ -10,31 +10,35 @@ It follows the same resource-dictionary pattern as
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes), and includes a gallery that
 demonstrates the complete control set in light and dark appearances.
 
-## Current release: 1.0.7
+## Current release: 1.0.8
 
-Published August 13, 2026. All four packages contain the same release version and
+Published August 20, 2026. All four packages contain the same release version and
 the complete `net10.0`, Android, iOS, WinUI 3, WebAssembly, and Desktop asset set.
 
 | Package | Current release |
 | --- | --- |
-| `LiquidGlass.Uno` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.7) |
-| `LiquidGlass.CommunityToolkit` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.7) |
-| `DevWinUI.LiquidGlass` | [1.0.7](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.7) |
-| `LiquidGlass.UnoToolkit` | [1.0.7](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.7) |
+| `LiquidGlass.Uno` | [1.0.8](https://www.nuget.org/packages/LiquidGlass.Uno/1.0.8) |
+| `LiquidGlass.CommunityToolkit` | [1.0.8](https://www.nuget.org/packages/LiquidGlass.CommunityToolkit/1.0.8) |
+| `DevWinUI.LiquidGlass` | [1.0.8](https://www.nuget.org/packages/DevWinUI.LiquidGlass/1.0.8) |
+| `LiquidGlass.UnoToolkit` | [1.0.8](https://www.nuget.org/packages/LiquidGlass.UnoToolkit/1.0.8) |
 
 Install the stable release with:
 
 ```bash
-dotnet add package LiquidGlass.Uno --version 1.0.7
-dotnet add package LiquidGlass.CommunityToolkit --version 1.0.7
-dotnet add package DevWinUI.LiquidGlass --version 1.0.7
-dotnet add package LiquidGlass.UnoToolkit --version 1.0.7
+dotnet add package LiquidGlass.Uno --version 1.0.8
+dotnet add package LiquidGlass.CommunityToolkit --version 1.0.8
+dotnet add package DevWinUI.LiquidGlass --version 1.0.8
+dotnet add package LiquidGlass.UnoToolkit --version 1.0.8
 ```
 
-### Changes in 1.0.7
+### Changes in 1.0.8
 
-- Fixed the Liquid Glass `NavigationView` compact mode so closing a left pane
-  retains a centered icon rail while hiding item labels, badges, and chevrons.
+- Corrected compact `NavigationView` geometry so its icon rail stays centered
+  inside the floating glass panel with equal left and right insets.
+- Matched the expanded and compact sidebar toggle alignment, reduced the pane's
+  capsule-like corners, and removed clipped full-width footer content in compact mode.
+- Inset every `NavigationViewItemSeparator` to the glass panel in both expanded
+  and compact modes.
 
 ## Supported platforms and target frameworks
 
@@ -113,8 +117,8 @@ instance. The design system uses:
 | `InfoBadge` | Capsule/circle badge geometry with Apple tint and high-contrast text. |
 | `PersonPicture` | Glass-backed avatar treatment with tint-colored initials and presence/badge integration. |
 | `TabViewItem` | Tabs become an Apple-style segmented control; the selected tab is a raised glass pill and the close button uses glass feedback. |
-| `NavigationViewItem` | Sidebar rows lose the Fluent indicator bar and use a rounded frosted selection pill; hierarchical indentation and animated chevrons are preserved. |
-| `NavigationView` pane | The `LiquidGlassNavigation.GlassPane` attached helper turns the pane into an inset floating acrylic sidebar with rim lighting and content extending beneath the blur. |
+| `NavigationViewItem` | Sidebar rows lose the Fluent indicator bar and use a rounded frosted selection pill; hierarchical indentation and animated chevrons are preserved, compact icons stay centered, and separators follow the inset panel. |
+| `NavigationView` pane | The `LiquidGlassNavigation.GlassPane` attached helper turns the pane into an inset floating acrylic sidebar with rim lighting, balanced compact spacing, and content extending beneath the blur. |
 | `Expander` | Rounded glass header, rotating chevron, and clear-glass expanded content area. |
 | `TreeViewItem` | Glass hover/selection rows with preserved depth indentation, expander behavior, and drag/drop states. |
 | `BreadcrumbBarItem` | Rounded glass breadcrumb segments, tint interaction states, and matching overflow flyout. |

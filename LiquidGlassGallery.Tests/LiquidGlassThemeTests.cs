@@ -249,6 +249,72 @@ public class LiquidGlassThemeTests
     }
 
     [Test]
+    public void Navigation_glass_panel_does_not_squeeze_the_compact_pane_content()
+    {
+        var source = File.ReadAllText(Path.Combine(
+            FindSolutionRoot(), "Uno.Themes.LiquidGlass", "LiquidGlassNavigation.cs"));
+
+        source.Should().Contain("paneGrid.Margin = new Thickness(0, 10, 0, 10);",
+            "the compact item must receive the full pane width");
+        source.Should().Contain("glass.Margin = new Thickness(4, 0, 4, 0);",
+            "the floating glass background needs equal left and right insets");
+        source.Should().Contain("CornerRadius = new CornerRadius(18)",
+            "the narrow rail must retain straight sides instead of becoming a capsule");
+        source.Should().NotContain("paneGrid.Margin = new Thickness(10, 10, 4, 10);");
+    }
+
+    [Test]
+    public void Navigation_separators_follow_the_glass_panel_inset()
+    {
+        var navigation = LoadXaml(Path.Combine("Controls", "NavigationViewItem.xaml"));
+        var style = navigation.Root!.Elements(Xaml + "Style")
+            .Single(s => KeyOf(s) == "LiquidGlassNavigationViewItemSeparatorStyle");
+        var margin = style.Elements(Xaml + "Setter")
+            .Single(s => (string)s.Attribute("Property")! == "Margin");
+
+        ((string?)margin.Attribute("Value")).Should().Be("4,0,4,0");
+
+        var theme = LoadXaml("Theme.xaml");
+        theme.Root!.Elements(Xaml + "Style").Should().Contain(s =>
+            (string?)s.Attribute("TargetType") == "NavigationViewItemSeparator"
+            && (string?)s.Attribute("BasedOn") == "{StaticResource LiquidGlassNavigationViewItemSeparatorStyle}");
+    }
+
+    [Test]
+    public void Navigation_sidebar_toggles_fit_the_open_and_compact_glass_panels()
+    {
+        var page = XDocument.Load(Path.Combine(FindSolutionRoot(), "LiquidGlassGallery", "MainPage.xaml"));
+        var style = page.Descendants(Xaml + "Style")
+            .Single(s => KeyOf(s) == "SidebarToggleButtonStyle");
+
+        string SetterValue(string property) => (string)style
+            .Elements(Xaml + "Setter")
+            .Single(s => (string)s.Attribute("Property")! == property)
+            .Attribute("Value")!;
+
+        SetterValue("Width").Should().Be("32");
+        SetterValue("Height").Should().Be("32");
+        SetterValue("CornerRadius").Should().Be("16");
+
+        var hideButton = page.Descendants(Xaml + "Button")
+            .Single(b => (string?)b.Attribute(X + "Name") == "HideSidebarButton");
+        var showButton = page.Descendants(Xaml + "Button")
+            .Single(b => (string?)b.Attribute(X + "Name") == "ShowSidebarButton");
+
+        ((string?)hideButton.Attribute("Style")).Should().Be("{StaticResource SidebarToggleButtonStyle}");
+        ((string?)showButton.Attribute("Style")).Should().Be("{StaticResource SidebarToggleButtonStyle}");
+        ((string?)hideButton.Attribute("Margin")).Should().Be("176,14,0,0");
+        ((string?)showButton.Attribute("Margin")).Should().Be("8,14,0,0");
+
+        var codeBehind = File.ReadAllText(Path.Combine(
+            FindSolutionRoot(), "LiquidGlassGallery", "MainPage.xaml.cs"));
+        codeBehind.Should().Contain("ThemeToggle.Visibility = Visibility.Collapsed;",
+            "the full-width pane footer must not be clipped into the compact icon rail");
+        codeBehind.Should().Contain("ThemeToggle.Visibility = Visibility.Visible;",
+            "the pane footer must return when the pane reopens");
+    }
+
+    [Test]
     public void Implicit_styles_are_based_on_existing_explicit_styles()
     {
         var explicitKeys = Directory
